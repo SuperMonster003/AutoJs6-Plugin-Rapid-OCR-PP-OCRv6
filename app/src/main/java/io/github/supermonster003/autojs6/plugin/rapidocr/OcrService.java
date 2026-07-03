@@ -12,10 +12,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.SharedMemory;
 
-import com.benjaminwan.ocrlibrary.OcrEngine;
-import com.benjaminwan.ocrlibrary.Point;
-import com.benjaminwan.ocrlibrary.TextBlock;
-
 import org.autojs.plugin.common.api.PluginCapabilityKeys;
 import org.autojs.plugin.common.api.PluginInfo;
 import org.autojs.plugin.paddle.ocr.api.IOcrPlugin;
@@ -25,9 +21,12 @@ import org.autojs.plugin.paddle.ocr.api.PaddleOcrOptionExtraKeys;
 import org.autojs.plugin.paddle.ocr.api.PaddleOcrPluginCapabilityKeys;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OcrService extends Service {
@@ -42,7 +41,8 @@ public class OcrService extends Service {
     private static final String[] SUPPORTED_ABIS = {"arm64-v8a", "armeabi-v7a", "x86_64"};
 
     private final Object ocrLock = new Object();
-    private OcrEngine engine;
+    private Object engine;
+    private Method detectMethod;
 
     private final IOcrPlugin.Stub binder = new IOcrPlugin.Stub() {
         @Override
@@ -99,17 +99,62 @@ public class OcrService extends Service {
         return binder;
     }
 
-    private OcrEngine getEngine() {
+    private Object getEngine() {
         if (engine == null) {
-            engine = new OcrEngine(this);
+            try {
+                Class<?> engineClass = Class.forName("com.benjaminwan.ocrlibrary.OcrEngine");
+                engine = engineClass.getConstructor(android.content.Context.class).newInstance(this);
+            } catch (ReflectiveOperationException e) {
+                throw wrapFailure(e);
+            }
         }
         return engine;
+    }
+
+    private Method getDetectMethod() {
+        if (detectMethod == null) {
+            try {
+                detectMethod = getEngine().getClass().getMethod(
+                        "detect",
+                        Bitmap.class,
+                        Bitmap.class,
+                        Integer.TYPE,
+                        Integer.TYPE,
+                        Float.TYPE,
+                        Float.TYPE,
+                        Float.TYPE,
+                        Boolean.TYPE,
+                        Boolean.TYPE
+                );
+            } catch (ReflectiveOperationException e) {
+                throw wrapFailure(e);
+            }
+        }
+        return detectMethod;
     }
 
     private List<OcrResult> detectInternal(Bitmap bitmap, OcrOptions options) {
         Bitmap output = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         try {
-            com.benjaminwan.ocrlibrary.OcrResult raw = getEngine().detect(
+            Object raw = invokeDetect(bitmap, output, options);
+            List<OcrResult> results = new ArrayList<>();
+            for (Object block : textBlocksOf(raw)) {
+                OcrResult result = new OcrResult();
+                result.text = textOf(block);
+                result.confidence = confidenceOf(block);
+                result.bounds = boundsOf(block);
+                results.add(result);
+            }
+            return results;
+        } finally {
+            output.recycle();
+        }
+    }
+
+    private Object invokeDetect(Bitmap bitmap, Bitmap output, OcrOptions options) {
+        try {
+            return getDetectMethod().invoke(
+                    getEngine(),
                     bitmap,
                     output,
                     DEFAULT_PADDING,
@@ -120,17 +165,8 @@ public class OcrService extends Service {
                     DEFAULT_DO_ANGLE,
                     DEFAULT_MOST_ANGLE
             );
-            List<OcrResult> results = new ArrayList<>();
-            for (TextBlock block : raw.getTextBlocks()) {
-                OcrResult result = new OcrResult();
-                result.text = block.getText();
-                result.confidence = block.getBoxScore();
-                result.bounds = boundsOf(block);
-                results.add(result);
-            }
-            return results;
-        } finally {
-            output.recycle();
+        } catch (ReflectiveOperationException e) {
+            throw wrapFailure(e);
         }
     }
 
@@ -148,22 +184,71 @@ public class OcrService extends Service {
         return DEFAULT_BOX_SCORE_THRESH;
     }
 
-    private Rect boundsOf(TextBlock block) {
-        List<Point> points = block.getBoxPoint();
+    private Iterable<?> textBlocksOf(Object raw) {
+        Object blocks = invokeGetter(raw, "getTextBlocks");
+        if (blocks instanceof Iterable<?>) {
+            return (Iterable<?>) blocks;
+        }
+        return Collections.emptyList();
+    }
+
+    private String textOf(Object block) {
+        Object text = invokeGetter(block, "getText");
+        return text instanceof String ? (String) text : "";
+    }
+
+    private float confidenceOf(Object block) {
+        Object confidence = invokeGetter(block, "getBoxScore");
+        return confidence instanceof Number ? ((Number) confidence).floatValue() : 0f;
+    }
+
+    private Rect boundsOf(Object block) {
+        Object value = invokeGetter(block, "getBoxPoint");
+        if (!(value instanceof List<?>)) {
+            return new Rect();
+        }
+        List<?> points = (List<?>) value;
         if (points.isEmpty()) {
             return new Rect();
         }
-        int left = points.get(0).getX();
-        int top = points.get(0).getY();
+        Object first = points.get(0);
+        int left = pointInt(first, "getX");
+        int top = pointInt(first, "getY");
         int right = left;
         int bottom = top;
-        for (Point point : points) {
-            left = Math.min(left, point.getX());
-            top = Math.min(top, point.getY());
-            right = Math.max(right, point.getX());
-            bottom = Math.max(bottom, point.getY());
+        for (Object point : points) {
+            left = Math.min(left, pointInt(point, "getX"));
+            top = Math.min(top, pointInt(point, "getY"));
+            right = Math.max(right, pointInt(point, "getX"));
+            bottom = Math.max(bottom, pointInt(point, "getY"));
         }
         return new Rect(left, top, right, bottom);
+    }
+
+    private int pointInt(Object point, String methodName) {
+        Object value = invokeGetter(point, methodName);
+        return value instanceof Number ? ((Number) value).intValue() : 0;
+    }
+
+    private Object invokeGetter(Object target, String methodName) {
+        try {
+            return target.getClass().getMethod(methodName).invoke(target);
+        } catch (ReflectiveOperationException e) {
+            throw wrapFailure(e);
+        }
+    }
+
+    private RuntimeException wrapFailure(ReflectiveOperationException error) {
+        Throwable cause = error instanceof InvocationTargetException
+                ? ((InvocationTargetException) error).getTargetException()
+                : error;
+        if (cause instanceof RuntimeException) {
+            return (RuntimeException) cause;
+        }
+        if (cause instanceof Error) {
+            throw (Error) cause;
+        }
+        return new IllegalStateException("Rapid OCR engine failed", cause);
     }
 
     private Bitmap decodeImage(ParcelFileDescriptor descriptor, OcrOptions options) {
