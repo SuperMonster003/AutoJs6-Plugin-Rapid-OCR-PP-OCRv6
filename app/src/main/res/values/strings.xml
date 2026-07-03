@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Rapid OCR</string>
+    <string name="plugin_description">Rapid OCR plugin for AutoJs6.</string>
+</resources>
