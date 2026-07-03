@@ -1,4 +1,4 @@
-package io.github.supermonster003.autojs6.plugin.rapidocr;
+package io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3;
 
 import android.app.Activity;
 import android.os.Bundle;

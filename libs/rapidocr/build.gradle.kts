@@ -14,7 +14,7 @@ plugins {
 }
 
 ext {
-    set("projectName", "Rapid OCR")
+    set("projectName", "Rapid OCR (PP-OCRv3)")
 }
 
 val versionMap = mapOf(

@@ -1,6 +1,6 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-rootProject.name = "autojs6-plugin-rapid-ocr"
+rootProject.name = "autojs6-plugin-rapid-ocr-pp-ocrv3"
 
 includeBuild("build-logic")
 

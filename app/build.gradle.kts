@@ -9,7 +9,7 @@ plugins {
     id("com.android.application")
 }
 
-val globalApplicationId = "io.github.supermonster003.autojs6.plugin.rapidocr"
+val globalApplicationId = "io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3"
 
 val buildTypeDebug = "debug"
 val buildTypeRelease = "release"

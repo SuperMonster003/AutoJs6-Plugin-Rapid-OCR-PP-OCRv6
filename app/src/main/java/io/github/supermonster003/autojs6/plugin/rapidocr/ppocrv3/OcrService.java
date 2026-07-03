@@ -1,4 +1,4 @@
-package io.github.supermonster003.autojs6.plugin.rapidocr;
+package io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3;
 
 import android.app.Service;
 import android.content.Intent;
@@ -31,7 +31,7 @@ import java.util.List;
 
 public class OcrService extends Service {
 
-    private static final String TAG = "RapidOcrService";
+    private static final String TAG = "RapidOcrV3Service";
 
     private static final int DEFAULT_MAX_SIDE_LEN = 1024;
     private static final int DEFAULT_PADDING = 50;
@@ -51,11 +51,11 @@ public class OcrService extends Service {
         @Override
         public PluginInfo getInfo() throws RemoteException {
             PluginInfo info = new PluginInfo();
-            info.setName("Rapid OCR");
+            info.setName("Rapid OCR (PP-OCRv3)");
             info.setAuthor("RapidAI / BenjaminWan");
-            info.setId("rapid-ocr");
+            info.setId("rapid-ocr-pp-ocrv3");
             info.setEngine("rapid-ocr");
-            info.setVariant("v3-onnx");
+            info.setVariant("pp-ocrv3");
             info.setVersionName(BuildConfig.VERSION_NAME);
             info.setVersionCode(BuildConfig.VERSION_CODE);
             info.setVersionDate(BuildConfig.VERSION_DATE);
@@ -188,10 +188,10 @@ public class OcrService extends Service {
 
     private RuntimeException wrapFailure(Throwable cause) {
         if (cause instanceof Error) {
-            Log.e(TAG, "Rapid OCR engine failed", cause);
+            Log.e(TAG, "Rapid OCR (PP-OCRv3) engine failed", cause);
             throw (Error) cause;
         }
-        String message = "Rapid OCR engine failed: " + cause.getClass().getName();
+        String message = "Rapid OCR (PP-OCRv3) engine failed: " + cause.getClass().getName();
         if (cause.getMessage() != null && !cause.getMessage().isEmpty()) {
             message += ": " + cause.getMessage();
         }
