@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.SharedMemory;
+import android.util.Log;
 
 import org.autojs.plugin.common.api.PluginCapabilityKeys;
 import org.autojs.plugin.common.api.PluginInfo;
@@ -31,6 +32,8 @@ import java.util.List;
 
 public class OcrService extends Service {
 
+    private static final String TAG = "RapidOcrService";
+
     private static final int DEFAULT_MAX_SIDE_LEN = 1024;
     private static final int DEFAULT_PADDING = 50;
     private static final float DEFAULT_BOX_SCORE_THRESH = 0.5f;
@@ -39,6 +42,8 @@ public class OcrService extends Service {
     private static final boolean DEFAULT_DO_ANGLE = false;
     private static final boolean DEFAULT_MOST_ANGLE = false;
     private static final String[] SUPPORTED_ABIS = {"arm64-v8a", "armeabi-v7a", "x86_64"};
+
+    private static boolean nativeDependencyLoaded;
 
     private final Object ocrLock = new Object();
     private Object engine;
@@ -75,6 +80,9 @@ public class OcrService extends Service {
                         texts.add(result.text);
                     }
                     return texts;
+                } catch (RuntimeException e) {
+                    Log.e(TAG, "recognizeText failed", e);
+                    throw e;
                 } finally {
                     recycleDecodedBitmap(bitmap);
                 }
@@ -87,6 +95,9 @@ public class OcrService extends Service {
                 Bitmap bitmap = decodeImage(image, options);
                 try {
                     return detectInternal(bitmap, options);
+                } catch (RuntimeException e) {
+                    Log.e(TAG, "detect failed", e);
+                    throw e;
                 } finally {
                     recycleDecodedBitmap(bitmap);
                 }
@@ -102,6 +113,7 @@ public class OcrService extends Service {
     private Object getEngine() {
         if (engine == null) {
             try {
+                ensureNativeDependencyLoaded();
                 Class<?> engineClass = Class.forName("com.benjaminwan.ocrlibrary.OcrEngine");
                 engine = engineClass.getConstructor(android.content.Context.class).newInstance(this);
             } catch (ReflectiveOperationException e) {
@@ -109,6 +121,14 @@ public class OcrService extends Service {
             }
         }
         return engine;
+    }
+
+    private static synchronized void ensureNativeDependencyLoaded() {
+        if (nativeDependencyLoaded) {
+            return;
+        }
+        System.loadLibrary("onnxruntime");
+        nativeDependencyLoaded = true;
     }
 
     private Method getDetectMethod() {
@@ -242,13 +262,16 @@ public class OcrService extends Service {
         Throwable cause = error instanceof InvocationTargetException
                 ? ((InvocationTargetException) error).getTargetException()
                 : error;
-        if (cause instanceof RuntimeException) {
-            return (RuntimeException) cause;
-        }
         if (cause instanceof Error) {
+            Log.e(TAG, "Rapid OCR engine failed", cause);
             throw (Error) cause;
         }
-        return new IllegalStateException("Rapid OCR engine failed", cause);
+        String message = "Rapid OCR engine failed: " + cause.getClass().getName();
+        if (cause.getMessage() != null && !cause.getMessage().isEmpty()) {
+            message += ": " + cause.getMessage();
+        }
+        Log.e(TAG, message, cause);
+        return new IllegalStateException(message, cause);
     }
 
     private Bitmap decodeImage(ParcelFileDescriptor descriptor, OcrOptions options) {
