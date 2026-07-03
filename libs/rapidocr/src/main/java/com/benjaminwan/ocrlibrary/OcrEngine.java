@@ -20,10 +20,10 @@ public class OcrEngine {
         boolean ret = init(
                 context.getAssets(),
                 numThread,
-                "models/ch_PP-OCRv3_det_infer.onnx",
-                "models/ch_ppocr_mobile_v2.0_cls_infer.onnx",
-                "models/ch_PP-OCRv3_rec_infer.onnx",
-                "models/ppocr_keys_v1.txt"
+                "models/PP-OCRv6_det_small.onnx",
+                "models/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+                "models/PP-OCRv6_rec_small.onnx",
+                "models/ppocrv6_dict.txt"
         );
         if (!ret) {
             throw new IllegalArgumentException();

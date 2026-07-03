@@ -1,4 +1,4 @@
-package io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3;
+package io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv6;
 
 import android.app.Service;
 import android.content.Intent;
@@ -31,13 +31,13 @@ import java.util.List;
 
 public class OcrService extends Service {
 
-    private static final String TAG = "RapidOcrV3Service";
+    private static final String TAG = "RapidOcrV6Service";
 
     private static final int DEFAULT_MAX_SIDE_LEN = 1024;
     private static final int DEFAULT_PADDING = 50;
     private static final float DEFAULT_BOX_SCORE_THRESH = 0.5f;
     private static final float DEFAULT_BOX_THRESH = 0.3f;
-    private static final float DEFAULT_UNCLIP_RATIO = 2.0f;
+    private static final float DEFAULT_UNCLIP_RATIO = 1.6f;
     private static final boolean DEFAULT_DO_ANGLE = false;
     private static final boolean DEFAULT_MOST_ANGLE = false;
     private static final String[] SUPPORTED_ABIS = {"arm64-v8a", "armeabi-v7a", "x86_64"};
@@ -51,11 +51,11 @@ public class OcrService extends Service {
         @Override
         public PluginInfo getInfo() throws RemoteException {
             PluginInfo info = new PluginInfo();
-            info.setName("Rapid OCR (PP-OCRv3)");
+            info.setName("Rapid OCR (PP-OCRv6)");
             info.setAuthor("RapidAI / BenjaminWan");
-            info.setId("rapid-ocr-pp-ocrv3");
+            info.setId("rapid-ocr-pp-ocrv6");
             info.setEngine("rapid-ocr");
-            info.setVariant("pp-ocrv3");
+            info.setVariant("pp-ocrv6");
             info.setVersionName(BuildConfig.VERSION_NAME);
             info.setVersionCode(BuildConfig.VERSION_CODE);
             info.setVersionDate(BuildConfig.VERSION_DATE);
@@ -188,10 +188,10 @@ public class OcrService extends Service {
 
     private RuntimeException wrapFailure(Throwable cause) {
         if (cause instanceof Error) {
-            Log.e(TAG, "Rapid OCR (PP-OCRv3) engine failed", cause);
+            Log.e(TAG, "Rapid OCR (PP-OCRv6) engine failed", cause);
             throw (Error) cause;
         }
-        String message = "Rapid OCR (PP-OCRv3) engine failed: " + cause.getClass().getName();
+        String message = "Rapid OCR (PP-OCRv6) engine failed: " + cause.getClass().getName();
         if (cause.getMessage() != null && !cause.getMessage().isEmpty()) {
             message += ": " + cause.getMessage();
         }

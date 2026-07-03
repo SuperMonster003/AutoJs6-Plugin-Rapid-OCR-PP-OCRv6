@@ -1,3 +1,3 @@
--keep class io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3.OcrService { *; }
--keep class io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3.OcrService$* { *; }
--keep class io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv3.WakeActivity { *; }
+-keep class io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv6.OcrService { *; }
+-keep class io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv6.OcrService$* { *; }
+-keep class io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv6.WakeActivity { *; }
