@@ -17,7 +17,7 @@ plugins {
 }
 
 ext {
-    set("projectName", "Rapid OCR (PP-OCRv6)")
+    set("projectName", "Rapid OCR (PP-OCRv6 Small)")
 }
 
 val onnxRuntimeReleaseVersion = props["RAPID_OCR/ONNX_RUNTIME"]
@@ -113,7 +113,7 @@ val rapidOcrAbis = listOf("armeabi-v7a", "arm64-v8a", "x86_64", "x86")
 
 tasks.register("downloadRapidOcrV6Models") {
     group = "rapidocr"
-    description = "Download PP-OCRv6 ONNX model assets used by Rapid OCR (PP-OCRv6)."
+    description = "Download PP-OCRv6 ONNX model assets used by Rapid OCR (PP-OCRv6 Small)."
 
     doLast {
         val modelDir = layout.projectDirectory.dir("src/main/assets/models").asFile

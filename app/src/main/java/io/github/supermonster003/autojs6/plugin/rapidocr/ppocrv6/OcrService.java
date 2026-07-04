@@ -51,7 +51,7 @@ public class OcrService extends Service {
         @Override
         public PluginInfo getInfo() throws RemoteException {
             PluginInfo info = new PluginInfo();
-            info.setName("Rapid OCR (PP-OCRv6)");
+            info.setName("Rapid OCR (PP-OCRv6 Small)");
             info.setAuthor("RapidAI / BenjaminWan");
             info.setId("rapid-ocr-pp-ocrv6");
             info.setEngine("rapid-ocr");
@@ -188,10 +188,10 @@ public class OcrService extends Service {
 
     private RuntimeException wrapFailure(Throwable cause) {
         if (cause instanceof Error) {
-            Log.e(TAG, "Rapid OCR (PP-OCRv6) engine failed", cause);
+            Log.e(TAG, "Rapid OCR (PP-OCRv6 Small) engine failed", cause);
             throw (Error) cause;
         }
-        String message = "Rapid OCR (PP-OCRv6) engine failed: " + cause.getClass().getName();
+        String message = "Rapid OCR (PP-OCRv6 Small) engine failed: " + cause.getClass().getName();
         if (cause.getMessage() != null && !cause.getMessage().isEmpty()) {
             message += ": " + cause.getMessage();
         }
