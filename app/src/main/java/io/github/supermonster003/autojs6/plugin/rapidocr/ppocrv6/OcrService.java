@@ -52,7 +52,7 @@ public class OcrService extends Service {
         public PluginInfo getInfo() throws RemoteException {
             PluginInfo info = new PluginInfo();
             info.setName("Rapid OCR (PP-OCRv6 Small)");
-            info.setAuthor("RapidAI / BenjaminWan");
+            info.setAuthor("SuperMonster003");
             info.setId("rapid-ocr-pp-ocrv6");
             info.setEngine("rapid-ocr");
             info.setVariant("pp-ocrv6");

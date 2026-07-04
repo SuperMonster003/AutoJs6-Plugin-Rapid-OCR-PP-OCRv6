@@ -13,7 +13,7 @@
 
         <meta-data
             android:name="org.autojs.plugin.info.AUTHOR"
-            android:value="RapidAI / BenjaminWan" />
+            android:value="SuperMonster003" />
 
         <activity
             android:name=".WakeActivity"
