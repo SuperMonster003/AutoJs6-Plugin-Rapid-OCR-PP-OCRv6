@@ -1,0 +1,52 @@
+{
+  "$name": "Español",
+  "text_current_lowercase": "actual",
+  "text_plugin_synopsis": "Plugin Rapid OCR para el reconocimiento de texto con PP-OCRv6 Small en AutoJs6",
+  "h3_languages_with_ascii": "Idiomas (Languages)",
+  "p_languages_all_supported_for_readme": "El README.md actual admite los siguientes idiomas",
+  "h3_introduction": "Introducción",
+  "p_introduction": "El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimiento de texto basados en RapidOCR, ONNX Runtime y OpenCV Mobile. Puede devolver texto reconocido, valores de confianza y límites de texto.",
+  "h3_functions": "Funciones",
+  "features": [
+    "Proporciona el servicio OCR compartido con el ID de plugin `{{ plugin_id }}`, el motor `{{ plugin_engine }}` y la variante `{{ plugin_variant }}`.",
+    "Expone la interfaz AIDL de OCR mediante `{{ plugin_action }}` y funciona con el mecanismo de descubrimiento de plugins OCR del host AutoJs6.",
+    "Admite `ocr.rapid.recognizeText` para listas de cadenas y `ocr.rapid.detect` para texto, valores de confianza y límites.",
+    "Admite imágenes codificadas y búferes de imagen `ARGB_8888` sin codificar.",
+    "Proporciona APK para `arm64-v8a`, `armeabi-v7a`, `x86_64` y `universal`.",
+    "Los metadatos del plugin, las instrucciones de uso, el README y el CHANGELOG están localizados en español, francés, ruso, árabe, japonés, coreano, inglés, chino simplificado, chino tradicional de Hong Kong y chino tradicional de Taiwán.",
+    "Construido sobre RapidOCR, ONNX Runtime y OpenCV Mobile."
+  ],
+  "h3_usage": "Ejemplos de uso",
+  "p_usage_intro": "Después de leer una imagen, use el módulo Rapid OCR para reconocer texto u obtener resultados detallados",
+  "p_usage_result": "`recognizeText` devuelve una lista de cadenas, mientras que `detect` devuelve una lista de resultados detallados",
+  "h3_plugin_interface": "Interfaz del plugin",
+  "p_plugin_interface": "El host puede descubrir e invocar el plugin con la siguiente identidad",
+  "p_result_shape": "Cada resultado de `detect` contiene `text`, `confidence` y `bounds`; la interfaz actual no proporciona un campo quad",
+  "h3_recognition_options": "Opciones de reconocimiento",
+  "p_recognition_options": "La implementación actual del plugin lee las siguientes opciones de reconocimiento",
+  "option_lines": [
+    "`maxSideLen`: Longitud lateral máxima utilizada durante la detección. El valor predeterminado es `1024`.",
+    "`scoreThreshold`: Umbral de puntuación de los cuadros de texto. El valor predeterminado es `0.5`."
+  ],
+  "h3_model_assets": "Recursos de modelos",
+  "p_model_assets": "La compilación descarga y verifica los siguientes 4 recursos desde ModelScope",
+  "model_asset_lines": [
+    "`{{ model_asset_detection }}`: Modelo de detección de texto PP-OCRv6 Small.",
+    "`{{ model_asset_recognition }}`: Modelo de reconocimiento de texto PP-OCRv6 Small.",
+    "`{{ model_asset_auxiliary }}`: Recurso de modelo auxiliar necesario durante la inicialización del motor.",
+    "`{{ model_asset_dictionary }}`: Diccionario de reconocimiento PP-OCRv6."
+  ],
+  "h3_release_history": "Historial de versiones",
+  "h5_for_more_release_history": "Para consultar más historial de versiones",
+  "h3_build": "Compilación",
+  "text_release_build": "Compilación Release",
+  "p_build_params": "Los parámetros de compilación provienen de `version.properties`; el SDK mínimo actual es 24 y el SDK de destino es 36. `preBuild` descarga y verifica los recursos de modelos, y luego sincroniza las bibliotecas nativas de ONNX Runtime",
+  "h3_resource_layout": "Estructura de recursos",
+  "p_resource_layout": "`strings.xml` contiene descripciones localizadas del plugin y `plugin_instruction.md` contiene instrucciones de uso mostradas por el host. Los archivos README y CHANGELOG se generan desde fuentes JSON mediante `.python/generate_markdown.py`. Solo se genera `README.md` en la raíz del repositorio y no se genera un `CHANGELOG.md` raíz",
+  "h3_links": "Enlaces",
+  "text_link_autojs6_ocr_docs": "Documentación OCR de AutoJs6",
+  "text_link_rapidocr": "Proyecto RapidOCR",
+  "text_link_modelscope": "Recursos de modelos de ModelScope",
+  "text_link_onnx_runtime": "ONNX Runtime",
+  "text_link_opencv_mobile": "OpenCV Mobile"
+}

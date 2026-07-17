@@ -1,0 +1,3 @@
+<resources>
+    <string name="plugin_description">Plugin de OCR local basado en Rapid OCR y PP-OCRv6 Small</string>
+</resources>

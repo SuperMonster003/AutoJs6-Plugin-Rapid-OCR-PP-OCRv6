@@ -1,0 +1,52 @@
+{
+  "$name": "English",
+  "text_current_lowercase": "current",
+  "text_plugin_synopsis": "Rapid OCR Plugin for AutoJs6 PP-OCRv6 Small text recognition",
+  "h3_languages_with_ascii": "Languages",
+  "p_languages_all_supported_for_readme": "The current README.md supports the following languages",
+  "h3_introduction": "Introduction",
+  "p_introduction": "The AutoJs6 Rapid OCR PP-OCRv6 Small Plugin provides text detection and recognition based on RapidOCR, ONNX Runtime, and OpenCV Mobile. It can return recognized text, confidence values, and text bounds.",
+  "h3_functions": "Features",
+  "features": [
+    "Provides the shared OCR plugin service with plugin ID `{{ plugin_id }}`, engine `{{ plugin_engine }}`, and variant `{{ plugin_variant }}`.",
+    "Exposes the OCR AIDL interface through `{{ plugin_action }}` and works with the AutoJs6 host OCR plugin discovery flow.",
+    "Supports `ocr.rapid.recognizeText` for string lists and `ocr.rapid.detect` for text, confidence values, and bounds.",
+    "Supports encoded image input and raw `ARGB_8888` image buffer input.",
+    "Provides `arm64-v8a`, `armeabi-v7a`, `x86_64`, and `universal` APKs.",
+    "Plugin metadata, usage instructions, README, and CHANGELOG are localized for Spanish, French, Russian, Arabic, Japanese, Korean, English, Simplified Chinese, Hong Kong Traditional Chinese, and Taiwan Traditional Chinese.",
+    "Built on RapidOCR, ONNX Runtime, and OpenCV Mobile."
+  ],
+  "h3_usage": "Usage Examples",
+  "p_usage_intro": "After reading an image, use the Rapid OCR module to recognize text or obtain detailed results",
+  "p_usage_result": "`recognizeText` returns a string list, while `detect` returns a list of detailed recognition results",
+  "h3_plugin_interface": "Plugin Interface",
+  "p_plugin_interface": "The host can discover and invoke the plugin with the following identity",
+  "p_result_shape": "Each `detect` result contains `text`, `confidence`, and `bounds`; the current interface does not provide a quad field",
+  "h3_recognition_options": "Recognition Options",
+  "p_recognition_options": "The current plugin implementation reads the following recognition options",
+  "option_lines": [
+    "`maxSideLen`: Maximum side length used during detection. The default is `1024`.",
+    "`scoreThreshold`: Text box score threshold. The default is `0.5`."
+  ],
+  "h3_model_assets": "Model Assets",
+  "p_model_assets": "The build downloads and verifies the following 4 assets from ModelScope",
+  "model_asset_lines": [
+    "`{{ model_asset_detection }}`: PP-OCRv6 Small text detection model.",
+    "`{{ model_asset_recognition }}`: PP-OCRv6 Small text recognition model.",
+    "`{{ model_asset_auxiliary }}`: Auxiliary model asset required during engine initialization.",
+    "`{{ model_asset_dictionary }}`: PP-OCRv6 recognition dictionary."
+  ],
+  "h3_release_history": "Release History",
+  "h5_for_more_release_history": "For more release history",
+  "h3_build": "Build",
+  "text_release_build": "Release build",
+  "p_build_params": "Build parameters come from `version.properties`; the current minimum SDK is 24 and target SDK is 36. `preBuild` downloads and verifies model assets, then synchronizes ONNX Runtime native libraries",
+  "h3_resource_layout": "Resource Layout",
+  "p_resource_layout": "`strings.xml` contains localized plugin descriptions, and `plugin_instruction.md` contains usage instructions displayed by the host. README and CHANGELOG files are generated from JSON sources by `.python/generate_markdown.py`. Only `README.md` is generated in the repository root, and no root `CHANGELOG.md` is generated",
+  "h3_links": "Links",
+  "text_link_autojs6_ocr_docs": "AutoJs6 OCR documentation",
+  "text_link_rapidocr": "RapidOCR project",
+  "text_link_modelscope": "ModelScope model assets",
+  "text_link_onnx_runtime": "ONNX Runtime",
+  "text_link_opencv_mobile": "OpenCV Mobile"
+}

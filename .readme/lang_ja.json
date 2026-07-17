@@ -1,0 +1,52 @@
+{
+  "$name": "日本語",
+  "text_current_lowercase": "現在",
+  "text_plugin_synopsis": "AutoJs6 で PP-OCRv6 Small 文字認識を提供する Rapid OCR プラグイン",
+  "h3_languages_with_ascii": "言語 (Languages)",
+  "p_languages_all_supported_for_readme": "現在の README.md は次の言語に対応しています",
+  "h3_introduction": "概要",
+  "p_introduction": "AutoJs6 Rapid OCR PP-OCRv6 Small プラグインは RapidOCR, ONNX Runtime, OpenCV Mobile を使用した文字検出と文字認識を AutoJs6 に提供します. 認識した文字列, 信頼度, 文字領域を返すことができます.",
+  "h3_functions": "機能",
+  "features": [
+    "プラグイン ID `{{ plugin_id }}`, エンジン `{{ plugin_engine }}`, バリアント `{{ plugin_variant }}` の共有 OCR プラグインサービスを提供します.",
+    "`{{ plugin_action }}` を介して OCR AIDL インターフェースを公開し, AutoJs6 ホストの OCR プラグイン検出機構に対応します.",
+    "`ocr.rapid.recognizeText` は文字列リストを返し, `ocr.rapid.detect` は文字列, 信頼度, 領域を返します.",
+    "エンコード画像入力と未エンコードの `ARGB_8888` 画像バッファ入力に対応します.",
+    "`arm64-v8a`, `armeabi-v7a`, `x86_64`, `universal` APK を提供します.",
+    "プラグイン情報, 使用説明, README, CHANGELOG はスペイン語/フランス語/ロシア語/アラビア語/日本語/韓国語/英語/簡体字中国語/香港繁体字中国語/台湾繁体字中国語に対応します.",
+    "RapidOCR, ONNX Runtime, OpenCV Mobile を基盤として構築されています."
+  ],
+  "h3_usage": "使用例",
+  "p_usage_intro": "画像を読み込んだ後に Rapid OCR モジュールで文字を認識するか詳細結果を取得します",
+  "p_usage_result": "`recognizeText` は文字列リストを返し, `detect` は詳細な認識結果のリストを返します",
+  "h3_plugin_interface": "プラグインインターフェース",
+  "p_plugin_interface": "ホストは次の識別情報でプラグインを検出して呼び出せます",
+  "p_result_shape": "`detect` の各結果には `text`, `confidence`, `bounds` が含まれます. 現在のインターフェースは quad フィールドを提供しません",
+  "h3_recognition_options": "認識オプション",
+  "p_recognition_options": "現在のプラグイン実装は次の認識オプションを読み取ります",
+  "option_lines": [
+    "`maxSideLen`: 検出時に使用する最大辺長です. デフォルトは `1024` です.",
+    "`scoreThreshold`: テキストボックスのスコアしきい値です. デフォルトは `0.5` です."
+  ],
+  "h3_model_assets": "モデルアセット",
+  "p_model_assets": "ビルドは ModelScope から次の 4 個のアセットをダウンロードして検証します",
+  "model_asset_lines": [
+    "`{{ model_asset_detection }}`: PP-OCRv6 Small 文字検出モデル.",
+    "`{{ model_asset_recognition }}`: PP-OCRv6 Small 文字認識モデル.",
+    "`{{ model_asset_auxiliary }}`: エンジン初期化に必要な補助モデルアセット.",
+    "`{{ model_asset_dictionary }}`: PP-OCRv6 認識辞書."
+  ],
+  "h3_release_history": "リリース履歴",
+  "h5_for_more_release_history": "その他のリリース履歴",
+  "h3_build": "ビルド",
+  "text_release_build": "Release ビルド",
+  "p_build_params": "ビルドパラメータは `version.properties` から取得します. 現在の最小 SDK は 24, ターゲット SDK は 36 です. `preBuild` はモデルアセットをダウンロードして検証し, ONNX Runtime ネイティブライブラリを同期します",
+  "h3_resource_layout": "リソース構成",
+  "p_resource_layout": "`strings.xml` にはローカライズされたプラグイン説明が含まれ, `plugin_instruction.md` にはホストが表示する使用説明が含まれます. README と CHANGELOG は `.python/generate_markdown.py` が JSON ソースから生成します. リポジトリのルートには `README.md` だけを生成し, ルートの `CHANGELOG.md` は生成しません",
+  "h3_links": "リンク",
+  "text_link_autojs6_ocr_docs": "AutoJs6 OCR ドキュメント",
+  "text_link_rapidocr": "RapidOCR プロジェクト",
+  "text_link_modelscope": "ModelScope モデルアセット",
+  "text_link_onnx_runtime": "ONNX Runtime",
+  "text_link_opencv_mobile": "OpenCV Mobile"
+}

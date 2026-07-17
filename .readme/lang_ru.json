@@ -1,0 +1,52 @@
+{
+  "$name": "Русский",
+  "text_current_lowercase": "текущий",
+  "text_plugin_synopsis": "Плагин Rapid OCR для распознавания текста PP-OCRv6 Small в AutoJs6",
+  "h3_languages_with_ascii": "Языки (Languages)",
+  "p_languages_all_supported_for_readme": "Текущий README.md поддерживает следующие языки",
+  "h3_introduction": "Введение",
+  "p_introduction": "Плагин AutoJs6 Rapid OCR PP-OCRv6 Small предоставляет обнаружение и распознавание текста на основе RapidOCR, ONNX Runtime и OpenCV Mobile. Он может возвращать распознанный текст, значения достоверности и границы текста.",
+  "h3_functions": "Возможности",
+  "features": [
+    "Предоставляет общий сервис OCR с ID плагина `{{ plugin_id }}`, движком `{{ plugin_engine }}` и вариантом `{{ plugin_variant }}`.",
+    "Открывает интерфейс OCR AIDL через `{{ plugin_action }}` и работает с механизмом обнаружения плагинов OCR в AutoJs6.",
+    "Поддерживает `ocr.rapid.recognizeText` для списков строк и `ocr.rapid.detect` для текста, значений достоверности и границ.",
+    "Поддерживает кодированные изображения и необработанные буферы изображений `ARGB_8888`.",
+    "Предоставляет APK для `arm64-v8a`, `armeabi-v7a`, `x86_64` и `universal`.",
+    "Метаданные плагина, инструкции, README и CHANGELOG локализованы на испанский, французский, русский, арабский, японский, корейский, английский, упрощенный китайский, гонконгский традиционный китайский и тайваньский традиционный китайский.",
+    "Создан на основе RapidOCR, ONNX Runtime и OpenCV Mobile."
+  ],
+  "h3_usage": "Примеры использования",
+  "p_usage_intro": "После чтения изображения используйте модуль Rapid OCR для распознавания текста или получения подробных результатов",
+  "p_usage_result": "`recognizeText` возвращает список строк, а `detect` возвращает список подробных результатов распознавания",
+  "h3_plugin_interface": "Интерфейс плагина",
+  "p_plugin_interface": "Хост может обнаружить и вызвать плагин со следующими идентификаторами",
+  "p_result_shape": "Каждый результат `detect` содержит `text`, `confidence` и `bounds`; текущий интерфейс не предоставляет поле quad",
+  "h3_recognition_options": "Параметры распознавания",
+  "p_recognition_options": "Текущая реализация плагина считывает следующие параметры распознавания",
+  "option_lines": [
+    "`maxSideLen`: Максимальная длина стороны при обнаружении. Значение по умолчанию равно `1024`.",
+    "`scoreThreshold`: Порог оценки текстового блока. Значение по умолчанию равно `0.5`."
+  ],
+  "h3_model_assets": "Ресурсы моделей",
+  "p_model_assets": "Сборка загружает и проверяет следующие 4 ресурса из ModelScope",
+  "model_asset_lines": [
+    "`{{ model_asset_detection }}`: Модель обнаружения текста PP-OCRv6 Small.",
+    "`{{ model_asset_recognition }}`: Модель распознавания текста PP-OCRv6 Small.",
+    "`{{ model_asset_auxiliary }}`: Вспомогательный ресурс модели для инициализации движка.",
+    "`{{ model_asset_dictionary }}`: Словарь распознавания PP-OCRv6."
+  ],
+  "h3_release_history": "История выпусков",
+  "h5_for_more_release_history": "Дополнительная история выпусков",
+  "h3_build": "Сборка",
+  "text_release_build": "Сборка Release",
+  "p_build_params": "Параметры сборки берутся из `version.properties`; текущий минимальный SDK равен 24, а целевой SDK равен 36. `preBuild` загружает и проверяет ресурсы моделей, затем синхронизирует нативные библиотеки ONNX Runtime",
+  "h3_resource_layout": "Структура ресурсов",
+  "p_resource_layout": "`strings.xml` содержит локализованные описания плагина, а `plugin_instruction.md` содержит инструкции для отображения в хосте. README и CHANGELOG генерируются из исходных файлов JSON скриптом `.python/generate_markdown.py`. В корне репозитория создается только `README.md`, а корневой `CHANGELOG.md` не создается",
+  "h3_links": "Ссылки",
+  "text_link_autojs6_ocr_docs": "Документация AutoJs6 OCR",
+  "text_link_rapidocr": "Проект RapidOCR",
+  "text_link_modelscope": "Ресурсы моделей ModelScope",
+  "text_link_onnx_runtime": "ONNX Runtime",
+  "text_link_opencv_mobile": "OpenCV Mobile"
+}

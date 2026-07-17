@@ -1,0 +1,205 @@
+<!--suppress HtmlDeprecatedAttribute, HttpUrlsUsage -->
+
+<div align="center">
+  <p>
+    <picture>
+      <source srcset="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/res/mipmap-night/ic_launcher.png?raw=true" media="(prefers-color-scheme: dark)" />
+      <img src="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/res/mipmap/ic_launcher.png?raw=true" alt="autojs6-plugin-rapid-ocr-pp-ocrv6-ic-launcher" border="0" width="128" />
+    </picture>
+  </p>
+
+  <p>Плагин Rapid OCR для распознавания текста PP-OCRv6 Small в AutoJs6</p>
+
+  <p>
+    <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/releases"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?label=Release"/></a>
+    <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/issues"><img alt="GitHub closed issues" src="https://img.shields.io/github/issues/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?color=A24232&label=Issues"/></a>
+    <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/commit/96410a029a429919da9eaaa21b5c900875f32bad"><img alt="Created" src="https://img.shields.io/date/1783059864?color=2e7d32&label=Created"/></a>
+    <br>
+    <a href="https://developer.android.com/studio/archive"><img alt="Android Studio" src="https://img.shields.io/badge/Android%20Studio-2023.3+-B64FC8"/></a>
+    <a href="https://www.jetbrains.com/idea/download/other.html"><img alt="IntelliJ IDEA" src="https://img.shields.io/badge/IntelliJ%20IDEA-2023.3+-EE4677"/></a>
+    <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?color=534BAE&label=License"/></a>
+  </p>
+</div>
+
+******
+
+### Языки (Languages)
+
+******
+
+Текущий README.md поддерживает следующие языки:
+
+- [简体中文 [zh-Hans]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-zh-Hans.md)
+- [繁體中文 (香港) [zh-Hant-HK]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-zh-Hant-HK.md)
+- [繁體中文 (台灣) [zh-Hant-TW]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-zh-Hant-TW.md)
+- [English [en]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-en.md)
+- [Français [fr]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-fr.md)
+- [Español [es]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-es.md)
+- [日本語 [ja]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-ja.md)
+- [한국어 [ko]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-ko.md)
+- Русский [ru] # текущий
+- [العربية [ar]](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.readme/README-ar.md)
+
+******
+
+### Введение
+
+******
+
+Плагин AutoJs6 Rapid OCR PP-OCRv6 Small предоставляет обнаружение и распознавание текста на основе RapidOCR, ONNX Runtime и OpenCV Mobile. Он может возвращать распознанный текст, значения достоверности и границы текста.
+
+******
+
+### Возможности
+
+******
+
+- Предоставляет общий сервис OCR с ID плагина `rapid-ocr-pp-ocrv6`, движком `rapid-ocr` и вариантом `pp-ocrv6`.
+- Открывает интерфейс OCR AIDL через `org.autojs.plugin.PADDLE_OCR` и работает с механизмом обнаружения плагинов OCR в AutoJs6.
+- Поддерживает `ocr.rapid.recognizeText` для списков строк и `ocr.rapid.detect` для текста, значений достоверности и границ.
+- Поддерживает кодированные изображения и необработанные буферы изображений `ARGB_8888`.
+- Предоставляет APK для `arm64-v8a`, `armeabi-v7a`, `x86_64` и `universal`.
+- Метаданные плагина, инструкции, README и CHANGELOG локализованы на испанский, французский, русский, арабский, японский, корейский, английский, упрощенный китайский, гонконгский традиционный китайский и тайваньский традиционный китайский.
+- Создан на основе RapidOCR, ONNX Runtime и OpenCV Mobile.
+
+******
+
+### Примеры использования
+
+******
+
+После чтения изображения используйте модуль Rapid OCR для распознавания текста или получения подробных результатов:
+
+```js
+let image = images.read("./sample.png");
+
+let texts = ocr.rapid.recognizeText(image, {
+    variant: "pp-ocrv6",
+});
+console.log(texts);
+
+let results = ocr.rapid.detect(image, {
+    variant: "pp-ocrv6",
+    maxSideLen: 1024,
+    scoreThreshold: 0.5,
+});
+console.log(results);
+
+image.recycle();
+```
+
+`recognizeText` возвращает список строк, а `detect` возвращает список подробных результатов распознавания.
+
+******
+
+### Интерфейс плагина
+
+******
+
+Хост может обнаружить и вызвать плагин со следующими идентификаторами:
+
+```text
+action: org.autojs.plugin.PADDLE_OCR
+engine: rapid-ocr
+variant: pp-ocrv6
+plugin id: rapid-ocr-pp-ocrv6
+supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
+```
+
+Каждый результат `detect` содержит `text`, `confidence` и `bounds`; текущий интерфейс не предоставляет поле quad.
+
+******
+
+### Параметры распознавания
+
+******
+
+Текущая реализация плагина считывает следующие параметры распознавания:
+
+- `maxSideLen`: Максимальная длина стороны при обнаружении. Значение по умолчанию равно `1024`.
+- `scoreThreshold`: Порог оценки текстового блока. Значение по умолчанию равно `0.5`.
+
+******
+
+### Ресурсы моделей
+
+******
+
+Сборка загружает и проверяет следующие 4 ресурса из ModelScope:
+
+- `PP-OCRv6_det_small.onnx`: Модель обнаружения текста PP-OCRv6 Small.
+- `PP-OCRv6_rec_small.onnx`: Модель распознавания текста PP-OCRv6 Small.
+- `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: Вспомогательный ресурс модели для инициализации движка.
+- `ppocrv6_dict.txt`: Словарь распознавания PP-OCRv6.
+
+******
+
+### История выпусков
+
+******
+
+# v1.0.0
+
+###### 2026/07/17
+
+* `Функция` Добавлены данные плагина Rapid OCR (PP-OCRv6 Small) с идентификатором `rapid-ocr-pp-ocrv6`, движком `rapid-ocr` и вариантом `pp-ocrv6`.
+* `Функция` Добавлены служба AIDL `PADDLE_OCR` и интерфейсы `recognizeText` и `detect`. `recognizeText` возвращает строки текста, а `detect` возвращает `text`, `confidence` и `bounds` для каждого результата.
+* `Функция` Поддерживаются кодированные изображения и необработанные изображения `ARGB_8888`. Android 13 использует `SharedMemory` при доступности, с переходом на потоковое чтение при недоступности или сбое `SharedMemory`.
+* `Функция` Добавлены локальные обнаружение и распознавание текста с моделями обнаружения и распознавания `PP-OCRv6 Small`, `ONNX Runtime` и `OpenCV Mobile`.
+* `Функция` Поддерживаются параметры `maxSideLen` и `scoreThreshold` для распознавания.
+* `Функция` `preBuild` подключен к загрузке ресурсов моделей, проверке их дайджестов `SHA-256` и синхронизации нативных библиотек `ONNX Runtime`.
+* `Функция` Добавлены локализованные метаданные плагина и инструкции на испанском, французском, русском, арабском, японском, корейском, английском, упрощенном китайском, гонконгском традиционном китайском и тайваньском традиционном китайском языках.
+* `Функция` Добавлены источники `JSON` и генератор `Python` для многоязычных документов `README` и `CHANGELOG`.
+* `Функция` Добавлены варианты APK для `arm64-v8a`, `armeabi-v7a`, `x86_64` и `universal`. Имена файлов выпуска содержат версию и вариант `ABI`, а архивные копии содержат дайджест `CRC32`.
+
+##### Дополнительная история выпусков
+
+* [CHANGELOG-ru.md](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.changelog/CHANGELOG-ru.md)
+
+******
+
+### Сборка
+
+******
+
+```powershell
+.\gradlew.bat :app:assembleDebug
+```
+
+Сборка Release:
+
+```powershell
+.\gradlew.bat :app:assembleRelease
+```
+
+Параметры сборки берутся из `version.properties`; текущий минимальный SDK равен 24, а целевой SDK равен 36. `preBuild` загружает и проверяет ресурсы моделей, затем синхронизирует нативные библиотеки ONNX Runtime.
+
+******
+
+### Структура ресурсов
+
+******
+
+```text
+.readme/lang_*.json
+.changelog/lang_*.json
+.python/generate_markdown.py
+app/src/main/assets/doc/CHANGELOG-*.md
+app/src/main/res/values-*/strings.xml
+app/src/main/res/raw-*/plugin_instruction.md
+libs/rapidocr/src/main/assets/models/
+```
+
+`strings.xml` содержит локализованные описания плагина, а `plugin_instruction.md` содержит инструкции для отображения в хосте. README и CHANGELOG генерируются из исходных файлов JSON скриптом `.python/generate_markdown.py`. В корне репозитория создается только `README.md`, а корневой `CHANGELOG.md` не создается.
+
+******
+
+### Ссылки
+
+******
+
+- Документация AutoJs6 OCR: https://docs.autojs6.com/#/ocr
+- Проект RapidOCR: https://github.com/RapidAI/RapidOCR
+- Ресурсы моделей ModelScope: https://www.modelscope.cn/models/RapidAI/RapidOCR
+- ONNX Runtime: https://onnxruntime.ai/
+- OpenCV Mobile: https://github.com/nihui/opencv-mobile

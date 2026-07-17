@@ -51,14 +51,15 @@ public class OcrService extends Service {
         @Override
         public PluginInfo getInfo() throws RemoteException {
             PluginInfo info = new PluginInfo();
-            info.setName("Rapid OCR (PP-OCRv6 Small)");
-            info.setAuthor("SuperMonster003");
-            info.setId("rapid-ocr-pp-ocrv6");
-            info.setEngine("rapid-ocr");
-            info.setVariant("pp-ocrv6");
+            info.setName(getString(R.string.app_name));
+            info.setDescription(getString(R.string.plugin_description));
+            info.setAuthor(getString(R.string.plugin_author));
+            info.setId(getString(R.string.plugin_id));
+            info.setEngine(getString(R.string.plugin_engine));
+            info.setVariant(getString(R.string.plugin_variant));
             info.setVersionName(BuildConfig.VERSION_NAME);
             info.setVersionCode(BuildConfig.VERSION_CODE);
-            info.setVersionDate(BuildConfig.VERSION_DATE);
+            info.setVersionDate(getString(R.string.plugin_version_date));
             info.setSupportedAbis(SUPPORTED_ABIS);
 
             Bundle capabilities = new Bundle();

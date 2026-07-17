@@ -1,0 +1,17 @@
+{
+  "repo_url": "https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6",
+  "docs_autojs6_ocr_url": "https://docs.autojs6.com/#/ocr",
+  "rapidocr_url": "https://github.com/RapidAI/RapidOCR",
+  "modelscope_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR",
+  "onnx_runtime_url": "https://onnxruntime.ai/",
+  "opencv_mobile_url": "https://github.com/nihui/opencv-mobile",
+  "plugin_action": "org.autojs.plugin.PADDLE_OCR",
+  "plugin_engine": "rapid-ocr",
+  "plugin_variant": "pp-ocrv6",
+  "plugin_id": "rapid-ocr-pp-ocrv6",
+  "supported_abis": "arm64-v8a, armeabi-v7a, x86_64, universal",
+  "model_asset_detection": "PP-OCRv6_det_small.onnx",
+  "model_asset_recognition": "PP-OCRv6_rec_small.onnx",
+  "model_asset_auxiliary": "ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+  "model_asset_dictionary": "ppocrv6_dict.txt"
+}

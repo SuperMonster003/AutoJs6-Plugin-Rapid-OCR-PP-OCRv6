@@ -28,12 +28,17 @@ android {
         versionCode = versions.appVersionCode
         versionName = versions.appVersionName
 
+        resValue("string", "app_name", "Rapid OCR (PP-OCRv6 Small)")
+        resValue("string", "plugin_author", "SuperMonster003")
+        resValue("string", "plugin_id", "rapid-ocr-pp-ocrv6")
+        resValue("string", "plugin_engine", "rapid-ocr")
+        resValue("string", "plugin_variant", "pp-ocrv6")
+        resValue("string", "plugin_version_date", utils.getDateString("MMM d, yyyy", "GMT+08:00"))
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled = true
         multiDexKeepProguard = file("multidex-keep.pro")
-
-        buildConfigField("String", "VERSION_DATE", "\"${utils.getDateString("MMM d, yyyy", "GMT+08:00")}\"")
 
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
@@ -78,6 +83,7 @@ android {
     buildFeatures {
         aidl = true
         buildConfig = true
+        resValues = true
     }
 
     @Suppress("DEPRECATION")
@@ -154,6 +160,28 @@ dependencies {
 tasks {
     withType(JavaCompile::class.java) {
         options.encoding = "UTF-8"
+    }
+
+    register<Copy>("appendDigestToReleasedFiles") {
+        description = "Appends CRC32 digest to released APK files"
+
+        val src = buildTypeRelease
+        val dst = "${src}s"
+        val ext = utils.FILE_EXTENSION_APK
+
+        if (!file(src).isDirectory) {
+            return@register
+        }
+
+        from(src); into(dst); include("*.$ext")
+
+        rename { name ->
+            utils.digestCRC32(file("${src}/$name")).let { digest ->
+                name.replace(Regex("^(.+?)(\\.$ext)$"), "$1-$digest$2")
+            }
+        }
+
+        doLast { println("Destination: ${file(dst)}") }
     }
 }
 

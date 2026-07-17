@@ -1,0 +1,3 @@
+<resources>
+    <string name="plugin_description">Локальный OCR-плагин на базе Rapid OCR и PP-OCRv6 Small</string>
+</resources>

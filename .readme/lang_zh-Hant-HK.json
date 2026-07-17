@@ -1,0 +1,52 @@
+{
+  "$name": "繁體中文 (香港)",
+  "text_current_lowercase": "目前",
+  "text_plugin_synopsis": "用於 AutoJs6 PP-OCRv6 Small 文字識別的 Rapid OCR 插件",
+  "h3_languages_with_ascii": "語言 (Languages)",
+  "p_languages_all_supported_for_readme": "目前 README.md 支援以下語言",
+  "h3_introduction": "簡介",
+  "p_introduction": "AutoJs6 Rapid OCR PP-OCRv6 Small 插件為 AutoJs6 提供基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 的文字檢測與識別能力. 插件可返回識別文本, 置信度和文本邊界框.",
+  "h3_functions": "功能",
+  "features": [
+    "提供共享 OCR 插件服務, 插件 ID 為 `{{ plugin_id }}`, 引擎為 `{{ plugin_engine }}`, 變體為 `{{ plugin_variant }}`.",
+    "通過 `{{ plugin_action }}` 暴露 OCR AIDL 接口, 兼容 AutoJs6 宿主側 OCR 插件發現機制.",
+    "支援 `ocr.rapid.recognizeText` 返回字符串列表, 支援 `ocr.rapid.detect` 返回文本, 置信度和邊界框.",
+    "支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.",
+    "提供 `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK.",
+    "插件資訊, 使用說明, README 和 CHANGELOG 支援西班牙語/法語/俄語/阿拉伯語/日語/韓語/英語/簡體中文/香港繁體/台灣繁體.",
+    "基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 構建."
+  ],
+  "h3_usage": "使用示例",
+  "p_usage_intro": "讀取圖片後可通過 Rapid OCR 模組識別文本或取得詳細結果",
+  "p_usage_result": "`recognizeText` 返回字符串列表, `detect` 返回包含識別詳情的結果列表",
+  "h3_plugin_interface": "插件接口",
+  "p_plugin_interface": "宿主可通過以下身份發現並調用插件",
+  "p_result_shape": "`detect` 的每個結果包含 `text`, `confidence` 和 `bounds`, 目前接口不提供 quad 字段",
+  "h3_recognition_options": "識別選項",
+  "p_recognition_options": "目前插件實現讀取以下識別選項",
+  "option_lines": [
+    "`maxSideLen`: 檢測階段的最大邊長, 默認值為 `1024`.",
+    "`scoreThreshold`: 文本框分數閾值, 默認值為 `0.5`."
+  ],
+  "h3_model_assets": "模型資產",
+  "p_model_assets": "構建過程從 ModelScope 下載並校驗以下 4 個資產",
+  "model_asset_lines": [
+    "`{{ model_asset_detection }}`: PP-OCRv6 Small 文本檢測模型.",
+    "`{{ model_asset_recognition }}`: PP-OCRv6 Small 文本識別模型.",
+    "`{{ model_asset_auxiliary }}`: 引擎初始化所需的輔助模型資產.",
+    "`{{ model_asset_dictionary }}`: PP-OCRv6 識別字典."
+  ],
+  "h3_release_history": "發行歷史",
+  "h5_for_more_release_history": "更多發行歷史可參閱",
+  "h3_build": "構建",
+  "text_release_build": "Release 構建",
+  "p_build_params": "構建參數來自 `version.properties`, 目前最低 SDK 為 24, 目標 SDK 為 36. `preBuild` 會下載並校驗模型資產, 同時同步 ONNX Runtime 原生庫",
+  "h3_resource_layout": "資源結構",
+  "p_resource_layout": "`strings.xml` 提供插件描述本地化, `plugin_instruction.md` 提供宿主側展示的使用說明. README 和 CHANGELOG 由 `.python/generate_markdown.py` 根據 JSON 源文件生成. 根目錄只生成 `README.md`, 不生成根目錄 `CHANGELOG.md`",
+  "h3_links": "相關連結",
+  "text_link_autojs6_ocr_docs": "AutoJs6 OCR 文檔",
+  "text_link_rapidocr": "RapidOCR 項目",
+  "text_link_modelscope": "ModelScope 模型資產",
+  "text_link_onnx_runtime": "ONNX Runtime",
+  "text_link_opencv_mobile": "OpenCV Mobile"
+}

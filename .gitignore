@@ -20,6 +20,7 @@ sync.ffs_db
 .gradle/
 .kotlin/
 .hprof/
+/.python/__pycache__/
 
 !.run
 
