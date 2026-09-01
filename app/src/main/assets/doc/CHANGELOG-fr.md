@@ -1,6 +1,12 @@
+******
+
+### Historique des versions
+
+******
+
 # v1.0.0
 
-###### 2026/07/17
+###### 2026/09/01
 
 * `Fonctionnalité` Ajout des informations identifiant le plugin Rapid OCR (PP-OCRv6 Small) avec ID de plugin `rapid-ocr-pp-ocrv6`, moteur `rapid-ocr`, et variante `pp-ocrv6`.
 * `Fonctionnalité` Ajout du service AIDL `PADDLE_OCR` et des interfaces `recognizeText` et `detect`. `recognizeText` renvoie des chaînes de texte, tandis que `detect` renvoie `text`, `confidence` et `bounds` pour chaque résultat.
@@ -11,3 +17,4 @@
 * `Fonctionnalité` Ajout des métadonnées de plugin et des instructions pour espagnol, français, russe, arabe, japonais, coréen, anglais, chinois simplifié, chinois traditionnel de Hong Kong et chinois traditionnel de Taïwan.
 * `Fonctionnalité` Ajout de sources `JSON` et du générateur `Python` pour les documents `README` et `CHANGELOG` multilingues.
 * `Fonctionnalité` Ajout de variantes APK pour `arm64-v8a`, `armeabi-v7a`, `x86_64` et `universal`. Les noms des fichiers publiés incluent la version et la variante `ABI`, et les copies archivées incluent une somme `CRC32`.
+* `Amélioration` Uniformiser la mise en page du README et la gestion des versions de la plateforme Gradle

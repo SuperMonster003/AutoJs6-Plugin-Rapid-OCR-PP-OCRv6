@@ -13,10 +13,6 @@
   <p>
     <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/releases"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?label=Release"/></a>
     <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/issues"><img alt="GitHub closed issues" src="https://img.shields.io/github/issues/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?color=A24232&label=Issues"/></a>
-    <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/commit/96410a029a429919da9eaaa21b5c900875f32bad"><img alt="Created" src="https://img.shields.io/date/1783059864?color=2e7d32&label=Created"/></a>
-    <br>
-    <a href="https://developer.android.com/studio/archive"><img alt="Android Studio" src="https://img.shields.io/badge/Android%20Studio-2023.3+-B64FC8"/></a>
-    <a href="https://www.jetbrains.com/idea/download/other.html"><img alt="IntelliJ IDEA" src="https://img.shields.io/badge/IntelliJ%20IDEA-2023.3+-EE4677"/></a>
     <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?color=534BAE&label=License"/></a>
   </p>
 </div>
@@ -140,7 +136,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 
 # v1.0.0
 
-###### 2026/07/17
+###### 2026/09/01
 
 * `기능` Rapid OCR (PP-OCRv6 Small) 플러그인 식별 정보를 추가했습니다. 플러그인 ID는 `rapid-ocr-pp-ocrv6`, 엔진은 `rapid-ocr`, 변형은 `pp-ocrv6`입니다.
 * `기능` `PADDLE_OCR` AIDL 서비스와 `recognizeText` 및 `detect` 인터페이스를 추가했습니다. `recognizeText`는 텍스트 문자열을 반환하고, `detect`는 각 결과의 `text`, `confidence`, `bounds`를 반환합니다.
@@ -151,10 +147,11 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `기능` 스페인어, 프랑스어, 러시아어, 아랍어, 일본어, 한국어, 영어, 중국어 간체, 홍콩 중국어 번체, 대만 중국어 번체 플러그인 메타데이터와 사용 설명을 추가했습니다.
 * `기능` 다국어 `README` 및 `CHANGELOG` 문서용 `JSON` 소스와 `Python` 생성기를 추가했습니다.
 * `기능` `arm64-v8a`, `armeabi-v7a`, `x86_64`, `universal` APK 변형을 추가했습니다. 릴리스 파일 이름에는 버전과 `ABI`가 포함되고, 보관 사본에는 `CRC32` 다이제스트가 포함됩니다.
+* `개선` README 레이아웃과 Gradle 플랫폼 버전 관리 방식을 통일
 
 ##### 더 많은 릴리스 기록
 
-* [CHANGELOG-ko.md](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.changelog/CHANGELOG-ko.md)
+* [CHANGELOG-ko.md](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/doc/CHANGELOG-ko.md)
 
 ******
 

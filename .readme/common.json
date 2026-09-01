@@ -1,5 +1,8 @@
 {
   "repo_url": "https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6",
+  "repo_slug": "SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6",
+  "icon_alt": "autojs6-plugin-rapid-ocr-pp-ocrv6-ic-launcher",
+  "license_url": "{{ repo_url }}/blob/master/LICENSE",
   "docs_autojs6_ocr_url": "https://docs.autojs6.com/#/ocr",
   "rapidocr_url": "https://github.com/RapidAI/RapidOCR",
   "modelscope_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR",

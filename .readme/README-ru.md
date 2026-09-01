@@ -13,10 +13,6 @@
   <p>
     <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/releases"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?label=Release"/></a>
     <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/issues"><img alt="GitHub closed issues" src="https://img.shields.io/github/issues/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?color=A24232&label=Issues"/></a>
-    <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/commit/96410a029a429919da9eaaa21b5c900875f32bad"><img alt="Created" src="https://img.shields.io/date/1783059864?color=2e7d32&label=Created"/></a>
-    <br>
-    <a href="https://developer.android.com/studio/archive"><img alt="Android Studio" src="https://img.shields.io/badge/Android%20Studio-2023.3+-B64FC8"/></a>
-    <a href="https://www.jetbrains.com/idea/download/other.html"><img alt="IntelliJ IDEA" src="https://img.shields.io/badge/IntelliJ%20IDEA-2023.3+-EE4677"/></a>
     <a href="https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6?color=534BAE&label=License"/></a>
   </p>
 </div>
@@ -140,7 +136,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 
 # v1.0.0
 
-###### 2026/07/17
+###### 2026/09/01
 
 * `Функция` Добавлены данные плагина Rapid OCR (PP-OCRv6 Small) с идентификатором `rapid-ocr-pp-ocrv6`, движком `rapid-ocr` и вариантом `pp-ocrv6`.
 * `Функция` Добавлены служба AIDL `PADDLE_OCR` и интерфейсы `recognizeText` и `detect`. `recognizeText` возвращает строки текста, а `detect` возвращает `text`, `confidence` и `bounds` для каждого результата.
@@ -151,10 +147,11 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `Функция` Добавлены локализованные метаданные плагина и инструкции на испанском, французском, русском, арабском, японском, корейском, английском, упрощенном китайском, гонконгском традиционном китайском и тайваньском традиционном китайском языках.
 * `Функция` Добавлены источники `JSON` и генератор `Python` для многоязычных документов `README` и `CHANGELOG`.
 * `Функция` Добавлены варианты APK для `arm64-v8a`, `armeabi-v7a`, `x86_64` и `universal`. Имена файлов выпуска содержат версию и вариант `ABI`, а архивные копии содержат дайджест `CRC32`.
+* `Улучшение` Унифицировать оформление README и управление версиями платформы Gradle
 
 ##### Дополнительная история выпусков
 
-* [CHANGELOG-ru.md](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/.changelog/CHANGELOG-ru.md)
+* [CHANGELOG-ru.md](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/doc/CHANGELOG-ru.md)
 
 ******
 

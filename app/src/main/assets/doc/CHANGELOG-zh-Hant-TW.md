@@ -1,6 +1,12 @@
+******
+
+### 發行歷史
+
+******
+
 # v1.0.0
 
-###### 2026/07/17
+###### 2026/09/01
 
 * `新增` Rapid OCR (PP-OCRv6 Small) 外掛識別資訊, 外掛 ID 為 `rapid-ocr-pp-ocrv6`, 引擎為 `rapid-ocr`, 變體為 `pp-ocrv6`.
 * `新增` `PADDLE_OCR` AIDL 服務以及 `recognizeText` 和 `detect` 介面. `recognizeText` 回傳文字字串, `detect` 為每個結果回傳 `text`, `confidence` 和 `bounds`.
@@ -11,3 +17,4 @@
 * `新增` 西班牙文, 法文, 俄文, 阿拉伯文, 日文, 韓文, 英文, 簡體中文, 香港繁體中文和台灣繁體中文的外掛中繼資料與使用說明.
 * `新增` `JSON` 來源檔和 `Python` 產生器, 用於產生多語言 `README` 與 `CHANGELOG` 文件.
 * `新增` `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK 變體. 發佈檔名包含版本和 `ABI`, 封存副本包含 `CRC32` 摘要.
+* `改善` 統一 README 版式與 Gradle 平台版本管理方式

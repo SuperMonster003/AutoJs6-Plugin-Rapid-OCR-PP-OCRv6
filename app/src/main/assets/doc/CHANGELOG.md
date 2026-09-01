@@ -1,6 +1,12 @@
+******
+
+### 发行历史
+
+******
+
 # v1.0.0
 
-###### 2026/07/17
+###### 2026/09/01
 
 * `新增` Rapid OCR (PP-OCRv6 Small) 插件标识, 插件 ID 为 `rapid-ocr-pp-ocrv6`, 引擎为 `rapid-ocr`, 变体为 `pp-ocrv6`.
 * `新增` `PADDLE_OCR` AIDL 服务以及 `recognizeText` 和 `detect` 接口. `recognizeText` 返回文本字符串, `detect` 为每个结果返回 `text`, `confidence` 和 `bounds`.
@@ -11,3 +17,4 @@
 * `新增` 西班牙语, 法语, 俄语, 阿拉伯语, 日语, 韩语, 英语, 简体中文, 香港繁体中文和台湾繁体中文的插件信息与使用说明.
 * `新增` `JSON` 源文件和 `Python` 生成器, 用于生成多语言 `README` 与 `CHANGELOG` 文档.
 * `新增` `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK 变体. 发布文件名包含版本和 `ABI`, 归档副本包含 `CRC32` 摘要.
+* `优化` 统一 README 版式与 Gradle 平台版本管理方式
