@@ -4,6 +4,13 @@
 
 ******
 
+# v1.0.2
+
+###### 2026/09/12
+
+* `수정` 패키징된 네이티브 라이브러리에 `libc++_shared.so`가 누락되던 문제 수정: CMake가 `c++_shared` STL을 명시적으로 사용하여 AGP가 4개 ABI 모두에 NDK r28.2 libc++를 함께 패키징하므로 16 KB 페이지 크기 기기에서도 OCR 엔진이 다시 로드됨
+* `개선` OpenCV 4.8.0 네이티브 라이브러리를 NDK r28c (Clang 19.0.1) 재빌드 버전으로 동기화 (donor: AutoJs6-Plugin-OpenCV); 4개 ABI의 `libopencv_java4.so`는 16 KB `PT_LOAD` 정렬을 유지하며 provenance 매니페스트를 포함
+
 # v1.0.1
 
 ###### 2026/09/11

@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "date": "2026-09-11",
   "opencvVersion": "4.8.0",
-  "sha256": "0c4db6cc54f2388e063d1a49f410d570e5ed2261404731b65ff304548ed4a222",
-  "donorSha256": "869e3ee9cf0cbb6e76e8a02dd94cd12e6cd2445e4b6dc662f46ed8f715c8875a",
+  "sha256": "75f9c45d1c8467128c061e15042b482c57f05c7ebfca8206b4d417faacb609b4",
+  "donorSha256": "f760265bbc0bae75f2f906088fee3447eb32d9bc2b4d7ad8fd246923ddc26dd6",
   "donorProvenance": "AutoJs6-Plugin-OpenCV/libs/opencv-native-4.8.0.provenance.json",
   "headersUrl": "https://github.com/opencv/opencv/releases/download/4.8.0/opencv-4.8.0-android-sdk.zip",
   "threading": "TBB; no statically linked OpenMP in RapidOcr",
@@ -354,9 +354,9 @@
     "headers/opencv2/videoio/registry.hpp": "3c5d3892dc0d89753202ec1a81ce6f22232318daac3785bdd4f2b19391636c2e",
     "headers/opencv2/videoio/videoio.hpp": "d38fe912bef4af8a587bf820e2316202c1253c60fca72a339a32f94e85ac2c81",
     "headers/opencv2/videoio/videoio_c.h": "48ad598cb1609b34ed1f8663a3839b49a65c9ea5998803aa026a42e5dfdab112",
-    "jni/arm64-v8a/libopencv_java4.so": "adb31f4905ac448d5b22faa293fd7d2315bcdab675b374088831fda7517c70ac",
-    "jni/armeabi-v7a/libopencv_java4.so": "7e2f2a6761db7b049761e3e4da7ca245d48817f057799e95abf3d5d4ebd79138",
-    "jni/x86/libopencv_java4.so": "e5836d2f0d32b381e811eb653b6234b2b175b989ecde63aa3dadfa456e37d8fc",
-    "jni/x86_64/libopencv_java4.so": "33fce612532940b72721c618e5b3a0d979b0138a6f32dac412c41ce09411ab22"
+    "jni/arm64-v8a/libopencv_java4.so": "988f653ee309848dae1a57b5bedb32d85c17c6f2ad9b8c7ec1a1bb4c3095d506",
+    "jni/armeabi-v7a/libopencv_java4.so": "7e8f92311f34853a5998eadceaf07ebdc7483a878bbafe90d31276d045ae26ce",
+    "jni/x86/libopencv_java4.so": "86414781d9b32628535a6516c68b198eef325aa89080ddf4d9fd65bb89aff972",
+    "jni/x86_64/libopencv_java4.so": "f9a66c2fec379e14757b11aa4220e67205c2e4d917b4dfffe7c6f99ba2623c6e"
   }
 }

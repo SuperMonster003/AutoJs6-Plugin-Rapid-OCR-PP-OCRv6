@@ -5,6 +5,15 @@
   "changelog_label_improvement": "优化",
   "changelog_label_dependency": "依赖",
   "$data": {
+    "v1.0.2": {
+      "released_date": "2026/09/12",
+      "fix": [
+        "修复原生库未打包 `libc++_shared.so` 的问题: CMake 现在显式使用 `c++_shared` STL, 由 AGP 随 4 个 ABI 一并打包 NDK r28.2 的 libc++, 16 KB 页大小设备上不再因缺少依赖而无法加载 OCR 引擎"
+      ],
+      "improvement": [
+        "同步 OpenCV 4.8.0 原生库至 NDK r28c (Clang 19.0.1) 重编版本 (donor: AutoJs6-Plugin-OpenCV), 4 个 ABI 的 `libopencv_java4.so` 保持 16 KB `PT_LOAD` 对齐并附带 provenance 清单"
+      ]
+    },
     "v1.0.1": {
       "released_date": "2026/09/11",
       "fix": [

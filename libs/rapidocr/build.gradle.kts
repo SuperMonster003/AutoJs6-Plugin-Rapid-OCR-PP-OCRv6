@@ -195,6 +195,7 @@ android {
             cmake {
                 arguments += "-DOPENCV_NATIVE_DIR=${openCvNativeDirectory.get().asFile.invariantSeparatorsPath}"
                 arguments += "-DONNXRUNTIME_NATIVE_DIR=${onnxRuntimeNativeDirectory.get().asFile.invariantSeparatorsPath}"
+                arguments += "-DANDROID_STL=c++_shared"
                 abiFilters += rapidOcrAbis
             }
         }

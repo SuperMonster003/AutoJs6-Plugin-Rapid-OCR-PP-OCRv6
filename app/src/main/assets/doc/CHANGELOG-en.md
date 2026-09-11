@@ -4,6 +4,13 @@
 
 ******
 
+# v1.0.2
+
+###### 2026/09/12
+
+* `Fix` Fixed the missing `libc++_shared.so` in the packaged native libraries: CMake now uses the `c++_shared` STL explicitly so AGP bundles the NDK r28.2 libc++ for all 4 ABIs, and the OCR engine loads again on 16 KB page size devices
+* `Improvement` Synced the OpenCV 4.8.0 native library to the NDK r28c (Clang 19.0.1) rebuild (donor: AutoJs6-Plugin-OpenCV); `libopencv_java4.so` for all 4 ABIs keeps 16 KB `PT_LOAD` alignment and ships with a provenance manifest
+
 # v1.0.1
 
 ###### 2026/09/11
