@@ -5,6 +5,19 @@
   "changelog_label_improvement": "تحسين",
   "changelog_label_dependency": "تبعية",
   "$data": {
+    "v1.0.1": {
+      "released_date": "2026/09/11",
+      "fix": [
+        "تعطل عند استخدام Paddle OCR و Rapid OCR بالتتابع في التطبيق المعبأ نفسه"
+      ],
+      "improvement": [
+        "التحقق أثناء البناء من محاذاة صفحات 16 KB للمكتبات الأصلية ذات 64 بت, مع فحص عقد manifest وتقارير JSON"
+      ],
+      "dependency": [
+        "ترقية ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) من الاصدار 1.18.0 -> 1.21.1",
+        "ترقية إصدار OpenCV من 4.5.3 إلى 4.8.0"
+      ]
+    },
     "v1.0.0": {
       "released_date": "2026/09/01",
       "feature": [

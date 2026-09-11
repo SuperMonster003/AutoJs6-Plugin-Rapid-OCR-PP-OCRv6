@@ -7,6 +7,7 @@ plugins {
     id("org.autojs.build.signs")
     id("org.autojs.build.jvm-convention")
     id("com.android.application")
+    id("io.github.supermonster003.autojs6-native-alignment")
 }
 
 val globalApplicationId = "io.github.supermonster003.autojs6.plugin.rapidocr.ppocrv6"

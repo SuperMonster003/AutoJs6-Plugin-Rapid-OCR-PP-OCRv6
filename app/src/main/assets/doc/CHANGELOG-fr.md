@@ -4,6 +4,15 @@
 
 ******
 
+# v1.0.1
+
+###### 2026/09/11
+
+* `Correctif` Un plantage lors de l'utilisation successive de Paddle OCR et Rapid OCR dans la même application empaquetée
+* `Amélioration` Vérification à la compilation de l'alignement des pages de 16 KB des bibliothèques natives 64 bits, avec contrôle du contrat manifest et rapports JSON
+* `Dépendance` Mise a niveau de ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) version 1.18.0 -> 1.21.1
+* `Dépendance` Mise à jour de OpenCV version 4.5.3 à 4.8.0
+
 # v1.0.0
 
 ###### 2026/09/01

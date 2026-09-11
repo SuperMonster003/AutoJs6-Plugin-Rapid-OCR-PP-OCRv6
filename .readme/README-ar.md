@@ -134,6 +134,15 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 
 ******
 
+# v1.0.1
+
+###### 2026/09/11
+
+* `إصلاح` تعطل عند استخدام Paddle OCR و Rapid OCR بالتتابع في التطبيق المعبأ نفسه
+* `تحسين` التحقق أثناء البناء من محاذاة صفحات 16 KB للمكتبات الأصلية ذات 64 بت, مع فحص عقد manifest وتقارير JSON
+* `تبعية` ترقية ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) من الاصدار 1.18.0 -> 1.21.1
+* `تبعية` ترقية إصدار OpenCV من 4.5.3 إلى 4.8.0
+
 # v1.0.0
 
 ###### 2026/09/01
@@ -200,3 +209,6 @@ libs/rapidocr/src/main/assets/models/
 - أصول نماذج ModelScope: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
 - OpenCV Mobile: https://github.com/nihui/opencv-mobile
+
+
+[16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

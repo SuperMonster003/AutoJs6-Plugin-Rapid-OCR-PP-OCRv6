@@ -9,35 +9,26 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # OnnxRuntime
 
 get_filename_component(MODULE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
-include(${MODULE_DIR}/src/main/onnxruntime-shared/OnnxRuntimeWrapper.cmake)
-find_package(OnnxRuntime REQUIRED)
-if (OnnxRuntime_FOUND)
-    message(STATUS "OnnxRuntime_LIBS: ${OnnxRuntime_LIBS}")
-    message(STATUS "OnnxRuntime_INCLUDE_DIRS: ${OnnxRuntime_INCLUDE_DIRS}")
-else ()
-    message(FATAL_ERROR "onnxruntime Not Found!")
-endif (OnnxRuntime_FOUND)
-
-## opencv 库
-
-set(OpenCV_DIR "${MODULE_DIR}/src/sdk/native/jni")
-find_package(OpenCV REQUIRED)
-if (OpenCV_FOUND)
-    message(STATUS "OpenCV_LIBS: ${OpenCV_LIBS}")
-    message(STATUS "OpenCV_INCLUDE_DIRS: ${OpenCV_INCLUDE_DIRS}")
-else ()
-    message(FATAL_ERROR "opencv Not Found!")
-endif (OpenCV_FOUND)
-
-# openmp
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fopenmp")
-
-if (DEFINED ANDROID_NDK_MAJOR AND ${ANDROID_NDK_MAJOR} GREATER 20)
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -static-openmp")
+if (NOT DEFINED ONNXRUNTIME_NATIVE_DIR)
+    message(FATAL_ERROR "ONNXRUNTIME_NATIVE_DIR must point to the extracted Maven AAR")
 endif ()
+add_library(onnxruntime SHARED IMPORTED)
+set_target_properties(onnxruntime PROPERTIES
+    IMPORTED_LOCATION "${ONNXRUNTIME_NATIVE_DIR}/jni/${ANDROID_ABI}/libonnxruntime.so"
+    INTERFACE_INCLUDE_DIRECTORIES "${ONNXRUNTIME_NATIVE_DIR}/headers")
+set(OnnxRuntime_LIBS onnxruntime)
+set(OnnxRuntime_INCLUDE_DIRS "${ONNXRUNTIME_NATIVE_DIR}/headers")
+include_directories(${OnnxRuntime_INCLUDE_DIRS})
+
+# Share the verified OpenCV/TBB runtime; static OpenMP conflicts with embedded Paddle Lite.
+if (NOT DEFINED OPENCV_NATIVE_DIR)
+    message(FATAL_ERROR "OPENCV_NATIVE_DIR must point to the verified OpenCV AAR")
+endif ()
+add_library(opencv_runtime SHARED IMPORTED)
+set_target_properties(opencv_runtime PROPERTIES
+    IMPORTED_LOCATION "${OPENCV_NATIVE_DIR}/jni/${ANDROID_ABI}/libopencv_java4.so"
+    INTERFACE_INCLUDE_DIRECTORIES "${OPENCV_NATIVE_DIR}/headers")
+set(OpenCV_LIBS opencv_runtime)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer -fstrict-aliasing -ffast-math")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer -fstrict-aliasing -ffast-math")
@@ -72,3 +63,5 @@ target_link_libraries(
         ${log-lib}
         ${android-lib}
         jnigraphics)
+
+target_link_options(RapidOcr PRIVATE -Wl,-z,max-page-size=16384 -Wl,-z,common-page-size=16384)

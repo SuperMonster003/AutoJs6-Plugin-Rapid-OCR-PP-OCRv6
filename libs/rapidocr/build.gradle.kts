@@ -30,39 +30,16 @@ val versionMap = mapOf(
     "TARGET_SDK" to props["TARGET_SDK"].toInt(),
     "NDK" to props["RAPID_OCR/NDK"],
     "CMAKE" to props["RAPID_OCR/CMAKE"],
-    "OPENCV_MOBILE" to props["RAPID_OCR/OPENCV_MOBILE"],
-    "OPENCV_MOBILE_LABEL" to props["RAPID_OCR/OPENCV_MOBILE_LABEL"],
     "ONNX_RUNTIME" to onnxRuntimeReleaseVersion,
     "ONNX_RUNTIME_ASSET" to onnxRuntimeAssetVersion,
 )
 
 val nameMap = mapOf(
     "PROJECT" to extensions.extraProperties["projectName"] as String,
-    "OPENCV_MOBILE" to "OpenCV Mobile",
-    "OPENCV_MOBILE_LABEL" to "OpenCV Mobile Label",
     "ONNX_RUNTIME" to "Onnx Runtime",
     "ONNX_RUNTIME_ASSET" to "Onnx Runtime Asset",
     "NDK" to "NDK",
     "CMAKE" to "Cmake",
-)
-
-val libsToDeploy = listOf(
-    utils.newLibDeployer(
-        project,
-        nameMap["OPENCV_MOBILE"] as String,
-        "https://github.com/nihui/opencv-mobile/releases/download/v${versionMap["OPENCV_MOBILE_LABEL"]}/opencv-mobile-${versionMap["OPENCV_MOBILE"]}-android.zip",
-    ).apply {
-        setSourceDir("/opencv-mobile-${versionMap["OPENCV_MOBILE"]}-android/sdk/native/")
-        setDestDir("/src/sdk/native/")
-    },
-    utils.newLibDeployer(
-        project,
-        nameMap["ONNX_RUNTIME"] as String,
-        "https://github.com/RapidAI/OnnxruntimeBuilder/releases/download/${versionMap["ONNX_RUNTIME"]}/onnxruntime-${versionMap["ONNX_RUNTIME_ASSET"]}-android-shared.7z",
-    ).apply {
-        setSourceDir("/onnxruntime-android-shared/")
-        setDestDir("/src/main/onnxruntime-shared/")
-    },
 )
 
 data class RapidOcrRemoteAsset(
@@ -153,30 +130,8 @@ tasks.register("downloadRapidOcrV6Models") {
     }
 }
 
-tasks.register("syncOnnxRuntimeJniLibs") {
-    group = "rapidocr"
-    description = "Copy ONNX Runtime shared libraries into Android jniLibs packaging layout."
-
-    doLast {
-        val sourceRoot = layout.projectDirectory.dir("src/main/onnxruntime-shared").asFile
-        val targetRoot = layout.projectDirectory.dir("src/main/sharedLibs").asFile
-        targetRoot.deleteRecursively()
-
-        rapidOcrAbis.forEach { abi ->
-            val source = sourceRoot.resolve("$abi/lib/libonnxruntime.so")
-            require(source.isFile) {
-                "Missing ONNX Runtime shared library for $abi: ${source.absolutePath}"
-            }
-            val target = targetRoot.resolve("$abi/libonnxruntime.so")
-            target.parentFile.mkdirs()
-            source.copyTo(target, overwrite = true)
-        }
-    }
-}
-
 tasks.named("preBuild").configure {
     dependsOn("downloadRapidOcrV6Models")
-    dependsOn("syncOnnxRuntimeJniLibs")
 }
 
 utils.configureLibraryLifecycleHooks(
@@ -184,10 +139,43 @@ utils.configureLibraryLifecycleHooks(
     nameMap["PROJECT"] as String,
     listOf("OPENCV_MOBILE", "OPENCV_MOBILE_LABEL", "ONNX_RUNTIME", "ONNX_RUNTIME_ASSET", "NDK", "CMAKE")
         .map { "${nameMap[it] ?: it}: ${versionMap[it]}" },
-    libsToDeploy,
+    emptyList(),
     "isCleanupRapidOcr",
     listOf(".cxx"),
 )
+
+val onnxRuntimeNative by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+    isTransitive = false
+}
+dependencies {
+    onnxRuntimeNative("com.microsoft.onnxruntime:onnxruntime-android:${versionMap["ONNX_RUNTIME"]}@aar")
+}
+val onnxRuntimeNativeDirectory = layout.buildDirectory.dir("onnxruntime-native")
+val extractOnnxRuntimeNative by tasks.registering(Sync::class) {
+    from({ zipTree(onnxRuntimeNative.singleFile) }) {
+        include("headers/**", "jni/**/libonnxruntime.so")
+    }
+    into(onnxRuntimeNativeDirectory)
+}
+val openCvNative by configurations.creating {
+    isCanBeConsumed = false
+    isCanBeResolved = true
+    isTransitive = false
+}
+dependencies { openCvNative(files(rootProject.file("libs/opencv-native-4.8.0.aar"))) }
+val openCvNativeDirectory = layout.buildDirectory.dir("opencv-native")
+val extractOpenCvNative by tasks.registering(Sync::class) {
+    from({ zipTree(openCvNative.singleFile) }) { include("headers/**", "jni/**") }
+    into(openCvNativeDirectory)
+}
+
+tasks.configureEach {
+    if (name == "preBuild" || name.startsWith("configureCMake") || name.startsWith("buildCMake")) {
+        dependsOn(extractOnnxRuntimeNative, extractOpenCvNative)
+    }
+}
 
 android {
 
@@ -205,14 +193,10 @@ android {
 
         externalNativeBuild {
             cmake {
+                arguments += "-DOPENCV_NATIVE_DIR=${openCvNativeDirectory.get().asFile.invariantSeparatorsPath}"
+                arguments += "-DONNXRUNTIME_NATIVE_DIR=${onnxRuntimeNativeDirectory.get().asFile.invariantSeparatorsPath}"
                 abiFilters += rapidOcrAbis
             }
-        }
-    }
-
-    sourceSets {
-        getByName("main") {
-            jniLibs.directories.add("src/main/sharedLibs")
         }
     }
 

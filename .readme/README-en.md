@@ -134,6 +134,15 @@ The build downloads and verifies the following 4 assets from ModelScope:
 
 ******
 
+# v1.0.1
+
+###### 2026/09/11
+
+* `Fix` A crash when Paddle OCR and Rapid OCR are used sequentially in the same packaged app
+* `Improvement` Build verification of 16 KB page alignment for 64-bit native libraries, including manifest contract checks and JSON reports
+* `Dependency` Upgraded ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) version 1.18.0 -> 1.21.1
+* `Dependency` Upgraded OpenCV version from 4.5.3 -> 4.8.0
+
 # v1.0.0
 
 ###### 2026/09/01
@@ -200,3 +209,6 @@ libs/rapidocr/src/main/assets/models/
 - ModelScope model assets: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
 - OpenCV Mobile: https://github.com/nihui/opencv-mobile
+
+
+[16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

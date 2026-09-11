@@ -4,6 +4,15 @@
 
 ******
 
+# v1.0.1
+
+###### 2026/09/11
+
+* `修復` 在同一個打包應用中依次使用 Paddle OCR 和 Rapid OCR 時可能崩潰的問題
+* `優化` 建置階段校驗 64 位原生程式庫的 16 KB 頁面大小對齊, 檢查 manifest 契約並輸出 JSON 報告
+* `依賴` 升級 ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) 版本 1.18.0 -> 1.21.1
+* `依賴` 升級 OpenCV 版本 4.5.3 -> 4.8.0
+
 # v1.0.0
 
 ###### 2026/09/01

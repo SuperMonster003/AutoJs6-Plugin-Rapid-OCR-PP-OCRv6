@@ -63,7 +63,7 @@ public class OcrService extends Service {
             info.setSupportedAbis(SUPPORTED_ABIS);
 
             Bundle capabilities = new Bundle();
-            capabilities.putInt(PluginCapabilityKeys.REQUIRES_HOST_VERSION, 3923);
+            capabilities.putInt(PluginCapabilityKeys.REQUIRES_HOST_VERSION, 5279);
             capabilities.putBoolean(PaddleOcrPluginCapabilityKeys.SUPPORTS_RAW_IMAGE, true);
             info.setCapabilities(capabilities);
             return info;

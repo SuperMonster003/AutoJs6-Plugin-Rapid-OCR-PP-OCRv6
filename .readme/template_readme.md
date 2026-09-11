@@ -168,3 +168,6 @@ libs/rapidocr/src/main/assets/models/
 - {{ text_link_modelscope }}: {{ modelscope_url }}
 - {{ text_link_onnx_runtime }}: {{ onnx_runtime_url }}
 - {{ text_link_opencv_mobile }}: {{ opencv_mobile_url }}
+
+
+[16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)
