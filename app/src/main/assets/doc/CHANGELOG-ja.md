@@ -9,6 +9,7 @@
 ###### 2026/09/12
 
 * `修正` パッケージ済みネイティブライブラリに `libc++_shared.so` が含まれていなかった問題を修正: CMake が `c++_shared` STL を明示的に使用し, AGP が 4 つの ABI すべてに NDK r28.2 の libc++ を同梱するため, 16 KB ページサイズ端末でも OCR エンジンを読み込めるように
+* `修正` Rapid OCR のネイティブ依存関係のクリーンアップ設定が初期化されていない場合に `clean` タスクが失敗する問題
 * `改善` OpenCV 4.8.0 ネイティブライブラリを NDK r28c (Clang 19.0.1) 再ビルド版に同期 (donor: AutoJs6-Plugin-OpenCV); 4 つの ABI の `libopencv_java4.so` は 16 KB `PT_LOAD` アラインメントを維持し provenance マニフェストを同梱
 
 # v1.0.1

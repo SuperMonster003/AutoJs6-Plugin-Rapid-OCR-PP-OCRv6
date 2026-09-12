@@ -8,7 +8,8 @@
     "v1.0.2": {
       "released_date": "2026/09/12",
       "fix": [
-        "修復原生程式庫未打包 `libc++_shared.so` 的問題: CMake 現在明確使用 `c++_shared` STL, 由 AGP 隨 4 個 ABI 一併打包 NDK r28.2 的 libc++, 16 KB 分頁大小裝置上不再因缺少相依而無法載入 OCR 引擎"
+        "修復原生程式庫未打包 `libc++_shared.so` 的問題: CMake 現在明確使用 `c++_shared` STL, 由 AGP 隨 4 個 ABI 一併打包 NDK r28.2 的 libc++, 16 KB 分頁大小裝置上不再因缺少相依而無法載入 OCR 引擎",
+        "Rapid OCR 原生依賴清理開關未初始化時 `clean` 任務執行失敗"
       ],
       "improvement": [
         "同步 OpenCV 4.8.0 原生程式庫至 NDK r28c (Clang 19.0.1) 重新建置版本 (donor: AutoJs6-Plugin-OpenCV), 4 個 ABI 的 `libopencv_java4.so` 保持 16 KB `PT_LOAD` 對齊並附帶 provenance 清單"

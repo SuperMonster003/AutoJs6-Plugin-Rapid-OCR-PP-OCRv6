@@ -21,6 +21,11 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention")
 }
 
+// Native dependency cleanup stays disabled unless explicitly configured.
+if (!gradle.extra.has("isCleanupRapidOcr")) {
+    gradle.extra["isCleanupRapidOcr"] = false
+}
+
 includeBuild("build-logic")
 
 private val libs = listOf(
