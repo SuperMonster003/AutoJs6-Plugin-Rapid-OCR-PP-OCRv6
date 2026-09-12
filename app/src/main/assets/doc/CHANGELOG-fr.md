@@ -4,6 +4,13 @@
 
 ******
 
+# v1.0.3
+
+###### 2026/09/12
+
+* `Correctif` Texte reconnu incorrect après la recréation du service ou des initialisations répétées du moteur, causé par l'ajout répété du dictionnaire OCR
+* `Correctif` Anciennes sessions ONNX conservées lors de la réinitialisation et accès concurrents entre l'initialisation et la reconnaissance dans le même processus
+
 # v1.0.2
 
 ###### 2026/09/12

@@ -5,6 +5,13 @@
   "changelog_label_improvement": "優化",
   "changelog_label_dependency": "依賴",
   "$data": {
+    "v1.0.3": {
+      "released_date": "2026/09/12",
+      "fix": [
+        "插件服務重建或重複初始化引擎時, 字典重複附加導致識別文字偏移的問題",
+        "重新初始化時遺留舊 ONNX Session 的問題, 並循序處理同一程序內的初始化與識別以避免狀態競爭"
+      ]
+    },
     "v1.0.2": {
       "released_date": "2026/09/12",
       "fix": [

@@ -4,6 +4,13 @@
 
 ******
 
+# v1.0.3
+
+###### 2026/09/12
+
+* `Fix` Incorrect recognized text after plugin service recreation or repeated engine initialization caused by appending the OCR dictionary again
+* `Fix` Old ONNX sessions retained during reinitialization and races between initialization and recognition in the same process
+
 # v1.0.2
 
 ###### 2026/09/12

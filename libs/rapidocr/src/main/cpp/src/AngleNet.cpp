@@ -1,14 +1,11 @@
 #include "AngleNet.h"
 #include "OcrUtils.h"
 #include <numeric>
+#include <cstdlib>
 
 AngleNet::AngleNet() {}
 
-AngleNet::~AngleNet() {
-    delete session;
-    inputNamesPtr.clear();
-    outputNamesPtr.clear();
-}
+AngleNet::~AngleNet() = default;
 
 void AngleNet::setNumThread(int numOfThread) {
     numThread = numOfThread;
@@ -33,12 +30,12 @@ void AngleNet::setNumThread(int numOfThread) {
 
 void AngleNet::initModel(AAssetManager *mgr, const std::string &name) {
     int dbModelDataLength = 0;
-    void *dbModelData = getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength);
-    session = new Ort::Session(ortEnv, dbModelData, dbModelDataLength,
-                               sessionOptions);
-    free(dbModelData);
-    inputNamesPtr = getInputNames(session);
-    outputNamesPtr = getOutputNames(session);
+    std::unique_ptr<void, decltype(&std::free)> modelData(
+            getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength), &std::free);
+    session = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
+                                            sessionOptions);
+    inputNamesPtr = getInputNames(session.get());
+    outputNamesPtr = getOutputNames(session.get());
 }
 
 Angle scoreToAngle(const std::vector<float> &outputData) {

@@ -5,6 +5,13 @@
   "changelog_label_improvement": "Mejora",
   "changelog_label_dependency": "Dependencia",
   "$data": {
+    "v1.0.3": {
+      "released_date": "2026/09/12",
+      "fix": [
+        "Texto reconocido incorrecto tras recrear el servicio o inicializar el motor repetidamente debido a la adición repetida del diccionario OCR",
+        "Sesiones ONNX anteriores retenidas durante la reinicialización y condiciones de carrera entre la inicialización y el reconocimiento en el mismo proceso"
+      ]
+    },
     "v1.0.2": {
       "released_date": "2026/09/12",
       "fix": [

@@ -1,14 +1,11 @@
 #include "DbNet.h"
 #include "OcrUtils.h"
 #include <numeric>
+#include <cstdlib>
 
 DbNet::DbNet() {}
 
-DbNet::~DbNet() {
-    delete session;
-    inputNamesPtr.clear();
-    outputNamesPtr.clear();
-}
+DbNet::~DbNet() = default;
 
 void DbNet::setNumThread(int numOfThread) {
     numThread = numOfThread;
@@ -33,11 +30,12 @@ void DbNet::setNumThread(int numOfThread) {
 
 void DbNet::initModel(AAssetManager *mgr, const std::string &name) {
     int dbModelDataLength = 0;
-    void *dbModelData = getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength);
-    session = new Ort::Session(ortEnv, dbModelData, dbModelDataLength, sessionOptions);
-    free(dbModelData);
-    inputNamesPtr = getInputNames(session);
-    outputNamesPtr = getOutputNames(session);
+    std::unique_ptr<void, decltype(&std::free)> modelData(
+            getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength), &std::free);
+    session = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
+                                            sessionOptions);
+    inputNamesPtr = getInputNames(session.get());
+    outputNamesPtr = getOutputNames(session.get());
 }
 
 std::vector<TextBox> findRsBoxes(const cv::Mat &predMat, const cv::Mat &dilateMat, ScaleParam &s,

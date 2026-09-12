@@ -1,14 +1,11 @@
 #include "CrnnNet.h"
 #include "OcrUtils.h"
 #include <numeric>
+#include <cstdlib>
 
 CrnnNet::CrnnNet() {}
 
-CrnnNet::~CrnnNet() {
-    delete session;
-    inputNamesPtr.clear();
-    outputNamesPtr.clear();
-}
+CrnnNet::~CrnnNet() = default;
 
 void CrnnNet::setNumThread(int numOfThread) {
     numThread = numOfThread;
@@ -59,14 +56,15 @@ char *readKeysFromAssets(AAssetManager *mgr, const std::string &keysName) {
 
 void CrnnNet::initModel(AAssetManager *mgr, const std::string &name, const std::string &keysName) {
     int dbModelDataLength = 0;
-    void *dbModelData = getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength);
-    session = new Ort::Session(ortEnv, dbModelData, dbModelDataLength,
-                               sessionOptions);
-    free(dbModelData);
-    inputNamesPtr = getInputNames(session);
-    outputNamesPtr = getOutputNames(session);
+    std::unique_ptr<void, decltype(&std::free)> modelData(
+            getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength), &std::free);
+    session = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
+                                            sessionOptions);
+    inputNamesPtr = getInputNames(session.get());
+    outputNamesPtr = getOutputNames(session.get());
 
-    //load keys
+    // Replace the previous dictionary, including its CTC blank and trailing space.
+    keys.clear();
     char *buffer = readKeysFromAssets(mgr, keysName);
     if (buffer != NULL) {
         std::istringstream inStr(buffer);

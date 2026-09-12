@@ -5,6 +5,13 @@
   "changelog_label_improvement": "改善",
   "changelog_label_dependency": "依存関係",
   "$data": {
+    "v1.0.3": {
+      "released_date": "2026/09/12",
+      "fix": [
+        "プラグインサービスの再作成やエンジンの繰り返し初期化時に OCR 辞書が重複追加され, 認識文字がずれる問題",
+        "再初期化時に古い ONNX セッションが残る問題と, 同一プロセス内の初期化と認識の競合"
+      ]
+    },
     "v1.0.2": {
       "released_date": "2026/09/12",
       "fix": [

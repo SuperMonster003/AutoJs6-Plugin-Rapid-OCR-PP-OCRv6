@@ -4,6 +4,13 @@
 
 ******
 
+# v1.0.3
+
+###### 2026/09/12
+
+* `Corrección` Texto reconocido incorrecto tras recrear el servicio o inicializar el motor repetidamente debido a la adición repetida del diccionario OCR
+* `Corrección` Sesiones ONNX anteriores retenidas durante la reinicialización y condiciones de carrera entre la inicialización y el reconocimiento en el mismo proceso
+
 # v1.0.2
 
 ###### 2026/09/12

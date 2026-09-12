@@ -2,6 +2,7 @@
 #define __OCR_DBNET_H__
 
 #include "OcrStruct.h"
+#include <memory>
 #include "onnxruntime_cxx_api.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -22,9 +23,10 @@ public:
                                       float boxThresh, float unClipRatio);
 
 private:
-    Ort::Session *session;
     Ort::Env ortEnv = Ort::Env(ORT_LOGGING_LEVEL_ERROR, "DbNet");
     Ort::SessionOptions sessionOptions = Ort::SessionOptions();
+    // Destroy the session before its environment and session options.
+    std::unique_ptr<Ort::Session> session;
     int numThread = 0;
 
     std::vector<Ort::AllocatedStringPtr> inputNamesPtr;

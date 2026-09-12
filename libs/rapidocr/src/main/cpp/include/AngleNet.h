@@ -2,6 +2,7 @@
 #define __OCR_ANGLENET_H__
 
 #include "OcrStruct.h"
+#include <memory>
 #include "onnxruntime_cxx_api.h"
 #include <opencv2/core.hpp>
 #include <android/asset_manager.h>
@@ -20,9 +21,10 @@ public:
     std::vector<Angle> getAngles(std::vector<cv::Mat> &partImgs, bool doAngle, bool mostAngle);
 
 private:
-    Ort::Session *session;
     Ort::Env ortEnv = Ort::Env(ORT_LOGGING_LEVEL_ERROR, "AngleNet");
     Ort::SessionOptions sessionOptions = Ort::SessionOptions();
+    // Destroy the session before its environment and session options.
+    std::unique_ptr<Ort::Session> session;
     int numThread = 0;
 
     std::vector<Ort::AllocatedStringPtr> inputNamesPtr;

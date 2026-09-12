@@ -5,6 +5,13 @@
   "changelog_label_improvement": "Improvement",
   "changelog_label_dependency": "Dependency",
   "$data": {
+    "v1.0.3": {
+      "released_date": "2026/09/12",
+      "fix": [
+        "Incorrect recognized text after plugin service recreation or repeated engine initialization caused by appending the OCR dictionary again",
+        "Old ONNX sessions retained during reinitialization and races between initialization and recognition in the same process"
+      ]
+    },
     "v1.0.2": {
       "released_date": "2026/09/12",
       "fix": [

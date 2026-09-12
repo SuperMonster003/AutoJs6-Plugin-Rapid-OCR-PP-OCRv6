@@ -2,7 +2,10 @@
 #include "BitmapUtils.h"
 #include "OcrLite.h"
 #include "OcrUtils.h"
+#include <mutex>
 
+// All Java wrappers share one native engine, even across service instances.
+static std::mutex ocrMutex;
 static OcrLite *ocrLite;
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
@@ -11,14 +14,17 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
 }
 
 JNIEXPORT void JNI_OnUnload(JavaVM *vm, void *reserved) {
+    std::lock_guard<std::mutex> lock(ocrMutex);
     LOGI("Goodbye OcrLite!");
     delete ocrLite;
+    ocrLite = nullptr;
 }
 
 extern "C" JNIEXPORT jboolean JNICALL
 Java_com_benjaminwan_ocrlibrary_OcrEngine_init(JNIEnv *env, jobject thiz, jobject assetManager,
                                                jint numThread, jstring detName, jstring clsName,
                                                jstring recName, jstring keysName) {
+    std::lock_guard<std::mutex> lock(ocrMutex);
     std::string modelDetName = jstringTostring(env, detName);
     std::string modelClsName = jstringTostring(env, clsName);
     std::string modelRecName = jstringTostring(env, recName);
@@ -42,6 +48,7 @@ JNIEXPORT jobject JNICALL
 Java_com_benjaminwan_ocrlibrary_OcrEngine_detect(JNIEnv *env, jobject thiz, jobject input, jobject output,
                                                  jint padding, jint maxSideLen, jfloat boxScoreThresh, jfloat boxThresh,
                                                  jfloat unClipRatio, jboolean doAngle, jboolean mostAngle) {
+    std::lock_guard<std::mutex> lock(ocrMutex);
     Logger("padding(%d),maxSideLen(%d),boxScoreThresh(%f),boxThresh(%f),unClipRatio(%f),doAngle(%d),mostAngle(%d)",
            padding, maxSideLen, boxScoreThresh, boxThresh, unClipRatio, doAngle, mostAngle);
     cv::Mat imgRGBA, imgBGR, imgOut;
@@ -71,6 +78,7 @@ Java_com_benjaminwan_ocrlibrary_OcrEngine_detect(JNIEnv *env, jobject thiz, jobj
 extern "C" JNIEXPORT jdouble JNICALL
 Java_com_benjaminwan_ocrlibrary_OcrEngine_benchmark(JNIEnv *env, jobject thiz, jobject input,
                                                     jint loop) {
+    std::lock_guard<std::mutex> lock(ocrMutex);
     int padding = 50;
     int paddingRect= 0;
     float boxScoreThresh = 0.6;

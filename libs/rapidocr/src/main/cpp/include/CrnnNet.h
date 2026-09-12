@@ -2,6 +2,7 @@
 #define __OCR_CRNNNET_H__
 
 #include "OcrStruct.h"
+#include <memory>
 #include "onnxruntime_cxx_api.h"
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
@@ -22,9 +23,10 @@ public:
     std::vector<TextLine> getTextLines(std::vector<cv::Mat> &partImg);
 
 private:
-    Ort::Session *session;
     Ort::Env ortEnv = Ort::Env(ORT_LOGGING_LEVEL_ERROR, "CrnnNet");
     Ort::SessionOptions sessionOptions = Ort::SessionOptions();
+    // Destroy the session before its environment and session options.
+    std::unique_ptr<Ort::Session> session;
     int numThread = 0;
 
     std::vector<Ort::AllocatedStringPtr> inputNamesPtr;
