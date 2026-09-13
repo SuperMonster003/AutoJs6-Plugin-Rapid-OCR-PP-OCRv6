@@ -57,6 +57,8 @@ AutoJs6 Rapid OCR PP-OCRv6 Small 插件为 AutoJs6 提供基于 RapidOCR, ONNX R
 - 提供 `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK.
 - 插件信息, 使用说明, README 和 CHANGELOG 支持西班牙语/法语/俄语/阿拉伯语/日语/韩语/英语/简体中文/香港繁体/台湾繁体.
 - 基于 RapidOCR, ONNX Runtime 和 OpenCV Mobile 构建.
+- 图像最多包含 16777216 个像素, 原始图像缓冲区上限为 64 MiB
+- 编码图像最大为 64 MiB, 支持文件描述符和管道传输
 
 ******
 
@@ -134,6 +136,16 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 
 ******
 
+# v1.0.4
+
+###### 2026/09/13
+
+* `修复` 插件中心显示的版本与 ABI 信息匹配实际安装的 APK
+* `修复` 编码图像最大为 64 MiB, 支持文件描述符和管道传输
+* `修复` 版本日期保持统一的英文格式
+* `优化` 发布下载文件生成前校验 APK 版本, 签名与完整变体集合
+* `优化` 图像最多包含 16777216 个像素, 原始图像缓冲区上限为 64 MiB
+
 # v1.0.3
 
 ###### 2026/09/12
@@ -148,15 +160,6 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `修复` 修复原生库未打包 `libc++_shared.so` 的问题: CMake 现在显式使用 `c++_shared` STL, 由 AGP 随 4 个 ABI 一并打包 NDK r28.2 的 libc++, 16 KB 页大小设备上不再因缺少依赖而无法加载 OCR 引擎
 * `修复` Rapid OCR 原生依赖清理开关未初始化时 `clean` 任务执行失败
 * `优化` 同步 OpenCV 4.8.0 原生库至 NDK r28c (Clang 19.0.1) 重编版本 (donor: AutoJs6-Plugin-OpenCV), 4 个 ABI 的 `libopencv_java4.so` 保持 16 KB `PT_LOAD` 对齐并附带 provenance 清单
-
-# v1.0.1
-
-###### 2026/09/11
-
-* `修复` 在同一个打包应用中依次使用 Paddle OCR 和 Rapid OCR 时可能崩溃的问题
-* `优化` 构建阶段校验 64 位原生库的 16 KB 页大小对齐, 检查 manifest 契约并输出 JSON 报告
-* `依赖` 升级 ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) 版本 1.18.0 -> 1.21.1
-* `依赖` 升级 OpenCV 版本 4.5.3 -> 4.8.0
 
 ##### 更多发行历史可参阅
 

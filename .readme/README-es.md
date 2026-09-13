@@ -57,6 +57,8 @@ El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimien
 - Proporciona APK para `arm64-v8a`, `armeabi-v7a`, `x86_64` y `universal`.
 - Los metadatos del plugin, las instrucciones de uso, el README y el CHANGELOG están localizados en español, francés, ruso, árabe, japonés, coreano, inglés, chino simplificado, chino tradicional de Hong Kong y chino tradicional de Taiwán.
 - Construido sobre RapidOCR, ONNX Runtime y OpenCV Mobile.
+- Las imágenes admiten hasta 16777216 píxeles; los búferes de imagen sin procesar se limitan a 64 MiB
+- La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías
 
 ******
 
@@ -134,6 +136,16 @@ La compilación descarga y verifica los siguientes 4 recursos desde ModelScope:
 
 ******
 
+# v1.0.4
+
+###### 2026/09/13
+
+* `Corrección` La versión y las ABI del centro de complementos coinciden con el APK instalado
+* `Corrección` La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías
+* `Corrección` Las fechas de versión mantienen un formato uniforme en inglés
+* `Mejora` Validación de las versiones, firmas y variantes completas de los APK antes de crear los archivos de descarga
+* `Mejora` Las imágenes admiten hasta 16777216 píxeles; los búferes de imagen sin procesar se limitan a 64 MiB
+
 # v1.0.3
 
 ###### 2026/09/12
@@ -148,15 +160,6 @@ La compilación descarga y verifica los siguientes 4 recursos desde ModelScope:
 * `Corrección` Corregida la ausencia de `libc++_shared.so` en las bibliotecas nativas empaquetadas: CMake usa ahora explícitamente la STL `c++_shared`, AGP incluye la libc++ del NDK r28.2 para las 4 ABI y el motor OCR vuelve a cargarse en dispositivos con páginas de 16 KB
 * `Corrección` El comando `clean` fallaba cuando no se inicializaba la opción de limpieza de las dependencias nativas de Rapid OCR
 * `Mejora` Sincronizada la biblioteca nativa OpenCV 4.8.0 con la reconstrucción NDK r28c (Clang 19.0.1) (donante: AutoJs6-Plugin-OpenCV); `libopencv_java4.so` de las 4 ABI mantiene la alineación `PT_LOAD` de 16 KB e incluye un manifiesto de provenance
-
-# v1.0.1
-
-###### 2026/09/11
-
-* `Corrección` Un cierre inesperado al usar Paddle OCR y Rapid OCR consecutivamente en la misma aplicación empaquetada
-* `Mejora` Verificación de compilación de la alineación de páginas de 16 KB en bibliotecas nativas de 64 bits, con controles del contrato manifest e informes JSON
-* `Dependencia` Actualizacion de ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) version 1.18.0 -> 1.21.1
-* `Dependencia` Actualización de versión de OpenCV de 4.5.3 a 4.8.0
 
 ##### Para consultar más historial de versiones
 

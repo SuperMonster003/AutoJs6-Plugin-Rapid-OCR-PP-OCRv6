@@ -57,6 +57,8 @@ AutoJs6 Rapid OCR PP-OCRv6 Small 플러그인은 RapidOCR, ONNX Runtime, OpenCV 
 - `arm64-v8a`, `armeabi-v7a`, `x86_64`, `universal` APK를 제공합니다.
 - 플러그인 정보, 사용 설명, README, CHANGELOG는 스페인어/프랑스어/러시아어/아랍어/일본어/한국어/영어/중국어 간체/홍콩 중국어 번체/대만 중국어 번체로 제공됩니다.
 - RapidOCR, ONNX Runtime, OpenCV Mobile을 기반으로 빌드됩니다.
+- 이미지는 최대 16777216픽셀, 원시 이미지 버퍼는 최대 64 MiB까지 지원
+- 인코딩된 이미지는 최대 64 MiB이며 파일 디스크립터와 파이프를 지원합니다
 
 ******
 
@@ -134,6 +136,16 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 
 ******
 
+# v1.0.4
+
+###### 2026/09/13
+
+* `수정` 플러그인 센터의 버전과 ABI 정보가 설치된 APK와 일치
+* `수정` 인코딩된 이미지는 최대 64 MiB이며 파일 디스크립터와 파이프를 지원합니다
+* `수정` 버전 날짜를 일관된 영어 형식으로 표시
+* `개선` 다운로드 파일 생성 전에 릴리스 APK의 버전, 서명 및 전체 변형 구성을 검증
+* `개선` 이미지는 최대 16777216픽셀, 원시 이미지 버퍼는 최대 64 MiB까지 지원
+
 # v1.0.3
 
 ###### 2026/09/12
@@ -148,15 +160,6 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `수정` 패키징된 네이티브 라이브러리에 `libc++_shared.so`가 누락되던 문제 수정: CMake가 `c++_shared` STL을 명시적으로 사용하여 AGP가 4개 ABI 모두에 NDK r28.2 libc++를 함께 패키징하므로 16 KB 페이지 크기 기기에서도 OCR 엔진이 다시 로드됨
 * `수정` Rapid OCR 네이티브 종속성 정리 설정이 초기화되지 않으면 `clean` 작업이 실패하는 문제
 * `개선` OpenCV 4.8.0 네이티브 라이브러리를 NDK r28c (Clang 19.0.1) 재빌드 버전으로 동기화 (donor: AutoJs6-Plugin-OpenCV); 4개 ABI의 `libopencv_java4.so`는 16 KB `PT_LOAD` 정렬을 유지하며 provenance 매니페스트를 포함
-
-# v1.0.1
-
-###### 2026/09/11
-
-* `수정` 동일한 패키징 앱에서 Paddle OCR과 Rapid OCR을 순서대로 사용할 때 발생할 수 있는 충돌
-* `개선` 64비트 네이티브 라이브러리의 16 KB 페이지 정렬을 빌드 시 검증, manifest 계약 검사 및 JSON 보고서 지원
-* `의존성` ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) 버전 1.18.0 -> 1.21.1 으로 업그레이드
-* `의존성` OpenCV 버전 4.5.3 -> 4.8.0 으로 업그레이드
 
 ##### 더 많은 릴리스 기록
 
