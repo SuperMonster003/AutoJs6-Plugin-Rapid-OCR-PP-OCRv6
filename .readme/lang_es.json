@@ -14,7 +14,9 @@
     "Admite imágenes codificadas y búferes de imagen `ARGB_8888` sin codificar.",
     "Proporciona APK para `arm64-v8a`, `armeabi-v7a`, `x86_64` y `universal`.",
     "Los metadatos del plugin, las instrucciones de uso, el README y el CHANGELOG están localizados en español, francés, ruso, árabe, japonés, coreano, inglés, chino simplificado, chino tradicional de Hong Kong y chino tradicional de Taiwán.",
-    "Construido sobre RapidOCR, ONNX Runtime y OpenCV Mobile."
+    "Construido sobre RapidOCR, ONNX Runtime y OpenCV Mobile.",
+    "Las imágenes admiten hasta 16777216 píxeles; los búferes de imagen sin procesar se limitan a 64 MiB",
+    "La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías"
   ],
   "h3_usage": "Ejemplos de uso",
   "p_usage_intro": "Después de leer una imagen, use el módulo Rapid OCR para reconocer texto u obtener resultados detallados",

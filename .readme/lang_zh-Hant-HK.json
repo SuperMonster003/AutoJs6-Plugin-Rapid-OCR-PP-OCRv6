@@ -14,7 +14,9 @@
     "支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.",
     "提供 `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK.",
     "插件資訊, 使用說明, README 和 CHANGELOG 支援西班牙語/法語/俄語/阿拉伯語/日語/韓語/英語/簡體中文/香港繁體/台灣繁體.",
-    "基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 構建."
+    "基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 構建.",
+    "影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB",
+    "編碼圖像最大為 64 MiB, 支援檔案描述符和管道傳輸"
   ],
   "h3_usage": "使用示例",
   "p_usage_intro": "讀取圖片後可通過 Rapid OCR 模組識別文本或取得詳細結果",

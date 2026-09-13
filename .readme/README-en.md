@@ -57,6 +57,8 @@ The AutoJs6 Rapid OCR PP-OCRv6 Small Plugin provides text detection and recognit
 - Provides `arm64-v8a`, `armeabi-v7a`, `x86_64`, and `universal` APKs.
 - Plugin metadata, usage instructions, README, and CHANGELOG are localized for Spanish, French, Russian, Arabic, Japanese, Korean, English, Simplified Chinese, Hong Kong Traditional Chinese, and Taiwan Traditional Chinese.
 - Built on RapidOCR, ONNX Runtime, and OpenCV Mobile.
+- Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB
+- Encoded image input is limited to 64 MiB and supports file descriptors and pipes
 
 ******
 
@@ -134,6 +136,16 @@ The build downloads and verifies the following 4 assets from ModelScope:
 
 ******
 
+# v1.0.4
+
+###### 2026/09/13
+
+* `Fix` Plugin center version and ABI information matches the installed plugin APK
+* `Fix` Encoded image input is limited to 64 MiB and supports file descriptors and pipes
+* `Fix` Version dates use a consistent English format
+* `Improvement` Validate release APK versions, signing and the complete variant set before creating download artifacts
+* `Improvement` Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB
+
 # v1.0.3
 
 ###### 2026/09/12
@@ -148,15 +160,6 @@ The build downloads and verifies the following 4 assets from ModelScope:
 * `Fix` Fixed the missing `libc++_shared.so` in the packaged native libraries: CMake now uses the `c++_shared` STL explicitly so AGP bundles the NDK r28.2 libc++ for all 4 ABIs, and the OCR engine loads again on 16 KB page size devices
 * `Fix` The `clean` task failed when the Rapid OCR native dependency cleanup flag was not initialized
 * `Improvement` Synced the OpenCV 4.8.0 native library to the NDK r28c (Clang 19.0.1) rebuild (donor: AutoJs6-Plugin-OpenCV); `libopencv_java4.so` for all 4 ABIs keeps 16 KB `PT_LOAD` alignment and ships with a provenance manifest
-
-# v1.0.1
-
-###### 2026/09/11
-
-* `Fix` A crash when Paddle OCR and Rapid OCR are used sequentially in the same packaged app
-* `Improvement` Build verification of 16 KB page alignment for 64-bit native libraries, including manifest contract checks and JSON reports
-* `Dependency` Upgraded ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) version 1.18.0 -> 1.21.1
-* `Dependency` Upgraded OpenCV version from 4.5.3 -> 4.8.0
 
 ##### For more release history
 

@@ -14,7 +14,9 @@
     "Prend en charge les images encodées et les tampons d'image `ARGB_8888` bruts.",
     "Fournit des APK pour `arm64-v8a`, `armeabi-v7a`, `x86_64` et `universal`.",
     "Les métadonnées du plugin, les instructions d'utilisation, le README et le CHANGELOG sont localisés en espagnol, français, russe, arabe, japonais, coréen, anglais, chinois simplifié, chinois traditionnel de Hong Kong et chinois traditionnel de Taïwan.",
-    "Construit avec RapidOCR, ONNX Runtime et OpenCV Mobile."
+    "Construit avec RapidOCR, ONNX Runtime et OpenCV Mobile.",
+    "Les images peuvent contenir jusqu'à 16777216 pixels; les tampons bruts sont limités à 64 MiB",
+    "Les images encodées sont limitées à 64 MiB avec prise en charge des fichiers et des tubes"
   ],
   "h3_usage": "Exemples d'utilisation",
   "p_usage_intro": "Après avoir lu une image, utilisez le module Rapid OCR pour reconnaître le texte ou obtenir des résultats détaillés",

@@ -147,6 +147,9 @@ androidComponents {
 }
 
 dependencies {
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.2.21")
     implementation("org.jetbrains:annotations:26.0.2")
 
@@ -163,29 +166,11 @@ tasks {
         options.encoding = "UTF-8"
     }
 
-    register<Copy>("appendDigestToReleasedFiles") {
-        description = "Appends CRC32 digest to released APK files"
 
-        val src = buildTypeRelease
-        val dst = "${src}s"
-        val ext = utils.FILE_EXTENSION_APK
-
-        if (!file(src).isDirectory) {
-            return@register
-        }
-
-        from(src); into(dst); include("*.$ext")
-
-        rename { name ->
-            utils.digestCRC32(file("${src}/$name")).let { digest ->
-                name.replace(Regex("^(.+?)(\\.$ext)$"), "$1-$digest$2")
-            }
-        }
-
-        doLast { println("Destination: ${file(dst)}") }
-    }
 }
 
 extra {
     versions.handleIfNeeded(project, listOf(buildTypeDebug, buildTypeRelease))
 }
+
+apply(from = rootProject.file("gradle/release-archive.gradle"))
