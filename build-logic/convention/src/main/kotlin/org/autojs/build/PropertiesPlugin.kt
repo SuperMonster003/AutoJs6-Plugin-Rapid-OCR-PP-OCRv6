@@ -31,12 +31,7 @@ import org.gradle.api.Project
  * props["RAPID_OCR/NDK"]
  * props["RAPID_OCR/CMAKE"]
  *
- * props["PADDLE_OCR/NDK"]
- * props["PADDLE_OCR/CMAKE"]
- * props["PADDLE_OCR/OPENCV"]
  *
- * props["IMAGE_QUANT/NDK"]
- * props["IMAGE_QUANT/CMAKE"]
  * ```
  */
 class PropertiesPlugin : Plugin<Project> {
