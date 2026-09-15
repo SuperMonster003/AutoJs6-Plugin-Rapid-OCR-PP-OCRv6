@@ -8,6 +8,8 @@
 
 ###### 2026/09/13
 
+* `Corrección` Acumulación de referencias locales JNI al convertir muchos bloques de texto, que podía desbordar la tabla de referencias en Android 7.x _[`issue #575`](http://issues.autojs6.com/575)_
+* `Corrección` Búferes nativos y referencias JNI temporales retenidos al convertir cadenas durante la inicialización, y manejo incorrecto de cadenas vacías _[`issue #575`](http://issues.autojs6.com/575)_
 * `Corrección` La versión y las ABI del centro de complementos coinciden con el APK instalado
 * `Corrección` La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías
 * `Corrección` Las fechas de versión mantienen un formato uniforme en inglés

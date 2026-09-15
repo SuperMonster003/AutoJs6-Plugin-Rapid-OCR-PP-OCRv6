@@ -7,15 +7,17 @@
   "$data": {
     "v1.0.4": {
       "released_date": "2026/09/13",
+      "fix": [
+        "Acumulación de referencias locales JNI al convertir muchos bloques de texto, que podía desbordar la tabla de referencias en Android 7.x _[`issue #575`](http://issues.autojs6.com/575)_",
+        "Búferes nativos y referencias JNI temporales retenidos al convertir cadenas durante la inicialización, y manejo incorrecto de cadenas vacías _[`issue #575`](http://issues.autojs6.com/575)_",
+        "La versión y las ABI del centro de complementos coinciden con el APK instalado",
+        "La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías",
+        "Las fechas de versión mantienen un formato uniforme en inglés"
+      ],
       "improvement": [
         "Validación de las versiones, firmas y variantes completas de los APK antes de crear los archivos de descarga",
         "Las imágenes admiten hasta 16777216 píxeles; los búferes de imagen sin procesar se limitan a 64 MiB",
         "Ampliar el empaquetado de ABI nativas y los metadatos del complemento a arm64-v8a, armeabi-v7a, x86 y x86_64, con APK universales e individuales coherentes"
-      ],
-      "fix": [
-        "La versión y las ABI del centro de complementos coinciden con el APK instalado",
-        "La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías",
-        "Las fechas de versión mantienen un formato uniforme en inglés"
       ]
     },
     "v1.0.3": {

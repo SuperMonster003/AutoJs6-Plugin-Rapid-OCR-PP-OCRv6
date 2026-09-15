@@ -1,204 +1,95 @@
-#include <OcrUtils.h>
 #include "OcrResultUtils.h"
 
-namespace {
+using ocr::jni::LocalRef;
 
-void throwIllegalState(JNIEnv *env, const char *message) {
-    if (env->ExceptionCheck()) {
-        return;
-    }
-    jclass clazz = env->FindClass("java/lang/IllegalStateException");
-    if (clazz != NULL) {
-        env->ThrowNew(clazz, message);
-    }
+OcrResultUtils::OcrResultUtils(JNIEnv *env, const OcrResult &ocrResult, jobject boxImg)
+        : jniEnv(env), listClass(env), pointClass(env), textBlockClass(env) {
+    if (env->ExceptionCheck()) return;
+    LocalRef<jclass> resultClass(env, env->FindClass("com/benjaminwan/ocrlibrary/OcrResult"));
+    if (resultClass.get() == nullptr) return;
+    jmethodID resultConstructor = env->GetMethodID(resultClass.get(), "<init>",
+            "(DLjava/util/ArrayList;Landroid/graphics/Bitmap;DLjava/lang/String;)V");
+    if (resultConstructor == nullptr || !initJavaTypes()) return;
+
+    LocalRef<jobject> textBlocks(env, getTextBlocks(ocrResult.textBlocks));
+    if (env->ExceptionCheck() || textBlocks.get() == nullptr) return;
+    LocalRef<jstring> text(env, env->NewStringUTF(ocrResult.strRes.c_str()));
+    if (text.get() == nullptr) return;
+    LocalRef<jobject> result(env, env->NewObject(resultClass.get(), resultConstructor,
+            ocrResult.dbNetTime, textBlocks.get(), boxImg, ocrResult.detectTime, text.get()));
+    if (env->ExceptionCheck()) return;
+    jOcrResult = result.release();
 }
 
-}
-
-OcrResultUtils::OcrResultUtils(JNIEnv *env, OcrResult &ocrResult, jobject boxImg) {
-    jniEnv = env;
-    jOcrResult = NULL;
-
-    jclass jOcrResultClass = env->FindClass("com/benjaminwan/ocrlibrary/OcrResult");
-    if (jOcrResultClass == NULL) {
-        LOGE("OcrResult class is null");
-        throwIllegalState(env, "OcrResult class is null");
-        return;
-    }
-
-    jmethodID jOcrResultConstructor = env->GetMethodID(jOcrResultClass, "<init>",
-                                                       "(DLjava/util/ArrayList;Landroid/graphics/Bitmap;DLjava/lang/String;)V");
-    if (jOcrResultConstructor == NULL) {
-        LOGE("OcrResult constructor is null");
-        throwIllegalState(env, "OcrResult constructor is null");
-        return;
-    }
-
-    jobject textBlocks = getTextBlocks(ocrResult.textBlocks);
-    if (env->ExceptionCheck()) {
-        return;
-    }
-    jdouble dbNetTime = (jdouble) ocrResult.dbNetTime;
-    jdouble detectTime = (jdouble) ocrResult.detectTime;
-    jstring jStrRest = jniEnv->NewStringUTF(ocrResult.strRes.c_str());
-    if (env->ExceptionCheck()) {
-        return;
-    }
-
-    jOcrResult = env->NewObject(jOcrResultClass, jOcrResultConstructor, dbNetTime,
-                                textBlocks, boxImg, detectTime, jStrRest);
-}
-
-OcrResultUtils::~OcrResultUtils() {
-    jniEnv = NULL;
-}
-
-jobject OcrResultUtils::getJObject() {
+jobject OcrResultUtils::getJObject() const {
     return jOcrResult;
 }
 
-jclass OcrResultUtils::newJListClass() {
-    jclass clazz = jniEnv->FindClass("java/util/ArrayList");
-    if (clazz == NULL) {
-        LOGE("ArrayList class is null");
-        return NULL;
-    }
-    return clazz;
+bool OcrResultUtils::initJavaTypes() {
+    listClass.reset(jniEnv->FindClass("java/util/ArrayList"));
+    if (listClass.get() == nullptr) return false;
+    listConstructor = jniEnv->GetMethodID(listClass.get(), "<init>", "()V");
+    if (listConstructor == nullptr) return false;
+    listAdd = jniEnv->GetMethodID(listClass.get(), "add", "(Ljava/lang/Object;)Z");
+    if (listAdd == nullptr) return false;
+
+    pointClass.reset(jniEnv->FindClass("com/benjaminwan/ocrlibrary/Point"));
+    if (pointClass.get() == nullptr) return false;
+    pointConstructor = jniEnv->GetMethodID(pointClass.get(), "<init>", "(II)V");
+    if (pointConstructor == nullptr) return false;
+
+    textBlockClass.reset(jniEnv->FindClass("com/benjaminwan/ocrlibrary/TextBlock"));
+    if (textBlockClass.get() == nullptr) return false;
+    textBlockConstructor = jniEnv->GetMethodID(textBlockClass.get(), "<init>",
+            "(Ljava/util/ArrayList;FIFDLjava/lang/String;[FDD)V");
+    return textBlockConstructor != nullptr;
 }
 
-jmethodID OcrResultUtils::getListConstructor(jclass clazz) {
-    if (clazz == NULL) {
-        throwIllegalState(jniEnv, "ArrayList class is null");
-        return NULL;
+jobject OcrResultUtils::newJBoxPoint(const std::vector<cv::Point> &boxPoint) {
+    LocalRef<jobject> list(jniEnv, jniEnv->NewObject(listClass.get(), listConstructor));
+    if (jniEnv->ExceptionCheck() || list.get() == nullptr) return nullptr;
+    for (const auto &point : boxPoint) {
+        LocalRef<jobject> jPoint(jniEnv, jniEnv->NewObject(
+                pointClass.get(), pointConstructor, point.x, point.y));
+        if (jniEnv->ExceptionCheck() || jPoint.get() == nullptr) return nullptr;
+        jniEnv->CallBooleanMethod(list.get(), listAdd, jPoint.get());
+        if (jniEnv->ExceptionCheck()) return nullptr;
     }
-    jmethodID constructor = jniEnv->GetMethodID(clazz, "<init>", "()V");
-    if (constructor == NULL) {
-        LOGE("ArrayList constructor is null");
-        throwIllegalState(jniEnv, "ArrayList constructor is null");
-    }
-    return constructor;
+    return list.release();
 }
 
-jobject OcrResultUtils::newJPoint(cv::Point &point) {
-    jclass clazz = jniEnv->FindClass("com/benjaminwan/ocrlibrary/Point");
-    if (clazz == NULL) {
-        LOGE("Point class is null");
-        throwIllegalState(jniEnv, "Point class is null");
-        return NULL;
-    }
-    jmethodID constructor = jniEnv->GetMethodID(clazz, "<init>", "(II)V");
-    if (constructor == NULL) {
-        LOGE("Point constructor is null");
-        throwIllegalState(jniEnv, "Point constructor is null");
-        return NULL;
-    }
-    jobject obj = jniEnv->NewObject(clazz, constructor, point.x, point.y);
-    return obj;
+jobject OcrResultUtils::getTextBlock(const TextBlock &textBlock) {
+    LocalRef<jobject> points(jniEnv, newJBoxPoint(textBlock.boxPoint));
+    if (jniEnv->ExceptionCheck() || points.get() == nullptr) return nullptr;
+    LocalRef<jstring> text(jniEnv, jniEnv->NewStringUTF(textBlock.text.c_str()));
+    if (text.get() == nullptr) return nullptr;
+    LocalRef<jfloatArray> scores(jniEnv, newJScoreArray(textBlock.charScores));
+    if (jniEnv->ExceptionCheck() || scores.get() == nullptr) return nullptr;
+    LocalRef<jobject> block(jniEnv, jniEnv->NewObject(textBlockClass.get(), textBlockConstructor,
+            points.get(), textBlock.boxScore, textBlock.angleIndex, textBlock.angleScore,
+            textBlock.angleTime, text.get(), scores.get(), textBlock.crnnTime, textBlock.blockTime));
+    if (jniEnv->ExceptionCheck()) return nullptr;
+    return block.release();
 }
 
-jobject OcrResultUtils::newJBoxPoint(std::vector<cv::Point> &boxPoint) {
-    jclass jListClass = newJListClass();
-    jmethodID jListConstructor = getListConstructor(jListClass);
-    if (jListConstructor == NULL) {
-        return NULL;
+jobject OcrResultUtils::getTextBlocks(const std::vector<TextBlock> &textBlocks) {
+    LocalRef<jobject> list(jniEnv, jniEnv->NewObject(listClass.get(), listConstructor));
+    if (jniEnv->ExceptionCheck() || list.get() == nullptr) return nullptr;
+    for (const auto &textBlock : textBlocks) {
+        LocalRef<jobject> block(jniEnv, getTextBlock(textBlock));
+        if (jniEnv->ExceptionCheck() || block.get() == nullptr) return nullptr;
+        jniEnv->CallBooleanMethod(list.get(), listAdd, block.get());
+        if (jniEnv->ExceptionCheck()) return nullptr;
     }
-    jobject jList = jniEnv->NewObject(jListClass, jListConstructor);
-    if (jniEnv->ExceptionCheck()) {
-        return NULL;
-    }
-    jmethodID jListAdd = jniEnv->GetMethodID(jListClass, "add", "(Ljava/lang/Object;)Z");
-    if (jListAdd == NULL) {
-        LOGE("ArrayList.add method is null");
-        throwIllegalState(jniEnv, "ArrayList.add method is null");
-        return NULL;
-    }
-
-    for (auto point : boxPoint) {
-        jobject jPoint = newJPoint(point);
-        if (jPoint == NULL || jniEnv->ExceptionCheck()) {
-            return NULL;
-        }
-        jniEnv->CallBooleanMethod(jList, jListAdd, jPoint);
-        if (jniEnv->ExceptionCheck()) {
-            return NULL;
-        }
-    }
-    return jList;
+    return list.release();
 }
 
-jobject OcrResultUtils::getTextBlock(TextBlock &textBlock) {
-    jobject jBoxPint = newJBoxPoint(textBlock.boxPoint);
-    if (jBoxPint == NULL || jniEnv->ExceptionCheck()) {
-        return NULL;
+jfloatArray OcrResultUtils::newJScoreArray(const std::vector<float> &scores) {
+    LocalRef<jfloatArray> result(jniEnv, jniEnv->NewFloatArray(static_cast<jsize>(scores.size())));
+    if (result.get() == nullptr) return nullptr;
+    if (!scores.empty()) {
+        jniEnv->SetFloatArrayRegion(result.get(), 0, static_cast<jsize>(scores.size()), scores.data());
+        if (jniEnv->ExceptionCheck()) return nullptr;
     }
-    jfloat jBoxScore = (jfloat) textBlock.boxScore;
-    jfloat jAngleScore = (jfloat) textBlock.angleScore;
-    jdouble jAngleTime = (jdouble) textBlock.angleTime;
-    jstring jText = jniEnv->NewStringUTF(textBlock.text.c_str());
-    if (jniEnv->ExceptionCheck()) {
-        return NULL;
-    }
-    jobject jCharScores = newJScoreArray(textBlock.charScores);
-    if (jCharScores == NULL || jniEnv->ExceptionCheck()) {
-        return NULL;
-    }
-    jdouble jCrnnTime = (jdouble) textBlock.crnnTime;
-    jdouble jBlockTime = (jdouble) textBlock.blockTime;
-    jclass clazz = jniEnv->FindClass("com/benjaminwan/ocrlibrary/TextBlock");
-    if (clazz == NULL) {
-        LOGE("TextBlock class is null");
-        throwIllegalState(jniEnv, "TextBlock class is null");
-        return NULL;
-    }
-    jmethodID constructor = jniEnv->GetMethodID(clazz, "<init>",
-                                                "(Ljava/util/ArrayList;FIFDLjava/lang/String;[FDD)V");
-    if (constructor == NULL) {
-        LOGE("TextBlock constructor is null");
-        throwIllegalState(jniEnv, "TextBlock constructor is null");
-        return NULL;
-    }
-    jobject obj = jniEnv->NewObject(clazz, constructor, jBoxPint, jBoxScore, textBlock.angleIndex,
-                                    jAngleScore, jAngleTime, jText, jCharScores, jCrnnTime,
-                                    jBlockTime);
-    return obj;
-}
-
-jobject OcrResultUtils::getTextBlocks(std::vector<TextBlock> &textBlocks) {
-    jclass jListClass = newJListClass();
-    jmethodID jListConstructor = getListConstructor(jListClass);
-    if (jListConstructor == NULL) {
-        return NULL;
-    }
-    jobject jList = jniEnv->NewObject(jListClass, jListConstructor);
-    if (jniEnv->ExceptionCheck()) {
-        return NULL;
-    }
-    jmethodID jListAdd = jniEnv->GetMethodID(jListClass, "add", "(Ljava/lang/Object;)Z");
-    if (jListAdd == NULL) {
-        LOGE("ArrayList.add method is null");
-        throwIllegalState(jniEnv, "ArrayList.add method is null");
-        return NULL;
-    }
-
-    for (int i = 0; i < textBlocks.size(); ++i) {
-        auto textBlock = textBlocks[i];
-        jobject jTextBlock = getTextBlock(textBlock);
-        if (jTextBlock == NULL || jniEnv->ExceptionCheck()) {
-            return NULL;
-        }
-        jniEnv->CallBooleanMethod(jList, jListAdd, jTextBlock);
-        if (jniEnv->ExceptionCheck()) {
-            return NULL;
-        }
-    }
-    return jList;
-}
-
-jfloatArray OcrResultUtils::newJScoreArray(std::vector<float> &scores) {
-    jfloatArray jScores = jniEnv->NewFloatArray(scores.size());
-    if (jScores == NULL || jniEnv->ExceptionCheck()) {
-        return NULL;
-    }
-    jniEnv->SetFloatArrayRegion(jScores, 0, scores.size(), (jfloat *) scores.data());
-    return jScores;
+    return result.release();
 }

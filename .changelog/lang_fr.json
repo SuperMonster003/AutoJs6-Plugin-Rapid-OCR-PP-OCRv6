@@ -7,15 +7,17 @@
   "$data": {
     "v1.0.4": {
       "released_date": "2026/09/13",
+      "fix": [
+        "Accumulation de références locales JNI lors de la conversion de nombreux blocs de texte, pouvant saturer la table de références sous Android 7.x _[`issue #575`](http://issues.autojs6.com/575)_",
+        "Tampons natifs et références JNI temporaires conservés lors de la conversion des chaînes pendant l'initialisation, et traitement incorrect des chaînes vides _[`issue #575`](http://issues.autojs6.com/575)_",
+        "Les informations de version et d'ABI du centre des plugins correspondent à l'APK installé",
+        "Les images encodées sont limitées à 64 MiB avec prise en charge des fichiers et des tubes",
+        "Les dates de version utilisent un format anglais uniforme"
+      ],
       "improvement": [
         "Validation des versions, signatures et variantes complètes des APK avant la création des fichiers à télécharger",
         "Les images peuvent contenir jusqu'à 16777216 pixels; les tampons bruts sont limités à 64 MiB",
         "Étendre les ABI natives et les métadonnées du plugin à arm64-v8a, armeabi-v7a, x86 et x86_64, avec des APK universels et par ABI cohérents"
-      ],
-      "fix": [
-        "Les informations de version et d'ABI du centre des plugins correspondent à l'APK installé",
-        "Les images encodées sont limitées à 64 MiB avec prise en charge des fichiers et des tubes",
-        "Les dates de version utilisent un format anglais uniforme"
       ]
     },
     "v1.0.3": {

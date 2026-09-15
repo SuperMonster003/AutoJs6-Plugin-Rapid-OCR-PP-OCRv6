@@ -8,6 +8,8 @@
 
 ###### 2026/09/13
 
+* `Fix` JNI local references accumulated when converting many text blocks, potentially overflowing the reference table on Android 7.x _[`issue #575`](http://issues.autojs6.com/575)_
+* `Fix` Native buffers and temporary JNI references retained during initialization string conversion, and incorrect handling of empty strings _[`issue #575`](http://issues.autojs6.com/575)_
 * `Fix` Plugin center version and ABI information matches the installed plugin APK
 * `Fix` Encoded image input is limited to 64 MiB and supports file descriptors and pipes
 * `Fix` Version dates use a consistent English format
