@@ -54,7 +54,7 @@ AutoJs6 Rapid OCR PP-OCRv6 Small 外掛為 AutoJs6 提供基於 RapidOCR, ONNX R
 - 透過 `org.autojs.plugin.PADDLE_OCR` 公開 OCR AIDL 介面, 相容 AutoJs6 宿主端 OCR 外掛探索機制.
 - 支援 `ocr.rapid.recognizeText` 傳回字串清單, 支援 `ocr.rapid.detect` 傳回文字, 信賴度和邊界框.
 - 支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.
-- 提供 `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK.
+- 提供 `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` 和 `universal` APK.
 - 外掛資訊, 使用說明, README 和 CHANGELOG 支援西班牙文/法文/俄文/阿拉伯文/日文/韓文/英文/簡體中文/香港繁體/台灣繁體.
 - 基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 建置.
 - 影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB
@@ -101,7 +101,7 @@ action: org.autojs.plugin.PADDLE_OCR
 engine: rapid-ocr
 variant: pp-ocrv6
 plugin id: rapid-ocr-pp-ocrv6
-supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
+supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ```
 
 `detect` 的每個結果包含 `text`, `confidence` 和 `bounds`, 目前介面不提供 quad 欄位.
@@ -145,6 +145,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `修正` 版本日期保持統一的英文格式
 * `改善` 發行下載檔案產生前驗證 APK 版本, 簽章與完整變體集合
 * `改善` 影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB
+* `改善` 擴充原生 ABI 封裝與外掛中繼資料至 arm64-v8a, armeabi-v7a, x86 和 x86_64, 同步通用 APK 與各 ABI 獨立 APK
 
 # v1.0.3
 

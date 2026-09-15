@@ -54,7 +54,7 @@ Le plugin AutoJs6 Rapid OCR PP-OCRv6 Small fournit la détection et la reconnais
 - Expose l'interface AIDL OCR via `org.autojs.plugin.PADDLE_OCR` et fonctionne avec le mécanisme de découverte des plugins OCR de l'hôte AutoJs6.
 - Prend en charge `ocr.rapid.recognizeText` pour les listes de chaînes et `ocr.rapid.detect` pour le texte, les valeurs de confiance et les limites.
 - Prend en charge les images encodées et les tampons d'image `ARGB_8888` bruts.
-- Fournit des APK pour `arm64-v8a`, `armeabi-v7a`, `x86_64` et `universal`.
+- Fournit des APK pour `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` et `universal`.
 - Les métadonnées du plugin, les instructions d'utilisation, le README et le CHANGELOG sont localisés en espagnol, français, russe, arabe, japonais, coréen, anglais, chinois simplifié, chinois traditionnel de Hong Kong et chinois traditionnel de Taïwan.
 - Construit avec RapidOCR, ONNX Runtime et OpenCV Mobile.
 - Les images peuvent contenir jusqu'à 16777216 pixels; les tampons bruts sont limités à 64 MiB
@@ -101,7 +101,7 @@ action: org.autojs.plugin.PADDLE_OCR
 engine: rapid-ocr
 variant: pp-ocrv6
 plugin id: rapid-ocr-pp-ocrv6
-supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
+supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ```
 
 Chaque résultat de `detect` contient `text`, `confidence` et `bounds`; l'interface actuelle ne fournit pas de champ quad.
@@ -145,6 +145,7 @@ La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelS
 * `Correctif` Les dates de version utilisent un format anglais uniforme
 * `Amélioration` Validation des versions, signatures et variantes complètes des APK avant la création des fichiers à télécharger
 * `Amélioration` Les images peuvent contenir jusqu'à 16777216 pixels; les tampons bruts sont limités à 64 MiB
+* `Amélioration` Étendre les ABI natives et les métadonnées du plugin à arm64-v8a, armeabi-v7a, x86 et x86_64, avec des APK universels et par ABI cohérents
 
 # v1.0.3
 

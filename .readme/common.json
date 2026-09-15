@@ -12,7 +12,7 @@
   "plugin_engine": "rapid-ocr",
   "plugin_variant": "pp-ocrv6",
   "plugin_id": "rapid-ocr-pp-ocrv6",
-  "supported_abis": "arm64-v8a, armeabi-v7a, x86_64, universal",
+  "supported_abis": "arm64-v8a, armeabi-v7a, x86, x86_64, universal",
   "model_asset_detection": "PP-OCRv6_det_small.onnx",
   "model_asset_recognition": "PP-OCRv6_rec_small.onnx",
   "model_asset_auxiliary": "ch_ppocr_mobile_v2.0_cls_mobile.onnx",

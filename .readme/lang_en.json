@@ -12,7 +12,7 @@
     "Exposes the OCR AIDL interface through `{{ plugin_action }}` and works with the AutoJs6 host OCR plugin discovery flow.",
     "Supports `ocr.rapid.recognizeText` for string lists and `ocr.rapid.detect` for text, confidence values, and bounds.",
     "Supports encoded image input and raw `ARGB_8888` image buffer input.",
-    "Provides `arm64-v8a`, `armeabi-v7a`, `x86_64`, and `universal` APKs.",
+    "Provides `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, and `universal` APKs.",
     "Plugin metadata, usage instructions, README, and CHANGELOG are localized for Spanish, French, Russian, Arabic, Japanese, Korean, English, Simplified Chinese, Hong Kong Traditional Chinese, and Taiwan Traditional Chinese.",
     "Built on RapidOCR, ONNX Runtime, and OpenCV Mobile.",
     "Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB",

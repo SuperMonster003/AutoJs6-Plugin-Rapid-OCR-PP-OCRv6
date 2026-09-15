@@ -54,7 +54,7 @@ AutoJs6 Rapid OCR PP-OCRv6 Small 플러그인은 RapidOCR, ONNX Runtime, OpenCV 
 - `org.autojs.plugin.PADDLE_OCR`을 통해 OCR AIDL 인터페이스를 제공하며 AutoJs6 호스트의 OCR 플러그인 검색 흐름과 함께 작동합니다.
 - `ocr.rapid.recognizeText`는 문자열 목록을 반환하고 `ocr.rapid.detect`는 문자, 신뢰도 값, 경계를 반환합니다.
 - 인코딩된 이미지 입력과 원시 `ARGB_8888` 이미지 버퍼 입력을 지원합니다.
-- `arm64-v8a`, `armeabi-v7a`, `x86_64`, `universal` APK를 제공합니다.
+- `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, `universal` APK를 제공합니다.
 - 플러그인 정보, 사용 설명, README, CHANGELOG는 스페인어/프랑스어/러시아어/아랍어/일본어/한국어/영어/중국어 간체/홍콩 중국어 번체/대만 중국어 번체로 제공됩니다.
 - RapidOCR, ONNX Runtime, OpenCV Mobile을 기반으로 빌드됩니다.
 - 이미지는 최대 16777216픽셀, 원시 이미지 버퍼는 최대 64 MiB까지 지원
@@ -101,7 +101,7 @@ action: org.autojs.plugin.PADDLE_OCR
 engine: rapid-ocr
 variant: pp-ocrv6
 plugin id: rapid-ocr-pp-ocrv6
-supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
+supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ```
 
 각 `detect` 결과에는 `text`, `confidence`, `bounds`가 포함됩니다. 현재 인터페이스는 quad 필드를 제공하지 않습니다.
@@ -145,6 +145,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `수정` 버전 날짜를 일관된 영어 형식으로 표시
 * `개선` 다운로드 파일 생성 전에 릴리스 APK의 버전, 서명 및 전체 변형 구성을 검증
 * `개선` 이미지는 최대 16777216픽셀, 원시 이미지 버퍼는 최대 64 MiB까지 지원
+* `개선` 네이티브 ABI 패키징과 플러그인 메타데이터를 arm64-v8a, armeabi-v7a, x86, x86_64로 확장하고 범용 APK와 ABI별 APK를 일치시킴
 
 # v1.0.3
 

@@ -12,7 +12,7 @@
     "Expose l'interface AIDL OCR via `{{ plugin_action }}` et fonctionne avec le mécanisme de découverte des plugins OCR de l'hôte AutoJs6.",
     "Prend en charge `ocr.rapid.recognizeText` pour les listes de chaînes et `ocr.rapid.detect` pour le texte, les valeurs de confiance et les limites.",
     "Prend en charge les images encodées et les tampons d'image `ARGB_8888` bruts.",
-    "Fournit des APK pour `arm64-v8a`, `armeabi-v7a`, `x86_64` et `universal`.",
+    "Fournit des APK pour `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` et `universal`.",
     "Les métadonnées du plugin, les instructions d'utilisation, le README et le CHANGELOG sont localisés en espagnol, français, russe, arabe, japonais, coréen, anglais, chinois simplifié, chinois traditionnel de Hong Kong et chinois traditionnel de Taïwan.",
     "Construit avec RapidOCR, ONNX Runtime et OpenCV Mobile.",
     "Les images peuvent contenir jusqu'à 16777216 pixels; les tampons bruts sont limités à 64 MiB",

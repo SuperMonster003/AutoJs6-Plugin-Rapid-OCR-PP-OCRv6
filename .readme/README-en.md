@@ -54,7 +54,7 @@ The AutoJs6 Rapid OCR PP-OCRv6 Small Plugin provides text detection and recognit
 - Exposes the OCR AIDL interface through `org.autojs.plugin.PADDLE_OCR` and works with the AutoJs6 host OCR plugin discovery flow.
 - Supports `ocr.rapid.recognizeText` for string lists and `ocr.rapid.detect` for text, confidence values, and bounds.
 - Supports encoded image input and raw `ARGB_8888` image buffer input.
-- Provides `arm64-v8a`, `armeabi-v7a`, `x86_64`, and `universal` APKs.
+- Provides `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, and `universal` APKs.
 - Plugin metadata, usage instructions, README, and CHANGELOG are localized for Spanish, French, Russian, Arabic, Japanese, Korean, English, Simplified Chinese, Hong Kong Traditional Chinese, and Taiwan Traditional Chinese.
 - Built on RapidOCR, ONNX Runtime, and OpenCV Mobile.
 - Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB
@@ -101,7 +101,7 @@ action: org.autojs.plugin.PADDLE_OCR
 engine: rapid-ocr
 variant: pp-ocrv6
 plugin id: rapid-ocr-pp-ocrv6
-supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
+supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ```
 
 Each `detect` result contains `text`, `confidence`, and `bounds`; the current interface does not provide a quad field.
@@ -145,6 +145,7 @@ The build downloads and verifies the following 4 assets from ModelScope:
 * `Fix` Version dates use a consistent English format
 * `Improvement` Validate release APK versions, signing and the complete variant set before creating download artifacts
 * `Improvement` Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB
+* `Improvement` Extend native ABI packaging and plugin metadata to arm64-v8a, armeabi-v7a, x86 and x86_64, with matching universal and per-ABI APKs
 
 # v1.0.3
 

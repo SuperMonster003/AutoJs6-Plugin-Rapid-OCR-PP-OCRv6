@@ -40,7 +40,7 @@ public class OcrService extends Service {
     private static final float DEFAULT_UNCLIP_RATIO = 1.6f;
     private static final boolean DEFAULT_DO_ANGLE = false;
     private static final boolean DEFAULT_MOST_ANGLE = false;
-    private static final String[] SUPPORTED_ABIS = {"arm64-v8a", "armeabi-v7a", "x86_64"};
+    private static final String[] SUPPORTED_ABIS = {"arm64-v8a", "armeabi-v7a", "x86", "x86_64"};
 
     private static boolean nativeDependencyLoaded;
 
