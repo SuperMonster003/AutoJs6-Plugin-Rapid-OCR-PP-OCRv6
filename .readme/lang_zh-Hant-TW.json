@@ -12,7 +12,7 @@
     "透過 `{{ plugin_action }}` 公開 OCR AIDL 介面, 相容 AutoJs6 宿主端 OCR 外掛探索機制.",
     "支援 `ocr.rapid.recognizeText` 傳回字串清單, 支援 `ocr.rapid.detect` 傳回文字, 信賴度和邊界框.",
     "支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.",
-    "提供 `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK.",
+    "提供 `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` 和 `universal` APK.",
     "外掛資訊, 使用說明, README 和 CHANGELOG 支援西班牙文/法文/俄文/阿拉伯文/日文/韓文/英文/簡體中文/香港繁體/台灣繁體.",
     "基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 建置.",
     "影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB",

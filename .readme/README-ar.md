@@ -54,7 +54,7 @@
 - يعرض واجهة OCR AIDL عبر `org.autojs.plugin.PADDLE_OCR` ويعمل مع آلية اكتشاف مكونات OCR في مضيف AutoJs6.
 - يدعم `ocr.rapid.recognizeText` لقوائم السلاسل و `ocr.rapid.detect` للنص وقيم الثقة والحدود.
 - يدعم إدخال الصور المشفرة وإدخال مخزن صور `ARGB_8888` الخام.
-- يوفر حزم APK للأنواع `arm64-v8a` و `armeabi-v7a` و `x86_64` و `universal`.
+- يوفر حزم APK للأنواع `arm64-v8a` و `armeabi-v7a` و `x86` و `x86_64` و `universal`.
 - تمت ترجمة بيانات المكون الإضافي وتعليمات الاستخدام و README و CHANGELOG إلى الإسبانية والفرنسية والروسية والعربية واليابانية والكورية والإنجليزية والصينية المبسطة والصينية التقليدية في هونغ كونغ والصينية التقليدية في تايوان.
 - مبني على RapidOCR و ONNX Runtime و OpenCV Mobile.
 - تقبل الصور حتى 16777216 بكسل, ويقتصر حجم مخزن الصورة الخام على 64 MiB
@@ -101,7 +101,7 @@ action: org.autojs.plugin.PADDLE_OCR
 engine: rapid-ocr
 variant: pp-ocrv6
 plugin id: rapid-ocr-pp-ocrv6
-supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
+supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ```
 
 تحتوي كل نتيجة من `detect` على `text` و `confidence` و `bounds`; لا توفر الواجهة الحالية حقل quad.
@@ -145,6 +145,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86_64, universal
 * `إصلاح` تستخدم تواريخ الإصدارات تنسيقا إنجليزيا موحدا
 * `تحسين` التحقق من إصدار حزم النشر وتوقيعها واكتمال متغيراتها قبل إنشاء ملفات التنزيل
 * `تحسين` تقبل الصور حتى 16777216 بكسل, ويقتصر حجم مخزن الصورة الخام على 64 MiB
+* `تحسين` توسيع حزم ABI الأصلية وبيانات الإضافة الوصفية لتشمل arm64-v8a وarmeabi-v7a وx86 وx86_64, مع ملفات APK عامة ومنفصلة متطابقة لكل ABI
 
 # v1.0.3
 

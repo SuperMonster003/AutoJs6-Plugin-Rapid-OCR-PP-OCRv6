@@ -12,7 +12,7 @@
     "通過 `{{ plugin_action }}` 暴露 OCR AIDL 接口, 兼容 AutoJs6 宿主側 OCR 插件發現機制.",
     "支援 `ocr.rapid.recognizeText` 返回字符串列表, 支援 `ocr.rapid.detect` 返回文本, 置信度和邊界框.",
     "支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.",
-    "提供 `arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK.",
+    "提供 `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` 和 `universal` APK.",
     "插件資訊, 使用說明, README 和 CHANGELOG 支援西班牙語/法語/俄語/阿拉伯語/日語/韓語/英語/簡體中文/香港繁體/台灣繁體.",
     "基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 構建.",
     "影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB",
