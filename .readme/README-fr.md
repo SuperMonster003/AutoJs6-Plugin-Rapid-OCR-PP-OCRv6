@@ -136,6 +136,12 @@ La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelS
 
 ******
 
+# v1.0.5
+
+###### 2026/09/15
+
+* `Amélioration` compileSdk et targetSdk passent à 37 (Android 17) ; le comportement du plugin ne dépend pas de la nouvelle cible
+
 # v1.0.4
 
 ###### 2026/09/13
@@ -155,14 +161,6 @@ La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelS
 
 * `Correctif` Texte reconnu incorrect après la recréation du service ou des initialisations répétées du moteur, causé par l'ajout répété du dictionnaire OCR
 * `Correctif` Anciennes sessions ONNX conservées lors de la réinitialisation et accès concurrents entre l'initialisation et la reconnaissance dans le même processus
-
-# v1.0.2
-
-###### 2026/09/12
-
-* `Correctif` Correction de l'absence de `libc++_shared.so` dans les bibliothèques natives empaquetées : CMake utilise désormais explicitement la STL `c++_shared`, AGP embarque la libc++ du NDK r28.2 pour les 4 ABI et le moteur OCR se charge de nouveau sur les appareils à pages de 16 Ko
-* `Correctif` Échec de la tâche `clean` lorsque l'option de nettoyage des dépendances natives de Rapid OCR n'était pas initialisée
-* `Amélioration` Bibliothèque native OpenCV 4.8.0 synchronisée avec la recompilation NDK r28c (Clang 19.0.1) (donneur : AutoJs6-Plugin-OpenCV) ; `libopencv_java4.so` des 4 ABI conserve l'alignement `PT_LOAD` de 16 Ko et embarque un manifeste de provenance
 
 ##### Pour consulter davantage d'historique des versions
 

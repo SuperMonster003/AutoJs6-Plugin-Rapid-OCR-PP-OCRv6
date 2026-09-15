@@ -136,6 +136,12 @@ The build downloads and verifies the following 4 assets from ModelScope:
 
 ******
 
+# v1.0.5
+
+###### 2026/09/15
+
+* `Improvement` Raise compileSdk and targetSdk to 37 (Android 17); the plugin's behavior does not depend on the new target
+
 # v1.0.4
 
 ###### 2026/09/13
@@ -155,14 +161,6 @@ The build downloads and verifies the following 4 assets from ModelScope:
 
 * `Fix` Incorrect recognized text after plugin service recreation or repeated engine initialization caused by appending the OCR dictionary again
 * `Fix` Old ONNX sessions retained during reinitialization and races between initialization and recognition in the same process
-
-# v1.0.2
-
-###### 2026/09/12
-
-* `Fix` Fixed the missing `libc++_shared.so` in the packaged native libraries: CMake now uses the `c++_shared` STL explicitly so AGP bundles the NDK r28.2 libc++ for all 4 ABIs, and the OCR engine loads again on 16 KB page size devices
-* `Fix` The `clean` task failed when the Rapid OCR native dependency cleanup flag was not initialized
-* `Improvement` Synced the OpenCV 4.8.0 native library to the NDK r28c (Clang 19.0.1) rebuild (donor: AutoJs6-Plugin-OpenCV); `libopencv_java4.so` for all 4 ABIs keeps 16 KB `PT_LOAD` alignment and ships with a provenance manifest
 
 ##### For more release history
 

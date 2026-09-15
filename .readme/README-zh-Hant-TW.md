@@ -136,6 +136,12 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
+# v1.0.5
+
+###### 2026/09/15
+
+* `改善` 將 compileSdk 與 targetSdk 提升到 37 (Android 17), 外掛程式行為不受新目標版本影響
+
 # v1.0.4
 
 ###### 2026/09/13
@@ -155,14 +161,6 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 * `修正` 外掛服務重建或重複初始化引擎時, 字典重複附加導致辨識文字偏移的問題
 * `修正` 重新初始化時遺留舊 ONNX Session 的問題, 並循序處理同一處理程序內的初始化與辨識以避免狀態競爭
-
-# v1.0.2
-
-###### 2026/09/12
-
-* `修正` 修復原生程式庫未打包 `libc++_shared.so` 的問題: CMake 現在明確使用 `c++_shared` STL, 由 AGP 隨 4 個 ABI 一併打包 NDK r28.2 的 libc++, 16 KB 分頁大小裝置上不再因缺少相依而無法載入 OCR 引擎
-* `修正` Rapid OCR 原生依賴清理開關未初始化時 `clean` 任務執行失敗
-* `改善` 同步 OpenCV 4.8.0 原生程式庫至 NDK r28c (Clang 19.0.1) 重新建置版本 (donor: AutoJs6-Plugin-OpenCV), 4 個 ABI 的 `libopencv_java4.so` 保持 16 KB `PT_LOAD` 對齊並附帶 provenance 清單
 
 ##### 更多發行歷史可參閱
 
