@@ -136,6 +136,12 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
+# v1.0.5
+
+###### 2026/09/15
+
+* `改善` compileSdk と targetSdk を 37 (Android 17) に引き上げ, プラグインの動作は新しいターゲットの影響を受けない
+
 # v1.0.4
 
 ###### 2026/09/13
@@ -155,14 +161,6 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 * `修正` プラグインサービスの再作成やエンジンの繰り返し初期化時に OCR 辞書が重複追加され, 認識文字がずれる問題
 * `修正` 再初期化時に古い ONNX セッションが残る問題と, 同一プロセス内の初期化と認識の競合
-
-# v1.0.2
-
-###### 2026/09/12
-
-* `修正` パッケージ済みネイティブライブラリに `libc++_shared.so` が含まれていなかった問題を修正: CMake が `c++_shared` STL を明示的に使用し, AGP が 4 つの ABI すべてに NDK r28.2 の libc++ を同梱するため, 16 KB ページサイズ端末でも OCR エンジンを読み込めるように
-* `修正` Rapid OCR のネイティブ依存関係のクリーンアップ設定が初期化されていない場合に `clean` タスクが失敗する問題
-* `改善` OpenCV 4.8.0 ネイティブライブラリを NDK r28c (Clang 19.0.1) 再ビルド版に同期 (donor: AutoJs6-Plugin-OpenCV); 4 つの ABI の `libopencv_java4.so` は 16 KB `PT_LOAD` アラインメントを維持し provenance マニフェストを同梱
 
 ##### その他のリリース履歴
 
