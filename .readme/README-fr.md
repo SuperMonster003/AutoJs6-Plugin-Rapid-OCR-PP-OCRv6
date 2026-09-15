@@ -140,6 +140,8 @@ La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelS
 
 ###### 2026/09/13
 
+* `Correctif` Accumulation de références locales JNI lors de la conversion de nombreux blocs de texte, pouvant saturer la table de références sous Android 7.x _[`issue #575`](http://issues.autojs6.com/575)_
+* `Correctif` Tampons natifs et références JNI temporaires conservés lors de la conversion des chaînes pendant l'initialisation, et traitement incorrect des chaînes vides _[`issue #575`](http://issues.autojs6.com/575)_
 * `Correctif` Les informations de version et d'ABI du centre des plugins correspondent à l'APK installé
 * `Correctif` Les images encodées sont limitées à 64 MiB avec prise en charge des fichiers et des tubes
 * `Correctif` Les dates de version utilisent un format anglais uniforme

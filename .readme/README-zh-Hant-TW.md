@@ -140,6 +140,8 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ###### 2026/09/13
 
+* `修正` 辨識結果包含大量文字區塊時, JNI 區域參照持續累積, 可能導致 Android 7.x 參照表溢位的問題 _[`issue #575`](http://issues.autojs6.com/575)_
+* `修正` 初始化字串轉換遺留原生緩衝區和 JNI 暫存參照, 以及空字串處理異常的問題 _[`issue #575`](http://issues.autojs6.com/575)_
 * `修正` 外掛中心顯示的版本與 ABI 資訊符合實際安裝的 APK
 * `修正` 編碼影像最大為 64 MiB, 支援檔案描述元和管線傳輸
 * `修正` 版本日期保持統一的英文格式

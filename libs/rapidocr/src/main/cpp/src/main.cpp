@@ -26,9 +26,13 @@ Java_com_benjaminwan_ocrlibrary_OcrEngine_init(JNIEnv *env, jobject thiz, jobjec
                                                jstring recName, jstring keysName) {
     std::lock_guard<std::mutex> lock(ocrMutex);
     std::string modelDetName = jstringTostring(env, detName);
+    if (env->ExceptionCheck()) return JNI_FALSE;
     std::string modelClsName = jstringTostring(env, clsName);
+    if (env->ExceptionCheck()) return JNI_FALSE;
     std::string modelRecName = jstringTostring(env, recName);
+    if (env->ExceptionCheck()) return JNI_FALSE;
     std::string modelKeysName = jstringTostring(env, keysName);
+    if (env->ExceptionCheck()) return JNI_FALSE;
     ocrLite->init(env, assetManager, numThread, modelDetName, modelClsName, modelRecName, modelKeysName);
     //ocrLite->initLogger(false);
     return JNI_TRUE;

@@ -7,15 +7,17 @@
   "$data": {
     "v1.0.4": {
       "released_date": "2026/09/13",
+      "fix": [
+        "JNI local references accumulated when converting many text blocks, potentially overflowing the reference table on Android 7.x _[`issue #575`](http://issues.autojs6.com/575)_",
+        "Native buffers and temporary JNI references retained during initialization string conversion, and incorrect handling of empty strings _[`issue #575`](http://issues.autojs6.com/575)_",
+        "Plugin center version and ABI information matches the installed plugin APK",
+        "Encoded image input is limited to 64 MiB and supports file descriptors and pipes",
+        "Version dates use a consistent English format"
+      ],
       "improvement": [
         "Validate release APK versions, signing and the complete variant set before creating download artifacts",
         "Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB",
         "Extend native ABI packaging and plugin metadata to arm64-v8a, armeabi-v7a, x86 and x86_64, with matching universal and per-ABI APKs"
-      ],
-      "fix": [
-        "Plugin center version and ABI information matches the installed plugin APK",
-        "Encoded image input is limited to 64 MiB and supports file descriptors and pipes",
-        "Version dates use a consistent English format"
       ]
     },
     "v1.0.3": {

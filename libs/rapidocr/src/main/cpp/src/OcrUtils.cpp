@@ -1,5 +1,6 @@
 #include <opencv2/imgproc.hpp>
 #include "OcrUtils.h"
+#include "JniUtils.h"
 #include "clipper.hpp"
 
 double getCurrentTime() {
@@ -396,19 +397,5 @@ void *getModelDataFromAssets(AAssetManager *mgr, const char *modelName, int &siz
 }
 
 std::string jstringTostring(JNIEnv *env, jstring input) {
-    char *str = NULL;
-    jclass clsstring = env->FindClass("java/lang/String");
-    jstring strencode = env->NewStringUTF("utf-8");
-    jmethodID mid = env->GetMethodID(clsstring, "getBytes", "(Ljava/lang/String;)[B");
-    jbyteArray barr = (jbyteArray) env->CallObjectMethod(input, mid, strencode);
-    jsize alen = env->GetArrayLength(barr);
-    jbyte *ba = env->GetByteArrayElements(barr, JNI_FALSE);
-    if (alen > 0) {
-        str = (char *) malloc(alen + 1);
-        memcpy(str, ba, alen);
-        str[alen] = 0;
-    }
-    env->ReleaseByteArrayElements(barr, ba, 0);
-    std::string ret = str;
-    return ret;
+    return ocr::jni::toUtf8(env, input);
 }

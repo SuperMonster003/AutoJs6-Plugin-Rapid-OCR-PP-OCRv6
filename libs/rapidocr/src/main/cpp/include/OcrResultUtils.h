@@ -1,36 +1,34 @@
 #ifndef __OCR_RESULT_UTILS_H__
 #define __OCR_RESULT_UTILS_H__
 
-#include <jni.h>
+#include "JniUtils.h"
 #include "OcrStruct.h"
 
 class OcrResultUtils {
 public:
-    OcrResultUtils(JNIEnv *env, OcrResult &ocrResult, jobject boxImg);
+    OcrResultUtils(JNIEnv *env, const OcrResult &ocrResult, jobject boxImg);
 
-    ~OcrResultUtils();
-
-    jobject getJObject();
+    jobject getJObject() const;
 
 private:
     JNIEnv *jniEnv;
-    jobject jOcrResult;
+    // Ownership is transferred to the JNI caller, which returns this reference to Java.
+    jobject jOcrResult = nullptr;
 
-    jclass newJListClass();
+    // Cache for this conversion only, without extending the class loader's lifetime.
+    ocr::jni::LocalRef<jclass> listClass;
+    ocr::jni::LocalRef<jclass> pointClass;
+    ocr::jni::LocalRef<jclass> textBlockClass;
+    jmethodID listConstructor = nullptr;
+    jmethodID listAdd = nullptr;
+    jmethodID pointConstructor = nullptr;
+    jmethodID textBlockConstructor = nullptr;
 
-    jmethodID getListConstructor(jclass clazz);
-
-    jobject getTextBlock(TextBlock &textBlock);
-
-    jobject getTextBlocks(std::vector<TextBlock> &textBlocks);
-
-    jobject newJPoint(cv::Point &point);
-
-    jobject newJBoxPoint(std::vector<cv::Point> &boxPoint);
-
-    jfloatArray newJScoreArray(std::vector<float> &scores);
-
+    bool initJavaTypes();
+    jobject getTextBlock(const TextBlock &textBlock);
+    jobject getTextBlocks(const std::vector<TextBlock> &textBlocks);
+    jobject newJBoxPoint(const std::vector<cv::Point> &boxPoint);
+    jfloatArray newJScoreArray(const std::vector<float> &scores);
 };
 
-
-#endif //__OCR_RESULT_UTILS_H__
+#endif // __OCR_RESULT_UTILS_H__
