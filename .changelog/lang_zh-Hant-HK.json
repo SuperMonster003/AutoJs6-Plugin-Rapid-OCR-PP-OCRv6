@@ -5,6 +5,15 @@
   "changelog_label_improvement": "優化",
   "changelog_label_dependency": "依賴",
   "$data": {
+    "v1.0.6": {
+      "released_date": "2026/09/20",
+      "dependency": [
+        "RapidOCR 模型來源版本從 v3.9.1 升級至 v3.9.2, 並在 `version.properties` 中統一鎖定模型版本"
+      ],
+      "hint": [
+        "PP-OCRv6 Small 檢測模型, 識別模型, 輔助分類模型和字典在兩個版本中的 SHA-256 均一致; 本次更新模型來源記錄, 識別行為保持不變"
+      ]
+    },
     "v1.0.5": {
       "released_date": "2026/09/19",
       "improvement": [

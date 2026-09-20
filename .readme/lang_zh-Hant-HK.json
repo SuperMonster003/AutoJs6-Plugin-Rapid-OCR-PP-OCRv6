@@ -31,7 +31,7 @@
     "`scoreThreshold`: 文本框分數閾值, 默認值為 `0.5`."
   ],
   "h3_model_assets": "模型資產",
-  "p_model_assets": "構建過程從 ModelScope 下載並校驗以下 4 個資產",
+  "p_model_assets": "構建過程從 ModelScope 的 RapidOCR v{{ rapidocr_model_version }} 下載並校驗以下 4 個資產",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: PP-OCRv6 Small 文本檢測模型.",
     "`{{ model_asset_recognition }}`: PP-OCRv6 Small 文本識別模型.",

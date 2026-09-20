@@ -69,6 +69,8 @@ public class PluginBinderContractTest {
                         return binder.transact(code, input, output, flags);
                     }
                 };
+                // Android 7.x requires a descriptor even when no local interface is attached.
+                transport.attachInterface(null, binder.getInterfaceDescriptor());
                 IOcrPlugin plugin = IOcrPlugin.Stub.asInterface(transport);
                 PluginInfo info = plugin.getInfo();
                 PackageInfo installed = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);

@@ -123,7 +123,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
-빌드는 ModelScope에서 다음 4개 자산을 다운로드하고 검증합니다:
+빌드 과정에서 ModelScope의 RapidOCR v3.9.2에서 다음 4개 자산을 다운로드하고 검증:
 
 - `PP-OCRv6_det_small.onnx`: PP-OCRv6 Small 문자 감지 모델.
 - `PP-OCRv6_rec_small.onnx`: PP-OCRv6 Small 문자 인식 모델.
@@ -135,6 +135,13 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ### 릴리스 기록
 
 ******
+
+# v1.0.6
+
+###### 2026/09/20
+
+* `힌트` PP-OCRv6 Small 감지 모델, 인식 모델, 보조 분류 모델 및 사전의 SHA-256은 두 버전에서 동일함. 이번 변경은 모델 출처 기록을 갱신하며 인식 동작은 유지됨
+* `의존성` RapidOCR 모델 소스를 v3.9.1에서 v3.9.2로 업그레이드하고 `version.properties`에서 모델 버전을 고정
 
 # v1.0.5
 
@@ -155,13 +162,6 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `개선` 다운로드 파일 생성 전에 릴리스 APK의 버전, 서명 및 전체 변형 구성을 검증
 * `개선` 이미지는 최대 16777216픽셀, 원시 이미지 버퍼는 최대 64 MiB까지 지원
 * `개선` 네이티브 ABI 패키징과 플러그인 메타데이터를 arm64-v8a, armeabi-v7a, x86, x86_64로 확장하고 범용 APK와 ABI별 APK를 일치시킴
-
-# v1.0.3
-
-###### 2026/09/12
-
-* `수정` 플러그인 서비스 재생성 또는 엔진 반복 초기화 시 OCR 사전이 중복 추가되어 인식 문자가 어긋나는 문제
-* `수정` 재초기화 시 이전 ONNX 세션이 남는 문제와 동일 프로세스 내 초기화 및 인식 간의 경쟁 상태
 
 ##### 더 많은 릴리스 기록
 

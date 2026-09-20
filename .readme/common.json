@@ -16,5 +16,6 @@
   "model_asset_detection": "PP-OCRv6_det_small.onnx",
   "model_asset_recognition": "PP-OCRv6_rec_small.onnx",
   "model_asset_auxiliary": "ch_ppocr_mobile_v2.0_cls_mobile.onnx",
-  "model_asset_dictionary": "ppocrv6_dict.txt"
+  "model_asset_dictionary": "ppocrv6_dict.txt",
+  "rapidocr_model_version": "3.9.2"
 }
