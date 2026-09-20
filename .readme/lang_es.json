@@ -31,7 +31,7 @@
     "`scoreThreshold`: Umbral de puntuación de los cuadros de texto. El valor predeterminado es `0.5`."
   ],
   "h3_model_assets": "Recursos de modelos",
-  "p_model_assets": "La compilación descarga y verifica los siguientes 4 recursos desde ModelScope",
+  "p_model_assets": "La compilación descarga y verifica los siguientes 4 recursos de RapidOCR v{{ rapidocr_model_version }} en ModelScope",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: Modelo de detección de texto PP-OCRv6 Small.",
     "`{{ model_asset_recognition }}`: Modelo de reconocimiento de texto PP-OCRv6 Small.",

@@ -5,6 +5,15 @@
   "changelog_label_improvement": "개선",
   "changelog_label_dependency": "의존성",
   "$data": {
+    "v1.0.6": {
+      "released_date": "2026/09/20",
+      "dependency": [
+        "RapidOCR 모델 소스를 v3.9.1에서 v3.9.2로 업그레이드하고 `version.properties`에서 모델 버전을 고정"
+      ],
+      "hint": [
+        "PP-OCRv6 Small 감지 모델, 인식 모델, 보조 분류 모델 및 사전의 SHA-256은 두 버전에서 동일함. 이번 변경은 모델 출처 기록을 갱신하며 인식 동작은 유지됨"
+      ]
+    },
     "v1.0.5": {
       "released_date": "2026/09/19",
       "improvement": [

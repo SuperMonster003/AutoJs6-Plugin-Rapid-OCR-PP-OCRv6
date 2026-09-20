@@ -22,6 +22,8 @@ ext {
 
 val onnxRuntimeReleaseVersion = props["RAPID_OCR/ONNX_RUNTIME"]
 val onnxRuntimeAssetVersion = props["RAPID_OCR/ONNX_RUNTIME_ASSET"]
+val rapidOcrModelVersion = props["RAPID_OCR/MODEL"]
+val rapidOcrModelBaseUrl = "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v$rapidOcrModelVersion"
 
 val versionMap = mapOf(
     "OFFICIAL_NAME" to "1.3.0", /* From original build.gradle file. */
@@ -63,25 +65,26 @@ fun File.sha256String(): String {
     return digest.digest().joinToString("") { "%02x".format(it.toInt() and 0xff) }
 }
 
+// Model provenance and upstream compatibility notes: models.provenance.json.
 val rapidOcrV6Assets = listOf(
     RapidOcrRemoteAsset(
         fileName = "PP-OCRv6_det_small.onnx",
-        url = "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.1/onnx/PP-OCRv6/det/PP-OCRv6_det_small.onnx",
+        url = "$rapidOcrModelBaseUrl/onnx/PP-OCRv6/det/PP-OCRv6_det_small.onnx",
         sha256 = "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f",
     ),
     RapidOcrRemoteAsset(
         fileName = "PP-OCRv6_rec_small.onnx",
-        url = "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.1/onnx/PP-OCRv6/rec/PP-OCRv6_rec_small.onnx",
+        url = "$rapidOcrModelBaseUrl/onnx/PP-OCRv6/rec/PP-OCRv6_rec_small.onnx",
         sha256 = "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884",
     ),
     RapidOcrRemoteAsset(
         fileName = "ch_ppocr_mobile_v2.0_cls_mobile.onnx",
-        url = "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.1/onnx/PP-OCRv4/cls/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+        url = "$rapidOcrModelBaseUrl/onnx/PP-OCRv4/cls/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
         sha256 = "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
     ),
     RapidOcrRemoteAsset(
         fileName = "ppocrv6_dict.txt",
-        url = "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.1/paddle/PP-OCRv6/rec/PP-OCRv6_rec_small/ppocrv6_dict.txt",
+        url = "$rapidOcrModelBaseUrl/paddle/PP-OCRv6/rec/PP-OCRv6_rec_small/ppocrv6_dict.txt",
         sha256 = "b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d",
     ),
 )
@@ -90,7 +93,7 @@ val rapidOcrAbis = listOf("armeabi-v7a", "arm64-v8a", "x86_64", "x86")
 
 tasks.register("downloadRapidOcrV6Models") {
     group = "rapidocr"
-    description = "Download PP-OCRv6 ONNX model assets used by Rapid OCR (PP-OCRv6 Small)."
+    description = "Download RapidOCR v$rapidOcrModelVersion model assets for PP-OCRv6 Small."
 
     doLast {
         val modelDir = layout.projectDirectory.dir("src/main/assets/models").asFile

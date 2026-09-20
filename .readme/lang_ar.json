@@ -31,7 +31,7 @@
     "`scoreThreshold`: عتبة تقييم مربع النص. القيمة الافتراضية هي `0.5`."
   ],
   "h3_model_assets": "أصول النماذج",
-  "p_model_assets": "تنزل عملية البناء الأصول الأربعة التالية من ModelScope وتتحقق منها",
+  "p_model_assets": "تقوم عملية البناء بتنزيل الموارد الأربعة التالية من RapidOCR v{{ rapidocr_model_version }} على ModelScope والتحقق منها",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: نموذج اكتشاف النص PP-OCRv6 Small.",
     "`{{ model_asset_recognition }}`: نموذج التعرف على النص PP-OCRv6 Small.",

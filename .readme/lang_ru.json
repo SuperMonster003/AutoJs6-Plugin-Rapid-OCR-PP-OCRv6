@@ -31,7 +31,7 @@
     "`scoreThreshold`: Порог оценки текстового блока. Значение по умолчанию равно `0.5`."
   ],
   "h3_model_assets": "Ресурсы моделей",
-  "p_model_assets": "Сборка загружает и проверяет следующие 4 ресурса из ModelScope",
+  "p_model_assets": "При сборке загружаются и проверяются следующие 4 ресурса RapidOCR v{{ rapidocr_model_version }} из ModelScope",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: Модель обнаружения текста PP-OCRv6 Small.",
     "`{{ model_asset_recognition }}`: Модель распознавания текста PP-OCRv6 Small.",

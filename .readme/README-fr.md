@@ -123,7 +123,7 @@ L'implémentation actuelle du plugin lit les options de reconnaissance suivantes
 
 ******
 
-La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelScope:
+La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v3.9.2 sur ModelScope:
 
 - `PP-OCRv6_det_small.onnx`: Modèle de détection de texte PP-OCRv6 Small.
 - `PP-OCRv6_rec_small.onnx`: Modèle de reconnaissance de texte PP-OCRv6 Small.
@@ -135,6 +135,13 @@ La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelS
 ### Historique des versions
 
 ******
+
+# v1.0.6
+
+###### 2026/09/20
+
+* `Note` Les modèles de détection et de reconnaissance PP-OCRv6 Small, le modèle de classification auxiliaire et le dictionnaire ont des empreintes SHA-256 identiques dans les deux versions; seule la provenance est mise à jour, sans changement du comportement de reconnaissance
+* `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.9.2 et verrouillage de la version dans `version.properties`
 
 # v1.0.5
 
@@ -155,13 +162,6 @@ La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelS
 * `Amélioration` Validation des versions, signatures et variantes complètes des APK avant la création des fichiers à télécharger
 * `Amélioration` Les images peuvent contenir jusqu'à 16777216 pixels; les tampons bruts sont limités à 64 MiB
 * `Amélioration` Étendre les ABI natives et les métadonnées du plugin à arm64-v8a, armeabi-v7a, x86 et x86_64, avec des APK universels et par ABI cohérents
-
-# v1.0.3
-
-###### 2026/09/12
-
-* `Correctif` Texte reconnu incorrect après la recréation du service ou des initialisations répétées du moteur, causé par l'ajout répété du dictionnaire OCR
-* `Correctif` Anciennes sessions ONNX conservées lors de la réinitialisation et accès concurrents entre l'initialisation et la reconnaissance dans le même processus
 
 ##### Pour consulter davantage d'historique des versions
 

@@ -123,7 +123,7 @@ The current plugin implementation reads the following recognition options:
 
 ******
 
-The build downloads and verifies the following 4 assets from ModelScope:
+The build downloads and verifies the following 4 assets from RapidOCR v3.9.2 on ModelScope:
 
 - `PP-OCRv6_det_small.onnx`: PP-OCRv6 Small text detection model.
 - `PP-OCRv6_rec_small.onnx`: PP-OCRv6 Small text recognition model.
@@ -135,6 +135,13 @@ The build downloads and verifies the following 4 assets from ModelScope:
 ### Release History
 
 ******
+
+# v1.0.6
+
+###### 2026/09/20
+
+* `Hint` The PP-OCRv6 Small detection and recognition models, auxiliary classification model, and dictionary have identical SHA-256 hashes in both versions; this updates model provenance without changing recognition behavior
+* `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.9.2 and pin the model version in `version.properties`
 
 # v1.0.5
 
@@ -155,13 +162,6 @@ The build downloads and verifies the following 4 assets from ModelScope:
 * `Improvement` Validate release APK versions, signing and the complete variant set before creating download artifacts
 * `Improvement` Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB
 * `Improvement` Extend native ABI packaging and plugin metadata to arm64-v8a, armeabi-v7a, x86 and x86_64, with matching universal and per-ABI APKs
-
-# v1.0.3
-
-###### 2026/09/12
-
-* `Fix` Incorrect recognized text after plugin service recreation or repeated engine initialization caused by appending the OCR dictionary again
-* `Fix` Old ONNX sessions retained during reinitialization and races between initialization and recognition in the same process
 
 ##### For more release history
 

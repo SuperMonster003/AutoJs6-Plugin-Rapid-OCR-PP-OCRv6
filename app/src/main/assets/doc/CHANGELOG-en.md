@@ -4,6 +4,13 @@
 
 ******
 
+# v1.0.6
+
+###### 2026/09/20
+
+* `Hint` The PP-OCRv6 Small detection and recognition models, auxiliary classification model, and dictionary have identical SHA-256 hashes in both versions; this updates model provenance without changing recognition behavior
+* `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.9.2 and pin the model version in `version.properties`
+
 # v1.0.5
 
 ###### 2026/09/19

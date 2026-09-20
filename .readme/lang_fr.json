@@ -31,7 +31,7 @@
     "`scoreThreshold`: Seuil de score des zones de texte. La valeur par défaut est `0.5`."
   ],
   "h3_model_assets": "Ressources des modèles",
-  "p_model_assets": "La compilation télécharge et vérifie les 4 ressources suivantes depuis ModelScope",
+  "p_model_assets": "La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v{{ rapidocr_model_version }} sur ModelScope",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: Modèle de détection de texte PP-OCRv6 Small.",
     "`{{ model_asset_recognition }}`: Modèle de reconnaissance de texte PP-OCRv6 Small.",

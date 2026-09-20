@@ -123,7 +123,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
-构建过程从 ModelScope 下载并校验以下 4 个资产:
+构建过程从 ModelScope 的 RapidOCR v3.9.2 下载并校验以下 4 个资产:
 
 - `PP-OCRv6_det_small.onnx`: PP-OCRv6 Small 文本检测模型.
 - `PP-OCRv6_rec_small.onnx`: PP-OCRv6 Small 文本识别模型.
@@ -135,6 +135,13 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ### 发行历史
 
 ******
+
+# v1.0.6
+
+###### 2026/09/20
+
+* `提示` PP-OCRv6 Small 检测模型, 识别模型, 辅助分类模型和字典在两个版本中的 SHA-256 均一致; 本次更新模型来源记录, 识别行为保持不变
+* `依赖` RapidOCR 模型来源版本从 v3.9.1 升级至 v3.9.2, 并在 `version.properties` 中统一锁定模型版本
 
 # v1.0.5
 
@@ -155,13 +162,6 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `优化` 发布下载文件生成前校验 APK 版本, 签名与完整变体集合
 * `优化` 图像最多包含 16777216 个像素, 原始图像缓冲区上限为 64 MiB
 * `优化` 扩展原生 ABI 打包与插件元数据至 arm64-v8a, armeabi-v7a, x86 和 x86_64, 同步通用 APK 与各 ABI 独立 APK
-
-# v1.0.3
-
-###### 2026/09/12
-
-* `修复` 插件服务重建或重复初始化引擎时, 字典重复追加导致识别文字偏移的问题
-* `修复` 重新初始化时遗留旧 ONNX Session 的问题, 并串行处理同一进程内的初始化与识别以避免状态竞争
 
 ##### 更多发行历史可参阅
 

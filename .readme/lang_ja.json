@@ -31,7 +31,7 @@
     "`scoreThreshold`: テキストボックスのスコアしきい値です. デフォルトは `0.5` です."
   ],
   "h3_model_assets": "モデルアセット",
-  "p_model_assets": "ビルドは ModelScope から次の 4 個のアセットをダウンロードして検証します",
+  "p_model_assets": "ビルド時に ModelScope の RapidOCR v{{ rapidocr_model_version }} から次の 4 つのアセットをダウンロードして検証",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: PP-OCRv6 Small 文字検出モデル.",
     "`{{ model_asset_recognition }}`: PP-OCRv6 Small 文字認識モデル.",

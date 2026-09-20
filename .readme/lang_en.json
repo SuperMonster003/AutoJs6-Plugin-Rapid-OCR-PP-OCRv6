@@ -31,7 +31,7 @@
     "`scoreThreshold`: Text box score threshold. The default is `0.5`."
   ],
   "h3_model_assets": "Model Assets",
-  "p_model_assets": "The build downloads and verifies the following 4 assets from ModelScope",
+  "p_model_assets": "The build downloads and verifies the following 4 assets from RapidOCR v{{ rapidocr_model_version }} on ModelScope",
   "model_asset_lines": [
     "`{{ model_asset_detection }}`: PP-OCRv6 Small text detection model.",
     "`{{ model_asset_recognition }}`: PP-OCRv6 Small text recognition model.",

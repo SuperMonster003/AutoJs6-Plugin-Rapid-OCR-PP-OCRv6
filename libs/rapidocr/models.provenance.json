@@ -1,0 +1,43 @@
+{
+  "project": "RapidAI/RapidOCR",
+  "scope": "Model assets used by the Android C++ ONNX Runtime engine; the RapidOCR Python package is not bundled.",
+  "version": "3.9.2",
+  "upstream_commit": "095232a4c94f7f0e6600ba5bba1177010ad696d4",
+  "release_url": "https://github.com/RapidAI/RapidOCR/releases/tag/v3.9.2",
+  "upstream_model_config": "https://github.com/RapidAI/RapidOCR/blob/v3.9.2/python/rapidocr/default_models.yaml",
+  "license": "Apache-2.0",
+  "license_url": "https://github.com/RapidAI/RapidOCR/blob/v3.9.2/LICENSE",
+  "model_card_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/README.md",
+  "verified_date": "2026-09-20",
+  "upgrade_notes": [
+    "All four v3.9.2 assets were downloaded and have the same SHA-256 hashes as the v3.9.1 assets already used by this plugin.",
+    "The v3.9.1...v3.9.2 code changes affect the Python package and its PyTorch/TensorRT backends; no Android C++ engine update is required for these unchanged ONNX models.",
+    "The Python image preprocessing switches introduced in v3.9.2 are not part of the Android plugin API."
+  ],
+  "assets": [
+    {
+      "file": "PP-OCRv6_det_small.onnx",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv6/det/PP-OCRv6_det_small.onnx",
+      "bytes": 9929594,
+      "sha256": "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f"
+    },
+    {
+      "file": "PP-OCRv6_rec_small.onnx",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv6/rec/PP-OCRv6_rec_small.onnx",
+      "bytes": 21234383,
+      "sha256": "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884"
+    },
+    {
+      "file": "ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/onnx/PP-OCRv4/cls/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
+      "bytes": 585532,
+      "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c"
+    },
+    {
+      "file": "ppocrv6_dict.txt",
+      "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.9.2/paddle/PP-OCRv6/rec/PP-OCRv6_rec_small/ppocrv6_dict.txt",
+      "bytes": 74947,
+      "sha256": "b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d"
+    }
+  ]
+}
