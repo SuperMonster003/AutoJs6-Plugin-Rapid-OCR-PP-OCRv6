@@ -8,7 +8,7 @@
     "v1.0.6": {
       "released_date": "2026/09/20",
       "dependency": [
-        "RapidOCR 模型来源版本从 v3.9.1 升级至 v3.9.2, 并在 `version.properties` 中统一锁定模型版本"
+        "升级 RapidOCR 模型来源版本 3.9.1 -> 3.9.2"
       ],
       "hint": [
         "PP-OCRv6 Small 检测模型, 识别模型, 辅助分类模型和字典在两个版本中的 SHA-256 均一致; 本次更新模型来源记录, 识别行为保持不变"
@@ -17,10 +17,10 @@
     "v1.0.5": {
       "released_date": "2026/09/19",
       "improvement": [
-        "将 compileSdk 与 targetSdk 提升到 37 (Android 17), 插件行为不受新目标版本影响"
+        "compileSdk/targetSdk 升级至 37 (Android 17)"
       ],
       "fix": [
-        "AGP 9.1 构建时的 SDK XML v4 解析警告及 JVM 单元测试组装任务误触发 APK 原生库对齐检查的问题 (共享构建插件 1.8.3)"
+        "AGP 9.1 构建时的 SDK XML v4 解析警告, 以及 JVM 单元测试误触发 APK 原生库对齐检查的问题 (共享构建插件 1.8.3)"
       ]
     },
     "v1.0.4": {
@@ -28,14 +28,14 @@
       "fix": [
         "识别结果包含大量文本块时, JNI 局部引用持续累积, 可能导致 Android 7.x 引用表溢出的问题 _[`issue #575`](http://issues.autojs6.com/575)_",
         "初始化字符串转换遗留原生缓冲区和 JNI 临时引用, 以及空字符串处理异常的问题 _[`issue #575`](http://issues.autojs6.com/575)_",
-        "插件中心显示的版本与 ABI 信息匹配实际安装的 APK",
-        "编码图像最大为 64 MiB, 支持文件描述符和管道传输",
-        "版本日期保持统一的英文格式"
+        "插件中心显示的版本及 ABI 信息与实际安装包不一致的问题",
+        "编码图像的文件描述符及管道输入兼容性问题 (文件大小上限为 64 MiB)",
+        "版本日期受构建环境语言影响, 未统一使用英文格式的问题"
       ],
       "improvement": [
-        "发布下载文件生成前校验 APK 版本, 签名与完整变体集合",
+        "发布前校验 APK 版本, 签名及变体完整性",
         "图像最多包含 16777216 个像素, 原始图像缓冲区上限为 64 MiB",
-        "扩展原生 ABI 打包与插件元数据至 arm64-v8a, armeabi-v7a, x86 和 x86_64, 同步通用 APK 与各 ABI 独立 APK"
+        "原生库支持 arm64-v8a/armeabi-v7a/x86/x86_64, 并提供通用及各 ABI 独立安装包"
       ]
     },
     "v1.0.3": {
@@ -48,11 +48,11 @@
     "v1.0.2": {
       "released_date": "2026/09/12",
       "fix": [
-        "修复原生库未打包 `libc++_shared.so` 的问题: CMake 现在显式使用 `c++_shared` STL, 由 AGP 随 4 个 ABI 一并打包 NDK r28.2 的 libc++, 16 KB 页大小设备上不再因缺少依赖而无法加载 OCR 引擎",
-        "Rapid OCR 原生依赖清理开关未初始化时 `clean` 任务执行失败"
+        "原生库未打包 `libc++_shared.so` 的问题: CMake 现在显式使用 `c++_shared` STL, 由 AGP 随 4 个 ABI 一并打包 NDK r28.2 的 libc++, 16 KB 页大小设备上不再因缺少依赖而无法加载 OCR 引擎",
+        "Rapid OCR 原生依赖清理开关未初始化时 clean 任务执行失败"
       ],
       "improvement": [
-        "同步 OpenCV 4.8.0 原生库至 NDK r28c (Clang 19.0.1) 重编版本 (donor: AutoJs6-Plugin-OpenCV), 4 个 ABI 的 `libopencv_java4.so` 保持 16 KB `PT_LOAD` 对齐并附带 provenance 清单"
+        "OpenCV 4.8.0 原生库改用 NDK r28c (Clang 19.0.1) 构建, 4 个 ABI 均支持 16 KB 内存页并附带构建来源清单 (来源: AutoJs6-Plugin-OpenCV)"
       ]
     },
     "v1.0.1": {
@@ -61,7 +61,7 @@
         "在同一个打包应用中依次使用 Paddle OCR 和 Rapid OCR 时可能崩溃的问题"
       ],
       "improvement": [
-        "构建阶段校验 64 位原生库的 16 KB 页大小对齐, 检查 manifest 契约并输出 JSON 报告"
+        "构建阶段校验 64 位原生库的 16 KB 内存页对齐及 Manifest 配置, 并输出校验报告"
       ],
       "dependency": [
         "升级 ONNX Runtime (com.microsoft.onnxruntime:onnxruntime-android) 版本 1.18.0 -> 1.21.1",
@@ -71,15 +71,15 @@
     "v1.0.0": {
       "released_date": "2026/09/01",
       "feature": [
-        "Rapid OCR (PP-OCRv6 Small) 插件标识, 插件 ID 为 `rapid-ocr-pp-ocrv6`, 引擎为 `rapid-ocr`, 变体为 `pp-ocrv6`.",
-        "`PADDLE_OCR` AIDL 服务以及 `recognizeText` 和 `detect` 接口. `recognizeText` 返回文本字符串, `detect` 为每个结果返回 `text`, `confidence` 和 `bounds`.",
-        "支持编码图像和原始 `ARGB_8888` 图像. Android 13 在可用时使用 `SharedMemory`, 在 `SharedMemory` 不可用或失败时回退到流式读取.",
-        "基于 `PP-OCRv6 Small` 检测和识别模型, `ONNX Runtime` 与 `OpenCV Mobile` 实现本地文本检测和识别.",
-        "支持用于识别的 `maxSideLen` 和 `scoreThreshold` 选项.",
-        "将 `preBuild` 接入模型资源下载和 `SHA-256` 摘要校验, 并同步 `ONNX Runtime` 原生库.",
-        "西班牙语, 法语, 俄语, 阿拉伯语, 日语, 韩语, 英语, 简体中文, 香港繁体中文和台湾繁体中文的插件信息与使用说明.",
-        "`JSON` 源文件和 `Python` 生成器, 用于生成多语言 `README` 与 `CHANGELOG` 文档.",
-        "`arm64-v8a`, `armeabi-v7a`, `x86_64` 和 `universal` APK 变体. 发布文件名包含版本和 `ABI`, 归档副本包含 `CRC32` 摘要."
+        "Rapid OCR (PP-OCRv6 Small) 插件标识, 插件 ID 为 `rapid-ocr-pp-ocrv6`, 引擎为 `rapid-ocr`, 变体为 `pp-ocrv6`",
+        "PADDLE_OCR AIDL 服务以及 recognizeText 和 detect 接口. recognizeText 返回文本字符串, detect 为每个结果返回 text, confidence 和 bounds",
+        "支持编码图像和原始 ARGB_8888 图像. Android 13 在可用时使用 SharedMemory, 在 SharedMemory 不可用或失败时回退到流式读取",
+        "基于 `PP-OCRv6 Small` 检测和识别模型, `ONNX Runtime` 与 `OpenCV Mobile` 实现本地文本检测和识别",
+        "支持用于识别的 maxSideLen 和 scoreThreshold 选项",
+        "将 preBuild 接入模型资源下载和 `SHA-256` 摘要校验, 并同步 `ONNX Runtime` 原生库",
+        "西班牙语, 法语, 俄语, 阿拉伯语, 日语, 韩语, 英语, 简体中文, 香港繁体中文和台湾繁体中文的插件信息与使用说明",
+        "JSON 源文件和 Python 生成器, 用于生成多语言 README 与 CHANGELOG 文档",
+        "`arm64-v8a`, `armeabi-v7a`, x86_64 和 universal APK 变体. 发布文件名包含版本和 ABI, 归档副本包含 CRC32 摘要"
       ],
       "improvement": [
         "统一 README 版式与 Gradle 平台版本管理方式"
