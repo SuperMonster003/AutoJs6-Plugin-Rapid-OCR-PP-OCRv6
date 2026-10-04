@@ -50,3 +50,9 @@ python -m unittest discover -s .python -p test_release_archive.py
 Image inputs are limited to 16777216 pixels; packed/padded raw buffers are limited to 64 MiB. Dimensions and stride are validated before allocation. Device CI covers x86_64 on 4 KB and 16 KB images where that ABI is available; ARM-only Paddle-Lite requires the explicitly configured ANDROID_ARM64_RUNNER. Missing runner coverage remains a release verification gap.
 
 Encoded images are also capped at 64 MiB. Hosts send non-seekable pipes: consume each descriptor once, then inspect dimensions and decode the retained bytes. Instrumentation must exercise the pipe transport as well as files.
+
+
+## Icon Studio publication snapshot (2026-10-04)
+
+- `.icons/recipe.json` and its content-addressed original assets own the current icon geometry, tone and backgrounds. Keep the portable renderer, generated resources, keep rules and icon CI in the same change.
+- Use `.python/generate_icon_studio.py --check` for read-only reproduction checks. Optical size bands are advisory; retain canvas, transparency and safe-circle checks. Three uses neutral foregrounds and fixed #FAFAFA / #212121 surfaces; other plugins may use colored artwork and custom or transparent surfaces.
