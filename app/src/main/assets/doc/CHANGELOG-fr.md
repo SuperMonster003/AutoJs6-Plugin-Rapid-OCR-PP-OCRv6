@@ -6,9 +6,10 @@
 
 # v1.0.6
 
-###### 2026/09/20
+###### 2026/10/04
 
 * `Note` Les modèles de détection et de reconnaissance PP-OCRv6 Small, le modèle de classification auxiliaire et le dictionnaire ont des empreintes SHA-256 identiques dans les deux versions; seule la provenance est mise à jour, sans changement du comportement de reconnaissance
+* `Amélioration` Les icônes du centre de plugins utilisent les tailles, positions, images claires et sombres et fonds circulaires réglés dans Icon Studio, avec les sources et paramètres permettant de les reproduire
 * `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.9.2 et verrouillage de la version dans `version.properties`
 
 # v1.0.5
