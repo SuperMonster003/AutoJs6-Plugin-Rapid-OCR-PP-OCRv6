@@ -138,10 +138,11 @@ The build downloads and verifies the following 4 assets from RapidOCR v3.9.2 on 
 
 # v1.0.6
 
-###### 2026/10/04
+###### 2026/10/05
 
 * `Hint` The PP-OCRv6 Small detection and recognition models, auxiliary classification model, and dictionary have identical SHA-256 hashes in both versions; this updates model provenance without changing recognition behavior
 * `Improvement` Plugin Center icons use the sizes, positions, light and dark artwork, and circular backgrounds adjusted in Icon Studio, retaining reproducible sources and parameters
+* `Improvement` Android App info icons share Icon Studio artwork and light/dark backgrounds while preserving transparent Plugin Center artwork and existing launcher choices
 * `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.9.2 and pin the model version in `version.properties`
 
 # v1.0.5

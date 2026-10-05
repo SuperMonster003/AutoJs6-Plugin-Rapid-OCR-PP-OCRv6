@@ -6,10 +6,11 @@
 
 # v1.0.6
 
-###### 2026/10/04
+###### 2026/10/05
 
 * `Aviso` Los modelos de detección y reconocimiento PP-OCRv6 Small, el modelo de clasificación auxiliar y el diccionario tienen hashes SHA-256 idénticos en ambas versiones; se actualiza la procedencia sin cambiar el comportamiento del reconocimiento
 * `Mejora` Los iconos del centro de plugins usan los tamaños, posiciones, imágenes claras y oscuras y fondos circulares ajustados en Icon Studio, conservando fuentes y parámetros reproducibles
+* `Mejora` Los iconos de información de la aplicación de Android comparten las imágenes y los fondos claros y oscuros de Icon Studio, conservando las imágenes transparentes del centro de plugins y las opciones del lanzador
 * `Dependencia` Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.9.2 y fijada la versión en `version.properties`
 
 # v1.0.5
