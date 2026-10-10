@@ -164,21 +164,87 @@ val extractOnnxRuntimeNative by tasks.registering(Sync::class) {
     }
     into(onnxRuntimeNativeDirectory)
 }
-val openCvNative by configurations.creating {
-    isCanBeConsumed = false
-    isCanBeResolved = true
-    isTransitive = false
+// Private OpenCV: libRapidOcr.so statically links the core and imgproc libraries of the official
+// OpenCV Android SDK. The record pins the release archive and every static library per ABI;
+// tools/opencv/opencv_sdk_provenance.py regenerates it for an upgrade.
+val openCvVersion = versionMap["OPENCV"] as String
+val openCvSdkProvenanceFile = rootProject.file("libs/opencv-android-sdk-$openCvVersion.provenance.json")
+
+@Suppress("UNCHECKED_CAST")
+val openCvSdkProvenance = groovy.json.JsonSlurper().parse(openCvSdkProvenanceFile) as Map<String, Any?>
+
+@Suppress("UNCHECKED_CAST")
+val openCvSdkUpstream = openCvSdkProvenance["upstream"] as Map<String, Any?>
+
+@Suppress("UNCHECKED_CAST")
+val openCvSdkStaticLibraries = openCvSdkProvenance["staticLibraries"] as Map<String, Map<String, String>>
+require(openCvSdkProvenance["opencvVersion"] == openCvVersion) {
+    "${openCvSdkProvenanceFile.name} does not describe OpenCV $openCvVersion"
 }
-dependencies { openCvNative(files(rootProject.file("libs/opencv-native-4.8.0.aar"))) }
-val openCvNativeDirectory = layout.buildDirectory.dir("opencv-native")
-val extractOpenCvNative by tasks.registering(Sync::class) {
-    from({ zipTree(openCvNative.singleFile) }) { include("headers/**", "jni/**") }
-    into(openCvNativeDirectory)
+require(rapidOcrAbis.all(openCvSdkStaticLibraries::containsKey)) {
+    "${openCvSdkProvenanceFile.name} must record the static libraries of every ABI: $rapidOcrAbis"
+}
+val openCvSdkArchive = layout.projectDirectory.file("cache/opencv-$openCvVersion-android-sdk.zip").asFile
+val openCvSdkDirectory = layout.buildDirectory.dir("opencv-android-sdk-$openCvVersion")
+
+val downloadOpenCvSdk by tasks.registering {
+    group = "rapidocr"
+    description = "Downloads and verifies the official OpenCV $openCvVersion Android SDK."
+    inputs.file(openCvSdkProvenanceFile)
+    outputs.file(openCvSdkArchive)
+    doLast {
+        val expected = openCvSdkUpstream["archiveSha256"] as String
+        if (!openCvSdkArchive.isFile || !openCvSdkArchive.sha256String().equals(expected, ignoreCase = true)) {
+            val url = openCvSdkUpstream["archive"] as String
+            val partial = File(openCvSdkArchive.path + ".part")
+            openCvSdkArchive.parentFile.mkdirs()
+            logger.lifecycle("Downloading OpenCV $openCvVersion Android SDK: $url")
+            URI(url).toURL().openStream().use { input -> partial.outputStream().use { output -> input.copyTo(output) } }
+            val actual = partial.sha256String()
+            if (!actual.equals(expected, ignoreCase = true)) {
+                partial.delete()
+                throw GradleException("SHA-256 mismatch for $url: expected=$expected actual=$actual")
+            }
+            openCvSdkArchive.delete()
+            check(partial.renameTo(openCvSdkArchive)) { "Unable to move ${partial.path} to ${openCvSdkArchive.path}" }
+        }
+    }
+}
+
+val extractOpenCvSdk by tasks.registering(Sync::class) {
+    group = "rapidocr"
+    description = "Extracts and verifies the static OpenCV $openCvVersion libraries for libRapidOcr.so."
+    dependsOn(downloadOpenCvSdk)
+    inputs.file(openCvSdkProvenanceFile)
+    from({ zipTree(openCvSdkArchive) }) {
+        include(
+            "OpenCV-android-sdk/sdk/native/jni/**",
+            "OpenCV-android-sdk/sdk/native/staticlibs/**",
+            "OpenCV-android-sdk/sdk/native/3rdparty/**",
+            // Only for the SDK's CMake export check; libRapidOcr.so never links or ships it.
+            "OpenCV-android-sdk/sdk/native/libs/**",
+        )
+        // Keep sdk/native: the SDK's CMake exports locate libraries relative to that layout.
+        eachFile { relativePath = RelativePath(true, *relativePath.segments.drop(1).toTypedArray()) }
+        includeEmptyDirs = false
+    }
+    into(openCvSdkDirectory)
+    doLast {
+        val nativeDir = openCvSdkDirectory.get().dir("sdk/native").asFile
+        rapidOcrAbis.forEach { abi ->
+            openCvSdkStaticLibraries.getValue(abi).forEach { (relative, expected) ->
+                val actual = nativeDir.resolve(relative).takeIf(File::isFile)?.sha256String()
+                if (!expected.equals(actual, ignoreCase = true)) {
+                    throw GradleException("OpenCV static library mismatch for $abi/$relative: expected=$expected actual=$actual")
+                }
+            }
+        }
+    }
 }
 
 tasks.configureEach {
     if (name == "preBuild" || name.startsWith("configureCMake") || name.startsWith("buildCMake")) {
-        dependsOn(extractOnnxRuntimeNative, extractOpenCvNative)
+        dependsOn(extractOnnxRuntimeNative, extractOpenCvSdk)
     }
 }
 
@@ -198,7 +264,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                arguments += "-DOPENCV_NATIVE_DIR=${openCvNativeDirectory.get().asFile.invariantSeparatorsPath}"
+                arguments += "-DOPENCV_SDK_NATIVE_DIR=${openCvSdkDirectory.get().dir("sdk/native").asFile.invariantSeparatorsPath}"
                 arguments += "-DONNXRUNTIME_NATIVE_DIR=${onnxRuntimeNativeDirectory.get().asFile.invariantSeparatorsPath}"
                 arguments += "-DANDROID_STL=c++_shared"
                 abiFilters += rapidOcrAbis

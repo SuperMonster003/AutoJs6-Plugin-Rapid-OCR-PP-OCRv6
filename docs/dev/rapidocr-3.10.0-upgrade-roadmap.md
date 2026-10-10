@@ -18,7 +18,7 @@
 | RapidOCR 模型来源 | v3.9.2 (提交 `095232a4`) | `libs/rapidocr/models.provenance.json` |
 | 打包模型 | `PP-OCRv6_det_small.onnx`, `PP-OCRv6_rec_small.onnx`, `ch_ppocr_mobile_v2.0_cls_mobile.onnx`, `ppocrv6_dict.txt` | `libs/rapidocr/build.gradle.kts` |
 | ONNX Runtime | Maven `onnxruntime-android` 1.21.1 (Paddle v4 / v5 / v6 与 Rapid v3 同版本) | `version.properties`, 兄弟仓库 |
-| OpenCV | 4.8.0 共享运行库 (TBB, NDK r28c donor) | `libs/opencv-native-4.8.0.provenance.json` |
+| OpenCV | 4.8.0 官方 Android SDK 静态库, 私有链接 (TBB); 2026-10-10 前为共享运行库 (NDK r28c donor) | `libs/opencv-android-sdk-4.8.0.provenance.json` |
 | NDK / CMake | 28.2.13676358 / 3.22.1 | `version.properties` |
 | 共享 Gradle 插件 | platform-versions / native-alignment 1.9.0 | `settings.gradle.kts` |
 | ABI | arm64-v8a, armeabi-v7a, x86, x86_64, universal | `app/build.gradle.kts` |

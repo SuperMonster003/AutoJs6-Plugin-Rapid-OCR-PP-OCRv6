@@ -6,9 +6,10 @@
   "changelog_label_dependency": "Dependencia",
   "$data": {
     "v1.0.6": {
-      "released_date": "2026/10/05",
+      "released_date": "2026/10/10",
       "dependency": [
-        "Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.10.0 y fijada la versión en `version.properties`"
+        "Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.10.0 y fijada la versión en `version.properties`",
+        "Reemplazado el runtime compartido de OpenCV 4.8.0 por las bibliotecas estáticas de OpenCV Android SDK 4.8.0"
       ],
       "hint": [
         "Los modelos de detección y reconocimiento PP-OCRv6 Small, el modelo de clasificación auxiliar y el diccionario tienen hashes SHA-256 idénticos en ambas versiones; se actualiza la procedencia sin cambiar el comportamiento del reconocimiento"
@@ -22,7 +23,8 @@
         "Los iconos de información de la aplicación de Android comparten las imágenes y los fondos claros y oscuros de Icon Studio, conservando las imágenes transparentes del centro de plugins y las opciones del lanzador",
         "La inicialización del modelo verifica que los recursos se lean por completo y que el diccionario de reconocimiento coincida con las clases de salida del modelo",
         "El APK incluye los textos completos de licencia y las atribuciones de los modelos PP-OCRv6, ONNX Runtime, OpenCV y otros componentes de terceros (`assets/licenses/`)",
-        "Las instrucciones del plugin describen la cobertura multilingüe de PP-OCRv6 Small y su licencia"
+        "Las instrucciones del plugin describen la cobertura multilingüe de PP-OCRv6 Small y su licencia",
+        "OpenCV se enlaza de forma estática y privada y solo se exportan los métodos JNI; el APK ya no incluye libopencv_java4.so, es más pequeño y las aplicaciones empaquetadas pueden usarlo junto con otra versión de OpenCV"
       ]
     },
     "v1.0.5": {

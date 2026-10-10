@@ -6,9 +6,10 @@
   "changelog_label_dependency": "의존성",
   "$data": {
     "v1.0.6": {
-      "released_date": "2026/10/05",
+      "released_date": "2026/10/10",
       "dependency": [
-        "RapidOCR 모델 소스를 v3.9.1에서 v3.10.0으로 업그레이드하고 `version.properties`에서 모델 버전을 고정"
+        "RapidOCR 모델 소스를 v3.9.1에서 v3.10.0으로 업그레이드하고 `version.properties`에서 모델 버전을 고정",
+        "OpenCV 4.8.0 공유 런타임을 OpenCV Android SDK 4.8.0 정적 라이브러리로 교체"
       ],
       "hint": [
         "PP-OCRv6 Small 감지 모델, 인식 모델, 보조 분류 모델 및 사전의 SHA-256은 두 버전에서 동일함. 이번 변경은 모델 출처 기록을 갱신하며 인식 동작은 유지됨"
@@ -22,7 +23,8 @@
         "Android 앱 정보 아이콘에 Icon Studio의 그림과 밝은 배경 및 어두운 배경을 사용하고 플러그인 센터의 투명 그림과 기존 런처 옵션을 유지",
         "모델 초기화 시 자산을 완전히 읽었는지, 인식 사전이 모델 출력 클래스 수와 일치하는지 검증",
         "PP-OCRv6 모델, ONNX Runtime, OpenCV 등 서드파티 구성 요소의 라이선스 전문과 저작자 표시를 APK에 포함(`assets/licenses/`)",
-        "플러그인 안내에 PP-OCRv6 Small의 다국어 인식 범위와 라이선스 정보 추가"
+        "플러그인 안내에 PP-OCRv6 Small의 다국어 인식 범위와 라이선스 정보 추가",
+        "OpenCV를 비공개 정적 링크로 변경하고 JNI 메서드만 내보냄. APK에 libopencv_java4.so가 더 이상 포함되지 않아 크기가 줄었으며, 패키징된 앱에서 다른 버전의 OpenCV와 함께 사용 가능"
       ]
     },
     "v1.0.5": {

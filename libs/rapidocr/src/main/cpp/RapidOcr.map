@@ -1,0 +1,9 @@
+/* The JNI entry points are the only public symbols of libRapidOcr.so. */
+{
+  global:
+    JNI_OnLoad;
+    JNI_OnUnload;
+    Java_*;
+  local:
+    *;
+};

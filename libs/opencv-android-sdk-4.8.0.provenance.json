@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "component": "OpenCV",
+  "opencvVersion": "4.8.0",
+  "upstream": {
+    "repository": "https://github.com/opencv/opencv",
+    "tag": "4.8.0",
+    "commit": "f9a59f2592993d3dcc080e495f4f5e02dd8ec7ef",
+    "archive": "https://github.com/opencv/opencv/releases/download/4.8.0/opencv-4.8.0-android-sdk.zip",
+    "archiveSize": 198100303,
+    "archiveSha256": "e415d976549be7aa56a909cedb7d9b5b7fd24dbdd0eabee94de0f004c52ddc7c"
+  },
+  "linkage": "static",
+  "modules": [
+    "core",
+    "imgproc"
+  ],
+  "parallelBackend": "TBB from the SDK; no OpenMP runtime",
+  "symbolVisibility": "hidden; only JNI entry points are exported",
+  "compilers": [
+    "Android (4751641 based on r328903) clang version 7.0.2 (https://android.googlesource.com/toolchain/clang 003100370607242ddd5815e4a043907ea9004281) (https://android.googlesource.com/toolchain/llvm 1d739ffb0366421d383e04ff80ec2ee591315116) (based on LLVM 7.0.2svn)"
+  ],
+  "staticLibraries": {
+    "arm64-v8a": {
+      "3rdparty/libs/arm64-v8a/libcpufeatures.a": "2a2a1fd330879b857850763f8baf413959a0a670f25e434f24dfa28107893d3a",
+      "3rdparty/libs/arm64-v8a/libittnotify.a": "1ff3616532cd4427a5a5938a62d4ea93ace3246941b4ef76a497854e508750b2",
+      "3rdparty/libs/arm64-v8a/libtbb.a": "3f9383c71f42a676cafe2a7007d1f50233f79c7a8ed223c2895a1b4102cc6f34",
+      "3rdparty/libs/arm64-v8a/libtegra_hal.a": "2e9e180bf1ecfc782fec2d37fdfa85612d4af43a3441f22fed4a05396a31d32c",
+      "staticlibs/arm64-v8a/libopencv_core.a": "d05d45768ff8d3394851cd9de54a4525b139e918c47c61d6964790394049dd6e",
+      "staticlibs/arm64-v8a/libopencv_imgproc.a": "c089b7e076a0936cd8fa9366afd94c9c9cba8e0648fbf5ab918f68b690f49764"
+    },
+    "armeabi-v7a": {
+      "3rdparty/libs/armeabi-v7a/libcpufeatures.a": "9866ea08e783b5aac9e6c3f0923d867afae9a6490231516106607b63a2e58300",
+      "3rdparty/libs/armeabi-v7a/libittnotify.a": "347a01468b94eeb1f776c67c4fe821a10b202df637a2b64035c26b690848bbb8",
+      "3rdparty/libs/armeabi-v7a/libtbb.a": "88dc21f2531eb4f35916e5ca6f3d806c7175952371f5627dc0e62ffff2487667",
+      "3rdparty/libs/armeabi-v7a/libtegra_hal.a": "18b69abba3d6aa0b59c9cf8f61d3b695c692498f971ed8c438218c47f4cb1b7d",
+      "staticlibs/armeabi-v7a/libopencv_core.a": "14caec64dd0a203343a034bbfe3186ea7488a8fd6ec79fcee638e25a7b067b0d",
+      "staticlibs/armeabi-v7a/libopencv_imgproc.a": "843eb9aa844ab96aae18f2cfedf83a4f7e4c6f7c492bd34a143cce432565b4bc"
+    },
+    "x86": {
+      "3rdparty/libs/x86/libcpufeatures.a": "dc742d9d2040354664fea1730443ea256450e10f6ec95dcf0cb2cf83b596b009",
+      "3rdparty/libs/x86/libippicv.a": "38544ec3abe5f7ecaa13eeb6b47d56ba5b0e35dd7ac312c686f6b080f78b8344",
+      "3rdparty/libs/x86/libippiw.a": "5e9e2feec005d99ec93c03e07bf68ecde0c14a6e19841f970f2eaa4be926d84e",
+      "3rdparty/libs/x86/libittnotify.a": "5099a7cebe6eca45bd3adcc517f3a733a97474e67d2b2b12218300d870ad0698",
+      "3rdparty/libs/x86/libtbb.a": "9a6ad3448e8a3e7e6483f12b35f0b4d14788a27b64e4e47eb46b45316a5cdfea",
+      "staticlibs/x86/libopencv_core.a": "e391a1f6a3f8190b9d6ff5714287b42c2ea1ceb243d613f74376d13c226ee512",
+      "staticlibs/x86/libopencv_imgproc.a": "5926d949c12106b76a48bdf7a706269c1f1d1aa10193702fbd4125cb351d82a0"
+    },
+    "x86_64": {
+      "3rdparty/libs/x86_64/libcpufeatures.a": "ea19845e6c95e2b7d9eadfbc8e2e539d502211b5b9c32caeb94988d76d137995",
+      "3rdparty/libs/x86_64/libittnotify.a": "377f3737e3fb74f30bb414e7e4ebe096e11b91e64970cdbbd8e219dfec18581e",
+      "3rdparty/libs/x86_64/libtbb.a": "2341986d8a6fcdb3ac915d87782bdf85e96a411044ebc39ac311e34ea574233b",
+      "staticlibs/x86_64/libopencv_core.a": "1c4b273c32bca07b0c06469040c6d37a9dc862f8bbe615c226e90ac89cf3a285",
+      "staticlibs/x86_64/libopencv_imgproc.a": "7a2a00ee0a356ce8b30653c71b2501a3f326d04a720a570a0f86b8a37779d12b"
+    }
+  }
+}

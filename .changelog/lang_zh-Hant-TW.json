@@ -6,9 +6,10 @@
   "changelog_label_dependency": "相依性",
   "$data": {
     "v1.0.6": {
-      "released_date": "2026/10/05",
+      "released_date": "2026/10/10",
       "dependency": [
-        "RapidOCR 模型來源版本從 v3.9.1 升級至 v3.10.0, 並在 `version.properties` 中統一鎖定模型版本"
+        "RapidOCR 模型來源版本從 v3.9.1 升級至 v3.10.0, 並在 `version.properties` 中統一鎖定模型版本",
+        "以 OpenCV Android SDK 4.8.0 靜態函式庫取代 OpenCV 4.8.0 共用執行階段函式庫"
       ],
       "hint": [
         "PP-OCRv6 Small 偵測模型, 辨識模型, 輔助分類模型和字典在兩個版本中的 SHA-256 均一致; 本次更新模型來源紀錄, 辨識行為保持不變"
@@ -22,7 +23,8 @@
         "Android 系統應用程式資訊圖示與圖示工作台共用圖稿及明暗底色, 保留外掛程式中心透明圖稿與現有啟動器選項",
         "模型初始化時驗證資產是否完整讀取, 以及辨識字典與模型輸出類別數是否一致",
         "APK 內附帶 PP-OCRv6 模型, ONNX Runtime, OpenCV 等第三方元件的授權全文與署名 (`assets/licenses/`)",
-        "外掛說明補充 PP-OCRv6 Small 的多語言辨識範圍及授權資訊"
+        "外掛說明補充 PP-OCRv6 Small 的多語言辨識範圍及授權資訊",
+        "OpenCV 改為私有靜態連結, 只匯出 JNI 方法, APK 不再附帶 libopencv_java4.so 且體積更小, 打包的應用程式中可與其他版本的 OpenCV 同時使用"
       ]
     },
     "v1.0.5": {

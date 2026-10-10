@@ -35,7 +35,7 @@ The C++ detection, angle classification and recognition pipeline (`libRapidOcr.s
 
 ## OpenCV 4.8.0 (Apache License 2.0) and statically linked components
 
-`libopencv_java4.so` is byte-identical to the AutoJs6 OpenCV plugin payload recorded in `libs/opencv-native-4.8.0.provenance.json`. Its license and attribution texts are in `opencv-4.8.0/`. They cover OpenCV and the statically linked ADE, Android cpufeatures, Carotene (ARM ABIs), FlatBuffers, Intel IPP and IPP IW (x86 ABIs), Intel ITT, libjpeg-turbo, OpenEXR, OpenJPEG, libpng, libtiff, libwebp, Protocol Buffers, quirc, SoftFloat, Intel TBB 2020.2 and the Torch importer.
+`libRapidOcr.so` statically links the core and imgproc libraries of the official OpenCV 4.8.0 Android SDK (<https://github.com/opencv/opencv/releases/tag/4.8.0>, commit f9a59f2592993d3dcc080e495f4f5e02dd8ec7ef) recorded in `libs/opencv-android-sdk-4.8.0.provenance.json`, together with Intel TBB 2020.2, Android cpufeatures, Intel ITT, Carotene (ARM ABIs) and Intel IPP ICV / IW (x86). The license and attribution texts in `opencv-4.8.0/` cover OpenCV and these components, plus the other components of the OpenCV 4.8.0 distribution.
 
 ## Clipper 6.4.2 (Boost Software License 1.0)
 

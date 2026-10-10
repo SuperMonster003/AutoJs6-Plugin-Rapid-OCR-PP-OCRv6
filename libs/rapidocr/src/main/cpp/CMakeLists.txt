@@ -20,18 +20,23 @@ set(OnnxRuntime_LIBS onnxruntime)
 set(OnnxRuntime_INCLUDE_DIRS "${ONNXRUNTIME_NATIVE_DIR}/headers")
 include_directories(${OnnxRuntime_INCLUDE_DIRS})
 
-# Share the verified OpenCV/TBB runtime; static OpenMP conflicts with embedded Paddle Lite.
-if (NOT DEFINED OPENCV_NATIVE_DIR)
-    message(FATAL_ERROR "OPENCV_NATIVE_DIR must point to the verified OpenCV AAR")
+# Private OpenCV: the core and imgproc static libraries of the official OpenCV Android SDK.
+# Its TBB backend avoids the OpenMP runtime that aborts next to Paddle Lite in user APKs, and
+# hidden symbols keep this copy invisible to any other OpenCV runtime loaded in the same process.
+if (NOT DEFINED OPENCV_SDK_NATIVE_DIR)
+    message(FATAL_ERROR "OPENCV_SDK_NATIVE_DIR must point to sdk/native of the verified OpenCV Android SDK")
 endif ()
-add_library(opencv_runtime SHARED IMPORTED)
-set_target_properties(opencv_runtime PROPERTIES
-    IMPORTED_LOCATION "${OPENCV_NATIVE_DIR}/jni/${ANDROID_ABI}/libopencv_java4.so"
-    INTERFACE_INCLUDE_DIRECTORIES "${OPENCV_NATIVE_DIR}/headers")
-set(OpenCV_LIBS opencv_runtime)
+set(OpenCV_DIR "${OPENCV_SDK_NATIVE_DIR}/jni")
+find_package(OpenCV REQUIRED COMPONENTS core imgproc)
+if (OpenCV_SHARED)
+    message(FATAL_ERROR "RapidOcr must link the static OpenCV libraries")
+endif ()
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer -fstrict-aliasing -ffast-math")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer -fstrict-aliasing -ffast-math")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility=hidden -fvisibility-inlines-hidden")
@@ -64,4 +69,12 @@ target_link_libraries(
         ${android-lib}
         jnigraphics)
 
-target_link_options(RapidOcr PRIVATE -Wl,-z,max-page-size=16384 -Wl,-z,common-page-size=16384)
+# Export only the JNI entry points; OpenCV, TBB and the other static archives stay local.
+set(RAPID_OCR_EXPORTS "${CMAKE_CURRENT_LIST_DIR}/RapidOcr.map")
+set_target_properties(RapidOcr PROPERTIES LINK_DEPENDS "${RAPID_OCR_EXPORTS}")
+target_link_options(RapidOcr PRIVATE
+        -Wl,--exclude-libs,ALL
+        -Wl,--gc-sections
+        "-Wl,--version-script=${RAPID_OCR_EXPORTS}"
+        -Wl,-z,max-page-size=16384
+        -Wl,-z,common-page-size=16384)

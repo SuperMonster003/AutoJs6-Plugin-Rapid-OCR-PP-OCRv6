@@ -6,7 +6,7 @@
 
 # v1.0.6
 
-###### 2026/10/05
+###### 2026/10/10
 
 * `Note` Les modèles de détection et de reconnaissance PP-OCRv6 Small, le modèle de classification auxiliaire et le dictionnaire ont des empreintes SHA-256 identiques dans les deux versions; seule la provenance est mise à jour, sans changement du comportement de reconnaissance
 * `Correctif` Le processus du plugin plantait lors de la reconnaissance d'images à haute profondeur de bits, comme les PNG 16 bits, qu'Android décode en RGBA_F16
@@ -16,7 +16,9 @@
 * `Amélioration` L'initialisation du modèle vérifie la lecture complète des ressources et la correspondance entre le dictionnaire de reconnaissance et les classes de sortie du modèle
 * `Amélioration` L'APK inclut les textes complets des licences et les attributions des modèles PP-OCRv6, d'ONNX Runtime, d'OpenCV et des autres composants tiers (`assets/licenses/`)
 * `Amélioration` Les instructions du plugin décrivent la couverture multilingue de PP-OCRv6 Small et sa licence
+* `Amélioration` OpenCV est lié de manière statique et privée et seules les méthodes JNI sont exportées; l'APK n'inclut plus libopencv_java4.so, il est plus léger et les applications empaquetées peuvent l'utiliser avec une autre version d'OpenCV
 * `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.10.0 et verrouillage de la version dans `version.properties`
+* `Dépendance` Remplacement du runtime partagé OpenCV 4.8.0 par les bibliothèques statiques du SDK Android OpenCV 4.8.0
 
 # v1.0.5
 
