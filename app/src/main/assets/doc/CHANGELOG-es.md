@@ -14,7 +14,7 @@
 * `Mejora` Los iconos del centro de plugins usan los tamaños, posiciones, imágenes claras y oscuras y fondos circulares ajustados en Icon Studio, conservando fuentes y parámetros reproducibles
 * `Mejora` Los iconos de información de la aplicación de Android comparten las imágenes y los fondos claros y oscuros de Icon Studio, conservando las imágenes transparentes del centro de plugins y las opciones del lanzador
 * `Mejora` La inicialización del modelo verifica que los recursos se lean por completo y que el diccionario de reconocimiento coincida con las clases de salida del modelo
-* `Dependencia` Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.9.2 y fijada la versión en `version.properties`
+* `Dependencia` Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.10.0 y fijada la versión en `version.properties`
 
 # v1.0.5
 

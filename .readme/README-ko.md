@@ -123,7 +123,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
-빌드 과정에서 ModelScope의 RapidOCR v3.9.2에서 다음 4개 자산을 다운로드하고 검증:
+빌드 과정에서 ModelScope의 RapidOCR v3.10.0에서 다음 4개 자산을 다운로드하고 검증:
 
 - `PP-OCRv6_det_small.onnx`: PP-OCRv6 Small 문자 감지 모델.
 - `PP-OCRv6_rec_small.onnx`: PP-OCRv6 Small 문자 인식 모델.
@@ -146,7 +146,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `개선` 플러그인 센터 아이콘에 Icon Studio에서 조정한 크기, 위치, 밝은 이미지와 어두운 이미지 및 원형 배경을 적용하고 재생성 가능한 원본과 매개변수를 유지
 * `개선` Android 앱 정보 아이콘에 Icon Studio의 그림과 밝은 배경 및 어두운 배경을 사용하고 플러그인 센터의 투명 그림과 기존 런처 옵션을 유지
 * `개선` 모델 초기화 시 자산을 완전히 읽었는지, 인식 사전이 모델 출력 클래스 수와 일치하는지 검증
-* `의존성` RapidOCR 모델 소스를 v3.9.1에서 v3.9.2로 업그레이드하고 `version.properties`에서 모델 버전을 고정
+* `의존성` RapidOCR 모델 소스를 v3.9.1에서 v3.10.0으로 업그레이드하고 `version.properties`에서 모델 버전을 고정
 
 # v1.0.5
 

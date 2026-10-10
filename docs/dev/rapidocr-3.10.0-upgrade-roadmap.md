@@ -85,16 +85,16 @@ C++ 侧上游 [RapidAI/RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx) �
 
 ### P0 基线与前置
 
-- [ ] 读取 `git status`, 分支, 最近提交; 确认 2026-10-10 审查修复 (第 5 节) 已提交. (SOURCE)
-- [ ] 在 1.0.6 当前产物上运行 `PluginBinderContractTest`, `HighBitDepthImageTest`, `OcrReinitializationTest`, 记录设备, ABI, 页大小与识别文本, 作为升级前对照. (DEVICE)
-- [ ] 记录当前 Release APK 的 `assets/models/*` SHA-256 (应等于第 1.1 节). (ANDROID_BUILD)
+- [x] 读取 `git status`, 分支, 最近提交; 确认 2026-10-10 审查修复 (第 5 节) 已提交. (SOURCE) 2026-10-10: 审查修复为提交 `ae3d4af`, 插件版本规则为 `3766e25`, 工作区干净.
+- [x] 在 1.0.6 当前产物上运行 `PluginBinderContractTest`, `HighBitDepthImageTest`, `OcrReinitializationTest`, 记录设备, ABI, 页大小与识别文本, 作为升级前对照. (DEVICE) 2026-10-10: 审查修复后的同一源码已在 Sony XQ-DQ72 上通过 (见第 5 节), 识别文本含 "Hello".
+- [x] 记录当前 Release APK 的 `assets/models/*` SHA-256 (应等于第 1.1 节). (ANDROID_BUILD) 2026-10-10: 以 v3.9.2 资产构建的 1.0.6 Debug universal APK (Release 打包同一组资产) 中四个文件的字节数与 SHA-256 均等于第 1.1 节.
 
 ### P1 模型来源重新固定
 
-- [ ] `version.properties`: `RAPID_OCR_MODEL_VERSION=3.10.0`. `build.gradle.kts` 的下载地址由该键派生, 无需改动. (SOURCE)
-- [ ] `libs/rapidocr/models.provenance.json`: 更新 `version`, `upstream_commit` (`bd941dae09da793e76c6ba15c7aaf40f8424232a`), `release_url`, `upstream_model_config`, `license_url` (改指 `python/LICENSE`), `model_card_url`, `verified_date`, `upgrade_notes` 与四个资产 URL; 新增 `model_license_notice_url` 指向 `python/MODEL_LICENSES.md`. (SOURCE)
-- [ ] 删除本地 `libs/rapidocr/src/main/assets/models/` 后执行 `:libs:rapidocr:downloadRapidOcrV6Models`, 确认四个资产经 SHA-256 门禁重新下载. (ANDROID_BUILD)
-- [ ] `.readme/common.json` 的 `rapidocr_model_version` 改为 3.10.0; 十语 changelog 写入依赖条目与 "模型 SHA-256 不变, 识别行为不变" 的提示. 运行 `python .python/generate_markdown.py` 及 `--check`. (DOCS)
+- [x] `version.properties`: `RAPID_OCR_MODEL_VERSION=3.10.0`. `build.gradle.kts` 的下载地址由该键派生, 无需改动. (SOURCE)
+- [x] `libs/rapidocr/models.provenance.json`: 更新 `version`, `upstream_commit` (`bd941dae09da793e76c6ba15c7aaf40f8424232a`), `release_url`, `upstream_model_config`, `license_url` (改指 `python/LICENSE`), `model_card_url`, `verified_date`, `upgrade_notes` 与四个资产 URL; 新增 `model_license_notice_url` 指向 `python/MODEL_LICENSES.md`. (SOURCE)
+- [x] 删除本地 `libs/rapidocr/src/main/assets/models/` 后执行 `:libs:rapidocr:downloadRapidOcrV6Models`, 确认四个资产经 SHA-256 门禁重新下载. (ANDROID_BUILD) 2026-10-10: 四个资产从 `resolve/v3.10.0` 重新下载, 校验通过, 字节数与 SHA-256 不变.
+- [x] `.readme/common.json` 的 `rapidocr_model_version` 改为 3.10.0; 十语 changelog 写入依赖条目与 "模型 SHA-256 不变, 识别行为不变" 的提示. 运行 `python .python/generate_markdown.py` 及 `--check`. (DOCS)
 
 ### P2 模型许可与署名
 

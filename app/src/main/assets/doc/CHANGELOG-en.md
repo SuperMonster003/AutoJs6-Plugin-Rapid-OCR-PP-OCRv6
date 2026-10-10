@@ -14,7 +14,7 @@
 * `Improvement` Plugin Center icons use the sizes, positions, light and dark artwork, and circular backgrounds adjusted in Icon Studio, retaining reproducible sources and parameters
 * `Improvement` Android App info icons share Icon Studio artwork and light/dark backgrounds while preserving transparent Plugin Center artwork and existing launcher choices
 * `Improvement` Model initialization verifies that assets are read completely and that the recognition dictionary matches the model output classes
-* `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.9.2 and pin the model version in `version.properties`
+* `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.10.0 and pin the model version in `version.properties`
 
 # v1.0.5
 

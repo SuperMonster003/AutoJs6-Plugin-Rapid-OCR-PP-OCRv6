@@ -123,7 +123,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
-ビルド時に ModelScope の RapidOCR v3.9.2 から次の 4 つのアセットをダウンロードして検証:
+ビルド時に ModelScope の RapidOCR v3.10.0 から次の 4 つのアセットをダウンロードして検証:
 
 - `PP-OCRv6_det_small.onnx`: PP-OCRv6 Small 文字検出モデル.
 - `PP-OCRv6_rec_small.onnx`: PP-OCRv6 Small 文字認識モデル.
@@ -146,7 +146,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `改善` プラグインセンターのアイコンに Icon Studio で調整したサイズ, 位置, 明暗の図稿と円形背景を適用し, 再生成可能な原稿とパラメーターを保持
 * `改善` Android のアプリ情報アイコンに Icon Studio と共通の図案と明暗の背景色を使用し, プラグインセンターの透明な図案と既存のランチャー設定を維持
 * `改善` モデル初期化時に, アセットが完全に読み込まれたことと認識辞書がモデルの出力クラス数と一致することを検証
-* `依存関係` RapidOCR モデルの取得元を v3.9.1 から v3.9.2 に更新し, `version.properties` でモデルのバージョンを固定
+* `依存関係` RapidOCR モデルの取得元を v3.9.1 から v3.10.0 に更新し, `version.properties` でモデルのバージョンを固定
 
 # v1.0.5
 

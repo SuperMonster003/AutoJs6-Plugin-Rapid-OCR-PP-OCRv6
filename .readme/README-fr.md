@@ -123,7 +123,7 @@ L'implémentation actuelle du plugin lit les options de reconnaissance suivantes
 
 ******
 
-La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v3.9.2 sur ModelScope:
+La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v3.10.0 sur ModelScope:
 
 - `PP-OCRv6_det_small.onnx`: Modèle de détection de texte PP-OCRv6 Small.
 - `PP-OCRv6_rec_small.onnx`: Modèle de reconnaissance de texte PP-OCRv6 Small.
@@ -146,7 +146,7 @@ La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v
 * `Amélioration` Les icônes du centre de plugins utilisent les tailles, positions, images claires et sombres et fonds circulaires réglés dans Icon Studio, avec les sources et paramètres permettant de les reproduire
 * `Amélioration` Les icônes des informations d'application Android utilisent les illustrations et les fonds clairs et sombres d'Icon Studio, en conservant les images transparentes du centre de plugins et les choix du lanceur
 * `Amélioration` L'initialisation du modèle vérifie la lecture complète des ressources et la correspondance entre le dictionnaire de reconnaissance et les classes de sortie du modèle
-* `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.9.2 et verrouillage de la version dans `version.properties`
+* `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.10.0 et verrouillage de la version dans `version.properties`
 
 # v1.0.5
 

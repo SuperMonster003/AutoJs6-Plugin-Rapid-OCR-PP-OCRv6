@@ -123,7 +123,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 
 ******
 
-构建过程从 ModelScope 的 RapidOCR v3.9.2 下载并校验以下 4 个资产:
+构建过程从 ModelScope 的 RapidOCR v3.10.0 下载并校验以下 4 个资产:
 
 - `PP-OCRv6_det_small.onnx`: PP-OCRv6 Small 文本检测模型.
 - `PP-OCRv6_rec_small.onnx`: PP-OCRv6 Small 文本识别模型.
@@ -146,7 +146,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `优化` 插件中心图标采用统一工作台调整后的尺寸, 位置, 亮暗图稿与圆形底色, 保留可重建原稿和参数
 * `优化` Android 系统应用信息图标与图标工作台共用图稿和亮暗底色, 保留插件中心透明图稿及现有启动器选项
 * `优化` 模型初始化时校验资产是否完整读取, 以及识别字典与模型输出类别数是否一致
-* `依赖` 升级 RapidOCR 模型来源版本 3.9.1 -> 3.9.2
+* `依赖` 升级 RapidOCR 模型来源版本 3.9.1 -> 3.10.0
 
 # v1.0.5
 
