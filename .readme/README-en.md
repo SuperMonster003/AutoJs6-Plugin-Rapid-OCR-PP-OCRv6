@@ -42,7 +42,7 @@ The current README.md supports the following languages:
 
 ******
 
-The AutoJs6 Rapid OCR PP-OCRv6 Small Plugin provides text detection and recognition based on RapidOCR, ONNX Runtime, and OpenCV Mobile. It can return recognized text, confidence values, and text bounds.
+The AutoJs6 Rapid OCR PP-OCRv6 Small Plugin provides text detection and recognition based on RapidOCR, ONNX Runtime, and OpenCV. It can return recognized text, confidence values, and text bounds.
 
 ******
 
@@ -56,7 +56,7 @@ The AutoJs6 Rapid OCR PP-OCRv6 Small Plugin provides text detection and recognit
 - Supports encoded image input and raw `ARGB_8888` image buffer input.
 - Provides `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, and `universal` APKs.
 - Plugin metadata, usage instructions, README, and CHANGELOG are localized for Spanish, French, Russian, Arabic, Japanese, Korean, English, Simplified Chinese, Hong Kong Traditional Chinese, and Taiwan Traditional Chinese.
-- Built on RapidOCR, ONNX Runtime, and OpenCV Mobile.
+- Built on RapidOCR, ONNX Runtime, and OpenCV.
 - Images may contain at most 16777216 pixels; raw image buffers are limited to 64 MiB
 - Encoded image input is limited to 64 MiB and supports file descriptors and pipes
 
@@ -141,8 +141,11 @@ The build downloads and verifies the following 4 assets from RapidOCR v3.9.2 on 
 ###### 2026/10/05
 
 * `Hint` The PP-OCRv6 Small detection and recognition models, auxiliary classification model, and dictionary have identical SHA-256 hashes in both versions; this updates model provenance without changing recognition behavior
+* `Fix` The plugin process crashed when recognizing high bit depth images such as 16-bit PNG files, which Android decodes as RGBA_F16
+* `Fix` Native failures during model loading or inference aborted the plugin process; they are now reported to the host as errors
 * `Improvement` Plugin Center icons use the sizes, positions, light and dark artwork, and circular backgrounds adjusted in Icon Studio, retaining reproducible sources and parameters
 * `Improvement` Android App info icons share Icon Studio artwork and light/dark backgrounds while preserving transparent Plugin Center artwork and existing launcher choices
+* `Improvement` Model initialization verifies that assets are read completely and that the recognition dictionary matches the model output classes
 * `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.9.2 and pin the model version in `version.properties`
 
 # v1.0.5
@@ -185,7 +188,7 @@ Release build:
 .\gradlew.bat :app:assembleRelease
 ```
 
-Build parameters come from `version.properties`; the current minimum SDK is 24 and target SDK is 36. `preBuild` downloads and verifies model assets, then synchronizes ONNX Runtime native libraries.
+Build parameters come from `version.properties`; the current minimum SDK is 24 and target SDK is 37. `preBuild` downloads and verifies model assets, then synchronizes ONNX Runtime native libraries.
 
 ******
 
@@ -215,7 +218,7 @@ libs/rapidocr/src/main/assets/models/
 - RapidOCR project: https://github.com/RapidAI/RapidOCR
 - ModelScope model assets: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
-- OpenCV Mobile: https://github.com/nihui/opencv-mobile
+- OpenCV: https://github.com/opencv/opencv
 
 
 [16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

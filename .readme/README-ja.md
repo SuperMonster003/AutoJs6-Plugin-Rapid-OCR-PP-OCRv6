@@ -42,7 +42,7 @@
 
 ******
 
-AutoJs6 Rapid OCR PP-OCRv6 Small プラグインは RapidOCR, ONNX Runtime, OpenCV Mobile を使用した文字検出と文字認識を AutoJs6 に提供します. 認識した文字列, 信頼度, 文字領域を返すことができます.
+AutoJs6 Rapid OCR PP-OCRv6 Small プラグインは RapidOCR, ONNX Runtime, OpenCV を使用した文字検出と文字認識を AutoJs6 に提供します. 認識した文字列, 信頼度, 文字領域を返すことができます.
 
 ******
 
@@ -56,7 +56,7 @@ AutoJs6 Rapid OCR PP-OCRv6 Small プラグインは RapidOCR, ONNX Runtime, Open
 - エンコード画像入力と未エンコードの `ARGB_8888` 画像バッファ入力に対応します.
 - `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, `universal` APK を提供します.
 - プラグイン情報, 使用説明, README, CHANGELOG はスペイン語/フランス語/ロシア語/アラビア語/日本語/韓国語/英語/簡体字中国語/香港繁体字中国語/台湾繁体字中国語に対応します.
-- RapidOCR, ONNX Runtime, OpenCV Mobile を基盤として構築されています.
+- RapidOCR, ONNX Runtime, OpenCV を基盤として構築されています.
 - 画像は最大 16777216 ピクセルまで, 生画像バッファーは 64 MiB まで対応
 - エンコード済み画像は 64 MiB まで対応し ファイル記述子とパイプを使用できます
 
@@ -141,8 +141,11 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ###### 2026/10/05
 
 * `ヒント` PP-OCRv6 Small の検出モデル, 認識モデル, 補助分類モデル, 辞書の SHA-256 は両バージョンで同一. 今回はモデルの取得元情報を更新し, 認識動作は維持
+* `修正` 16 ビット PNG などの高ビット深度画像 (Android では RGBA_F16 としてデコード) の認識時にプラグインプロセスがクラッシュする問題
+* `修正` モデルの読み込みや推論でネイティブ例外が発生するとプラグインプロセスが異常終了する問題 (ホストにエラーとして返すように変更)
 * `改善` プラグインセンターのアイコンに Icon Studio で調整したサイズ, 位置, 明暗の図稿と円形背景を適用し, 再生成可能な原稿とパラメーターを保持
 * `改善` Android のアプリ情報アイコンに Icon Studio と共通の図案と明暗の背景色を使用し, プラグインセンターの透明な図案と既存のランチャー設定を維持
+* `改善` モデル初期化時に, アセットが完全に読み込まれたことと認識辞書がモデルの出力クラス数と一致することを検証
 * `依存関係` RapidOCR モデルの取得元を v3.9.1 から v3.9.2 に更新し, `version.properties` でモデルのバージョンを固定
 
 # v1.0.5
@@ -185,7 +188,7 @@ Release ビルド:
 .\gradlew.bat :app:assembleRelease
 ```
 
-ビルドパラメータは `version.properties` から取得します. 現在の最小 SDK は 24, ターゲット SDK は 36 です. `preBuild` はモデルアセットをダウンロードして検証し, ONNX Runtime ネイティブライブラリを同期します.
+ビルドパラメータは `version.properties` から取得します. 現在の最小 SDK は 24, ターゲット SDK は 37 です. `preBuild` はモデルアセットをダウンロードして検証し, ONNX Runtime ネイティブライブラリを同期します.
 
 ******
 
@@ -215,7 +218,7 @@ libs/rapidocr/src/main/assets/models/
 - RapidOCR プロジェクト: https://github.com/RapidAI/RapidOCR
 - ModelScope モデルアセット: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
-- OpenCV Mobile: https://github.com/nihui/opencv-mobile
+- OpenCV: https://github.com/opencv/opencv
 
 
 [16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

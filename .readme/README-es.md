@@ -42,7 +42,7 @@ El README.md actual admite los siguientes idiomas:
 
 ******
 
-El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimiento de texto basados en RapidOCR, ONNX Runtime y OpenCV Mobile. Puede devolver texto reconocido, valores de confianza y límites de texto.
+El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimiento de texto basados en RapidOCR, ONNX Runtime y OpenCV. Puede devolver texto reconocido, valores de confianza y límites de texto.
 
 ******
 
@@ -56,7 +56,7 @@ El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimien
 - Admite imágenes codificadas y búferes de imagen `ARGB_8888` sin codificar.
 - Proporciona APK para `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` y `universal`.
 - Los metadatos del plugin, las instrucciones de uso, el README y el CHANGELOG están localizados en español, francés, ruso, árabe, japonés, coreano, inglés, chino simplificado, chino tradicional de Hong Kong y chino tradicional de Taiwán.
-- Construido sobre RapidOCR, ONNX Runtime y OpenCV Mobile.
+- Construido sobre RapidOCR, ONNX Runtime y OpenCV.
 - Las imágenes admiten hasta 16777216 píxeles; los búferes de imagen sin procesar se limitan a 64 MiB
 - La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías
 
@@ -141,8 +141,11 @@ La compilación descarga y verifica los siguientes 4 recursos de RapidOCR v3.9.2
 ###### 2026/10/05
 
 * `Aviso` Los modelos de detección y reconocimiento PP-OCRv6 Small, el modelo de clasificación auxiliar y el diccionario tienen hashes SHA-256 idénticos en ambas versiones; se actualiza la procedencia sin cambiar el comportamiento del reconocimiento
+* `Corrección` El proceso del plugin se cerraba al reconocer imágenes de alta profundidad de bits, como PNG de 16 bits, que Android decodifica como RGBA_F16
+* `Corrección` Los fallos nativos durante la carga del modelo o la inferencia cerraban el proceso del plugin; ahora se devuelven al host como errores
 * `Mejora` Los iconos del centro de plugins usan los tamaños, posiciones, imágenes claras y oscuras y fondos circulares ajustados en Icon Studio, conservando fuentes y parámetros reproducibles
 * `Mejora` Los iconos de información de la aplicación de Android comparten las imágenes y los fondos claros y oscuros de Icon Studio, conservando las imágenes transparentes del centro de plugins y las opciones del lanzador
+* `Mejora` La inicialización del modelo verifica que los recursos se lean por completo y que el diccionario de reconocimiento coincida con las clases de salida del modelo
 * `Dependencia` Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.9.2 y fijada la versión en `version.properties`
 
 # v1.0.5
@@ -185,7 +188,7 @@ Compilación Release:
 .\gradlew.bat :app:assembleRelease
 ```
 
-Los parámetros de compilación provienen de `version.properties`; el SDK mínimo actual es 24 y el SDK de destino es 36. `preBuild` descarga y verifica los recursos de modelos, y luego sincroniza las bibliotecas nativas de ONNX Runtime.
+Los parámetros de compilación provienen de `version.properties`; el SDK mínimo actual es 24 y el SDK de destino es 37. `preBuild` descarga y verifica los recursos de modelos, y luego sincroniza las bibliotecas nativas de ONNX Runtime.
 
 ******
 
@@ -215,7 +218,7 @@ libs/rapidocr/src/main/assets/models/
 - Proyecto RapidOCR: https://github.com/RapidAI/RapidOCR
 - Recursos de modelos de ModelScope: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
-- OpenCV Mobile: https://github.com/nihui/opencv-mobile
+- OpenCV: https://github.com/opencv/opencv
 
 
 [16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

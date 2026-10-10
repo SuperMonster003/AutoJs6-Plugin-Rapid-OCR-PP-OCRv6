@@ -26,7 +26,8 @@ public class OcrEngine {
                 "models/ppocrv6_dict.txt"
         );
         if (!ret) {
-            throw new IllegalArgumentException();
+            // The native layer normally throws first with the failing asset or stage.
+            throw new IllegalStateException("Rapid OCR model initialization failed");
         }
     }
 

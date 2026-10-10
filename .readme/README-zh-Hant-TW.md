@@ -42,7 +42,7 @@
 
 ******
 
-AutoJs6 Rapid OCR PP-OCRv6 Small 外掛為 AutoJs6 提供基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 的文字偵測與辨識能力. 外掛可傳回辨識文字, 信賴度和文字邊界框.
+AutoJs6 Rapid OCR PP-OCRv6 Small 外掛為 AutoJs6 提供基於 RapidOCR, ONNX Runtime 和 OpenCV 的文字偵測與辨識能力. 外掛可傳回辨識文字, 信賴度和文字邊界框.
 
 ******
 
@@ -56,7 +56,7 @@ AutoJs6 Rapid OCR PP-OCRv6 Small 外掛為 AutoJs6 提供基於 RapidOCR, ONNX R
 - 支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.
 - 提供 `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` 和 `universal` APK.
 - 外掛資訊, 使用說明, README 和 CHANGELOG 支援西班牙文/法文/俄文/阿拉伯文/日文/韓文/英文/簡體中文/香港繁體/台灣繁體.
-- 基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 建置.
+- 基於 RapidOCR, ONNX Runtime 和 OpenCV 建置.
 - 影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB
 - 編碼影像最大為 64 MiB, 支援檔案描述元和管線傳輸
 
@@ -141,8 +141,11 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ###### 2026/10/05
 
 * `提示` PP-OCRv6 Small 偵測模型, 辨識模型, 輔助分類模型和字典在兩個版本中的 SHA-256 均一致; 本次更新模型來源紀錄, 辨識行為保持不變
+* `修正` 辨識 16 位元 PNG 等高位元深度影像時外掛行程當機的問題 (Android 會將其解碼為 RGBA_F16)
+* `修正` 模型載入或推論發生原生例外時外掛行程直接當機的問題, 現改為向宿主回傳錯誤
 * `改善` 外掛程式中心圖示採用統一工作台調整後的尺寸, 位置, 明暗圖稿與圓形底色, 保留可重建原稿和參數
 * `改善` Android 系統應用程式資訊圖示與圖示工作台共用圖稿及明暗底色, 保留外掛程式中心透明圖稿與現有啟動器選項
+* `改善` 模型初始化時驗證資產是否完整讀取, 以及辨識字典與模型輸出類別數是否一致
 * `相依性` RapidOCR 模型來源版本從 v3.9.1 升級至 v3.9.2, 並在 `version.properties` 中統一鎖定模型版本
 
 # v1.0.5
@@ -185,7 +188,7 @@ Release 建置:
 .\gradlew.bat :app:assembleRelease
 ```
 
-建置參數來自 `version.properties`, 目前最低 SDK 為 24, 目標 SDK 為 36. `preBuild` 會下載並驗證模型資產, 同時同步 ONNX Runtime 原生程式庫.
+建置參數來自 `version.properties`, 目前最低 SDK 為 24, 目標 SDK 為 37. `preBuild` 會下載並驗證模型資產, 同時同步 ONNX Runtime 原生程式庫.
 
 ******
 
@@ -215,7 +218,7 @@ libs/rapidocr/src/main/assets/models/
 - RapidOCR 專案: https://github.com/RapidAI/RapidOCR
 - ModelScope 模型資產: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
-- OpenCV Mobile: https://github.com/nihui/opencv-mobile
+- OpenCV: https://github.com/opencv/opencv
 
 
 [16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

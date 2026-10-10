@@ -3,6 +3,7 @@ package com.benjaminwan.ocrlibrary;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -111,6 +112,24 @@ public class OcrReinitializationTest {
             workers.shutdownNow();
             assertTrue(workers.awaitTermination(120, TimeUnit.SECONDS));
         }
+    }
+
+    @Test
+    public void unreadableBitmapIsReportedWithoutAbortingTheProcess() {
+        OcrEngine engine = newEngine();
+        Bitmap unsupported = Bitmap.createBitmap(64, 32, Bitmap.Config.ALPHA_8);
+        Bitmap output = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        try {
+            engine.detect(unsupported, output, 1024);
+            fail("ALPHA_8 input must be rejected");
+        } catch (IllegalArgumentException expected) {
+            assertTrue(expected.getMessage(), expected.getMessage().contains("RGBA_8888"));
+        } finally {
+            unsupported.recycle();
+            output.recycle();
+        }
+        // The shared native engine must remain usable after the rejected call.
+        assertTrue(recognize(engine).contains("Hello"));
     }
 
     private static void await(CountDownLatch latch) {

@@ -13,9 +13,14 @@
       "hint": [
         "The PP-OCRv6 Small detection and recognition models, auxiliary classification model, and dictionary have identical SHA-256 hashes in both versions; this updates model provenance without changing recognition behavior"
       ],
+      "fix": [
+        "The plugin process crashed when recognizing high bit depth images such as 16-bit PNG files, which Android decodes as RGBA_F16",
+        "Native failures during model loading or inference aborted the plugin process; they are now reported to the host as errors"
+      ],
       "improvement": [
         "Plugin Center icons use the sizes, positions, light and dark artwork, and circular backgrounds adjusted in Icon Studio, retaining reproducible sources and parameters",
-        "Android App info icons share Icon Studio artwork and light/dark backgrounds while preserving transparent Plugin Center artwork and existing launcher choices"
+        "Android App info icons share Icon Studio artwork and light/dark backgrounds while preserving transparent Plugin Center artwork and existing launcher choices",
+        "Model initialization verifies that assets are read completely and that the recognition dictionary matches the model output classes"
       ]
     },
     "v1.0.5": {

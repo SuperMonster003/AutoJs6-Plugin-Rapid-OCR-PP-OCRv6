@@ -2,6 +2,9 @@
 #include "OcrUtils.h"
 #include <numeric>
 #include <cstdlib>
+#include <sstream>
+#include <stdexcept>
+#include <string>
 
 CrnnNet::CrnnNet() {}
 
@@ -45,12 +48,20 @@ char *readKeysFromAssets(AAssetManager *mgr, const std::string &keysName) {
     off_t bufferSize = AAsset_getLength(asset);
     //LOGI("file size : %d", bufferSize);
     buffer = (char *) malloc(bufferSize + 1);
-    buffer[bufferSize] = 0;
+    if (buffer == NULL) {
+        AAsset_close(asset);
+        LOGE(" %s", "cannot allocate the dictionary buffer");
+        return NULL;
+    }
     int numBytesRead = AAsset_read(asset, buffer, bufferSize);
-    //LOGI("readKeysFromAssets: %d", numBytesRead);
     /*关闭文件*/
     AAsset_close(asset);
-    //LOGI("readKeysFromAssets exit...");
+    if (numBytesRead != bufferSize) {
+        LOGE("dictionary read %d of %ld bytes", numBytesRead, (long) bufferSize);
+        free(buffer);
+        return NULL;
+    }
+    buffer[bufferSize] = 0;
     return buffer;
 }
 
@@ -58,28 +69,41 @@ void CrnnNet::initModel(AAssetManager *mgr, const std::string &name, const std::
     int dbModelDataLength = 0;
     std::unique_ptr<void, decltype(&std::free)> modelData(
             getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength), &std::free);
-    session = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
-                                            sessionOptions);
-    inputNamesPtr = getInputNames(session.get());
-    outputNamesPtr = getOutputNames(session.get());
-
-    // Replace the previous dictionary, including its CTC blank and trailing space.
-    keys.clear();
-    char *buffer = readKeysFromAssets(mgr, keysName);
-    if (buffer != NULL) {
-        std::istringstream inStr(buffer);
-        std::string line;
-        while (getline(inStr, line)) {
-            keys.emplace_back(line);
-        }
-        free(buffer);
-    } else {
-        LOGE(" txt file not found");
-        return;
+    if (modelData == nullptr || dbModelDataLength <= 0) {
+        throw std::runtime_error("cannot read model asset: " + name);
     }
-    keys.insert(keys.begin(),
-                "#"); // blank char for ctc
-    keys.emplace_back(" ");
+    auto newSession = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
+                                                     sessionOptions);
+    auto newInputNames = getInputNames(newSession.get());
+    auto newOutputNames = getOutputNames(newSession.get());
+
+    std::unique_ptr<char, decltype(&std::free)> buffer(readKeysFromAssets(mgr, keysName), &std::free);
+    if (buffer == nullptr) {
+        throw std::runtime_error("cannot read dictionary asset: " + keysName);
+    }
+    // The CTC blank comes first and the space class last.
+    std::vector<std::string> newKeys{"#"};
+    std::istringstream inStr(buffer.get());
+    std::string line;
+    while (getline(inStr, line)) {
+        newKeys.emplace_back(line);
+    }
+    newKeys.emplace_back(" ");
+    if (newKeys.size() <= 2) {
+        throw std::runtime_error("dictionary asset is empty: " + keysName);
+    }
+    // A mismatched dictionary silently shifts every decoded character.
+    std::vector<int64_t> outputShape = newSession->GetOutputTypeInfo(0).GetTensorTypeAndShapeInfo().GetShape();
+    if (!outputShape.empty() && outputShape.back() > 0 && outputShape.back() != (int64_t) newKeys.size()) {
+        throw std::runtime_error("dictionary " + keysName + " defines " + std::to_string(newKeys.size()) +
+                                 " classes, but model " + name + " outputs " + std::to_string(outputShape.back()));
+    }
+
+    // Keep the previous model and dictionary usable until the replacement is complete.
+    inputNamesPtr = std::move(newInputNames);
+    outputNamesPtr = std::move(newOutputNames);
+    keys = std::move(newKeys);
+    session = std::move(newSession);
     LOGI("keys size(%zu)", keys.size());
 }
 

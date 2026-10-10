@@ -5,7 +5,7 @@
   "h3_languages_with_ascii": "Idiomas (Languages)",
   "p_languages_all_supported_for_readme": "El README.md actual admite los siguientes idiomas",
   "h3_introduction": "Introducción",
-  "p_introduction": "El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimiento de texto basados en RapidOCR, ONNX Runtime y OpenCV Mobile. Puede devolver texto reconocido, valores de confianza y límites de texto.",
+  "p_introduction": "El plugin AutoJs6 Rapid OCR PP-OCRv6 Small proporciona detección y reconocimiento de texto basados en RapidOCR, ONNX Runtime y OpenCV. Puede devolver texto reconocido, valores de confianza y límites de texto.",
   "h3_functions": "Funciones",
   "features": [
     "Proporciona el servicio OCR compartido con el ID de plugin `{{ plugin_id }}`, el motor `{{ plugin_engine }}` y la variante `{{ plugin_variant }}`.",
@@ -14,7 +14,7 @@
     "Admite imágenes codificadas y búferes de imagen `ARGB_8888` sin codificar.",
     "Proporciona APK para `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` y `universal`.",
     "Los metadatos del plugin, las instrucciones de uso, el README y el CHANGELOG están localizados en español, francés, ruso, árabe, japonés, coreano, inglés, chino simplificado, chino tradicional de Hong Kong y chino tradicional de Taiwán.",
-    "Construido sobre RapidOCR, ONNX Runtime y OpenCV Mobile.",
+    "Construido sobre RapidOCR, ONNX Runtime y OpenCV.",
     "Las imágenes admiten hasta 16777216 píxeles; los búferes de imagen sin procesar se limitan a 64 MiB",
     "La imagen codificada admite hasta 64 MiB mediante descriptores de archivo y tuberías"
   ],
@@ -42,7 +42,7 @@
   "h5_for_more_release_history": "Para consultar más historial de versiones",
   "h3_build": "Compilación",
   "text_release_build": "Compilación Release",
-  "p_build_params": "Los parámetros de compilación provienen de `version.properties`; el SDK mínimo actual es 24 y el SDK de destino es 36. `preBuild` descarga y verifica los recursos de modelos, y luego sincroniza las bibliotecas nativas de ONNX Runtime",
+  "p_build_params": "Los parámetros de compilación provienen de `version.properties`; el SDK mínimo actual es 24 y el SDK de destino es 37. `preBuild` descarga y verifica los recursos de modelos, y luego sincroniza las bibliotecas nativas de ONNX Runtime",
   "h3_resource_layout": "Estructura de recursos",
   "p_resource_layout": "`strings.xml` contiene descripciones localizadas del plugin y `plugin_instruction.md` contiene instrucciones de uso mostradas por el host. Los archivos README y CHANGELOG se generan desde fuentes JSON mediante `.python/generate_markdown.py`. Solo se genera `README.md` en la raíz del repositorio y no se genera un `CHANGELOG.md` raíz",
   "h3_links": "Enlaces",
@@ -50,5 +50,5 @@
   "text_link_rapidocr": "Proyecto RapidOCR",
   "text_link_modelscope": "Recursos de modelos de ModelScope",
   "text_link_onnx_runtime": "ONNX Runtime",
-  "text_link_opencv_mobile": "OpenCV Mobile"
+  "text_link_opencv": "OpenCV"
 }

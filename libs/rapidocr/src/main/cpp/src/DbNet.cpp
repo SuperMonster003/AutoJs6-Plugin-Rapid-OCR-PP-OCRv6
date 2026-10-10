@@ -2,6 +2,7 @@
 #include "OcrUtils.h"
 #include <numeric>
 #include <cstdlib>
+#include <stdexcept>
 
 DbNet::DbNet() {}
 
@@ -32,10 +33,17 @@ void DbNet::initModel(AAssetManager *mgr, const std::string &name) {
     int dbModelDataLength = 0;
     std::unique_ptr<void, decltype(&std::free)> modelData(
             getModelDataFromAssets(mgr, name.c_str(), dbModelDataLength), &std::free);
-    session = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
-                                            sessionOptions);
-    inputNamesPtr = getInputNames(session.get());
-    outputNamesPtr = getOutputNames(session.get());
+    if (modelData == nullptr || dbModelDataLength <= 0) {
+        throw std::runtime_error("cannot read model asset: " + name);
+    }
+    auto newSession = std::make_unique<Ort::Session>(ortEnv, modelData.get(), dbModelDataLength,
+                                                     sessionOptions);
+    auto newInputNames = getInputNames(newSession.get());
+    auto newOutputNames = getOutputNames(newSession.get());
+    // Keep the previous model usable until the replacement is complete.
+    inputNamesPtr = std::move(newInputNames);
+    outputNamesPtr = std::move(newOutputNames);
+    session = std::move(newSession);
 }
 
 std::vector<TextBox> findRsBoxes(const cv::Mat &predMat, const cv::Mat &dilateMat, ScaleParam &s,

@@ -34,12 +34,14 @@ val versionMap = mapOf(
     "CMAKE" to props["RAPID_OCR/CMAKE"],
     "ONNX_RUNTIME" to onnxRuntimeReleaseVersion,
     "ONNX_RUNTIME_ASSET" to onnxRuntimeAssetVersion,
+    "OPENCV" to props["RAPID_OCR/OPENCV"],
 )
 
 val nameMap = mapOf(
     "PROJECT" to extensions.extraProperties["projectName"] as String,
     "ONNX_RUNTIME" to "Onnx Runtime",
     "ONNX_RUNTIME_ASSET" to "Onnx Runtime Asset",
+    "OPENCV" to "OpenCV",
     "NDK" to "NDK",
     "CMAKE" to "Cmake",
 )
@@ -140,7 +142,7 @@ tasks.named("preBuild").configure {
 utils.configureLibraryLifecycleHooks(
     project,
     nameMap["PROJECT"] as String,
-    listOf("OPENCV_MOBILE", "OPENCV_MOBILE_LABEL", "ONNX_RUNTIME", "ONNX_RUNTIME_ASSET", "NDK", "CMAKE")
+    listOf("OPENCV", "ONNX_RUNTIME", "ONNX_RUNTIME_ASSET", "NDK", "CMAKE")
         .map { "${nameMap[it] ?: it}: ${versionMap[it]}" },
     emptyList(),
     "isCleanupRapidOcr",

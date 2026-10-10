@@ -5,7 +5,7 @@
   "h3_languages_with_ascii": "語言 (Languages)",
   "p_languages_all_supported_for_readme": "目前 README.md 支援以下語言",
   "h3_introduction": "簡介",
-  "p_introduction": "AutoJs6 Rapid OCR PP-OCRv6 Small 插件為 AutoJs6 提供基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 的文字檢測與識別能力. 插件可返回識別文本, 置信度和文本邊界框.",
+  "p_introduction": "AutoJs6 Rapid OCR PP-OCRv6 Small 插件為 AutoJs6 提供基於 RapidOCR, ONNX Runtime 和 OpenCV 的文字檢測與識別能力. 插件可返回識別文本, 置信度和文本邊界框.",
   "h3_functions": "功能",
   "features": [
     "提供共享 OCR 插件服務, 插件 ID 為 `{{ plugin_id }}`, 引擎為 `{{ plugin_engine }}`, 變體為 `{{ plugin_variant }}`.",
@@ -14,7 +14,7 @@
     "支援編碼圖片輸入和原始 `ARGB_8888` 圖片緩衝區輸入.",
     "提供 `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` 和 `universal` APK.",
     "插件資訊, 使用說明, README 和 CHANGELOG 支援西班牙語/法語/俄語/阿拉伯語/日語/韓語/英語/簡體中文/香港繁體/台灣繁體.",
-    "基於 RapidOCR, ONNX Runtime 和 OpenCV Mobile 構建.",
+    "基於 RapidOCR, ONNX Runtime 和 OpenCV 構建.",
     "影像最多包含 16777216 個像素, 原始影像緩衝區上限為 64 MiB",
     "編碼圖像最大為 64 MiB, 支援檔案描述符和管道傳輸"
   ],
@@ -42,7 +42,7 @@
   "h5_for_more_release_history": "更多發行歷史可參閱",
   "h3_build": "構建",
   "text_release_build": "Release 構建",
-  "p_build_params": "構建參數來自 `version.properties`, 目前最低 SDK 為 24, 目標 SDK 為 36. `preBuild` 會下載並校驗模型資產, 同時同步 ONNX Runtime 原生庫",
+  "p_build_params": "構建參數來自 `version.properties`, 目前最低 SDK 為 24, 目標 SDK 為 37. `preBuild` 會下載並校驗模型資產, 同時同步 ONNX Runtime 原生庫",
   "h3_resource_layout": "資源結構",
   "p_resource_layout": "`strings.xml` 提供插件描述本地化, `plugin_instruction.md` 提供宿主側展示的使用說明. README 和 CHANGELOG 由 `.python/generate_markdown.py` 根據 JSON 源文件生成. 根目錄只生成 `README.md`, 不生成根目錄 `CHANGELOG.md`",
   "h3_links": "相關連結",
@@ -50,5 +50,5 @@
   "text_link_rapidocr": "RapidOCR 項目",
   "text_link_modelscope": "ModelScope 模型資產",
   "text_link_onnx_runtime": "ONNX Runtime",
-  "text_link_opencv_mobile": "OpenCV Mobile"
+  "text_link_opencv": "OpenCV"
 }

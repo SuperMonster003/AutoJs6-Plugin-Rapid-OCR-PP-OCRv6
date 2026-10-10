@@ -389,10 +389,17 @@ void *getModelDataFromAssets(AAssetManager *mgr, const char *modelName, int &siz
         return NULL;
     }
     off_t bufferSize = AAsset_getLength(asset);
-    void *modelData = malloc(bufferSize + 1);
-    size = AAsset_read(asset, modelData, bufferSize);
+    void *modelData = bufferSize > 0 ? malloc(bufferSize + 1) : NULL;
+    size = modelData == NULL ? -1 : AAsset_read(asset, modelData, bufferSize);
     AAsset_close(asset);
     LOGI("model=%s, numBytesRead=%d", modelName, size);
+    // A partial read must not reach ONNX Runtime as a truncated model.
+    if (modelData == NULL || size != bufferSize) {
+        LOGE("model=%s, expected %ld bytes", modelName, (long) bufferSize);
+        free(modelData);
+        size = 0;
+        return NULL;
+    }
     return modelData;
 }
 

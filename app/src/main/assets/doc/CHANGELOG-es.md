@@ -9,8 +9,11 @@
 ###### 2026/10/05
 
 * `Aviso` Los modelos de detección y reconocimiento PP-OCRv6 Small, el modelo de clasificación auxiliar y el diccionario tienen hashes SHA-256 idénticos en ambas versiones; se actualiza la procedencia sin cambiar el comportamiento del reconocimiento
+* `Corrección` El proceso del plugin se cerraba al reconocer imágenes de alta profundidad de bits, como PNG de 16 bits, que Android decodifica como RGBA_F16
+* `Corrección` Los fallos nativos durante la carga del modelo o la inferencia cerraban el proceso del plugin; ahora se devuelven al host como errores
 * `Mejora` Los iconos del centro de plugins usan los tamaños, posiciones, imágenes claras y oscuras y fondos circulares ajustados en Icon Studio, conservando fuentes y parámetros reproducibles
 * `Mejora` Los iconos de información de la aplicación de Android comparten las imágenes y los fondos claros y oscuros de Icon Studio, conservando las imágenes transparentes del centro de plugins y las opciones del lanzador
+* `Mejora` La inicialización del modelo verifica que los recursos se lean por completo y que el diccionario de reconocimiento coincida con las clases de salida del modelo
 * `Dependencia` Actualizada la fuente de los modelos RapidOCR de v3.9.1 a v3.9.2 y fijada la versión en `version.properties`
 
 # v1.0.5

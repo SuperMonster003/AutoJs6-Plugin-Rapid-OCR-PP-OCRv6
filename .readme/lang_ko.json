@@ -5,7 +5,7 @@
   "h3_languages_with_ascii": "언어 (Languages)",
   "p_languages_all_supported_for_readme": "현재 README.md는 다음 언어를 지원합니다",
   "h3_introduction": "소개",
-  "p_introduction": "AutoJs6 Rapid OCR PP-OCRv6 Small 플러그인은 RapidOCR, ONNX Runtime, OpenCV Mobile 기반의 문자 감지와 인식을 AutoJs6에 제공합니다. 인식된 문자, 신뢰도 값, 문자 경계를 반환할 수 있습니다.",
+  "p_introduction": "AutoJs6 Rapid OCR PP-OCRv6 Small 플러그인은 RapidOCR, ONNX Runtime, OpenCV 기반의 문자 감지와 인식을 AutoJs6에 제공합니다. 인식된 문자, 신뢰도 값, 문자 경계를 반환할 수 있습니다.",
   "h3_functions": "기능",
   "features": [
     "플러그인 ID `{{ plugin_id }}`, 엔진 `{{ plugin_engine }}`, 변형 `{{ plugin_variant }}`인 공유 OCR 플러그인 서비스를 제공합니다.",
@@ -14,7 +14,7 @@
     "인코딩된 이미지 입력과 원시 `ARGB_8888` 이미지 버퍼 입력을 지원합니다.",
     "`arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64`, `universal` APK를 제공합니다.",
     "플러그인 정보, 사용 설명, README, CHANGELOG는 스페인어/프랑스어/러시아어/아랍어/일본어/한국어/영어/중국어 간체/홍콩 중국어 번체/대만 중국어 번체로 제공됩니다.",
-    "RapidOCR, ONNX Runtime, OpenCV Mobile을 기반으로 빌드됩니다.",
+    "RapidOCR, ONNX Runtime, OpenCV을 기반으로 빌드됩니다.",
     "이미지는 최대 16777216픽셀, 원시 이미지 버퍼는 최대 64 MiB까지 지원",
     "인코딩된 이미지는 최대 64 MiB이며 파일 디스크립터와 파이프를 지원합니다"
   ],
@@ -42,7 +42,7 @@
   "h5_for_more_release_history": "더 많은 릴리스 기록",
   "h3_build": "빌드",
   "text_release_build": "Release 빌드",
-  "p_build_params": "빌드 매개변수는 `version.properties`에서 가져옵니다. 현재 최소 SDK는 24이고 대상 SDK는 36입니다. `preBuild`는 모델 자산을 다운로드하고 검증한 다음 ONNX Runtime 네이티브 라이브러리를 동기화합니다",
+  "p_build_params": "빌드 매개변수는 `version.properties`에서 가져옵니다. 현재 최소 SDK는 24이고 대상 SDK는 37입니다. `preBuild`는 모델 자산을 다운로드하고 검증한 다음 ONNX Runtime 네이티브 라이브러리를 동기화합니다",
   "h3_resource_layout": "리소스 구조",
   "p_resource_layout": "`strings.xml`에는 현지화된 플러그인 설명이 있고 `plugin_instruction.md`에는 호스트에 표시되는 사용 설명이 있습니다. README와 CHANGELOG는 `.python/generate_markdown.py`가 JSON 소스에서 생성합니다. 저장소 루트에는 `README.md`만 생성하며 루트 `CHANGELOG.md`는 생성하지 않습니다",
   "h3_links": "링크",
@@ -50,5 +50,5 @@
   "text_link_rapidocr": "RapidOCR 프로젝트",
   "text_link_modelscope": "ModelScope 모델 자산",
   "text_link_onnx_runtime": "ONNX Runtime",
-  "text_link_opencv_mobile": "OpenCV Mobile"
+  "text_link_opencv": "OpenCV"
 }

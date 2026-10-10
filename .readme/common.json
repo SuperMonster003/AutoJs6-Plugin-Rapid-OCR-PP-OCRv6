@@ -7,7 +7,7 @@
   "rapidocr_url": "https://github.com/RapidAI/RapidOCR",
   "modelscope_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR",
   "onnx_runtime_url": "https://onnxruntime.ai/",
-  "opencv_mobile_url": "https://github.com/nihui/opencv-mobile",
+  "opencv_url": "https://github.com/opencv/opencv",
   "plugin_action": "org.autojs.plugin.PADDLE_OCR",
   "plugin_engine": "rapid-ocr",
   "plugin_variant": "pp-ocrv6",

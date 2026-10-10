@@ -42,7 +42,7 @@
 
 ******
 
-يوفر مكون AutoJs6 Rapid OCR PP-OCRv6 Small الإضافي اكتشاف النص والتعرف عليه بالاعتماد على RapidOCR و ONNX Runtime و OpenCV Mobile. يمكنه إرجاع النص المتعرف عليه وقيم الثقة وحدود النص.
+يوفر مكون AutoJs6 Rapid OCR PP-OCRv6 Small الإضافي اكتشاف النص والتعرف عليه بالاعتماد على RapidOCR و ONNX Runtime و OpenCV. يمكنه إرجاع النص المتعرف عليه وقيم الثقة وحدود النص.
 
 ******
 
@@ -56,7 +56,7 @@
 - يدعم إدخال الصور المشفرة وإدخال مخزن صور `ARGB_8888` الخام.
 - يوفر حزم APK للأنواع `arm64-v8a` و `armeabi-v7a` و `x86` و `x86_64` و `universal`.
 - تمت ترجمة بيانات المكون الإضافي وتعليمات الاستخدام و README و CHANGELOG إلى الإسبانية والفرنسية والروسية والعربية واليابانية والكورية والإنجليزية والصينية المبسطة والصينية التقليدية في هونغ كونغ والصينية التقليدية في تايوان.
-- مبني على RapidOCR و ONNX Runtime و OpenCV Mobile.
+- مبني على RapidOCR و ONNX Runtime و OpenCV.
 - تقبل الصور حتى 16777216 بكسل, ويقتصر حجم مخزن الصورة الخام على 64 MiB
 - يقتصر حجم الصورة المشفرة على 64 MiB مع دعم واصفات الملفات والأنابيب
 
@@ -141,8 +141,11 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ###### 2026/10/05
 
 * `تلميح` بصمات SHA-256 لنماذج الكشف والتعرف PP-OCRv6 Small ونموذج التصنيف المساعد والقاموس متطابقة في الإصدارين; يتم تحديث معلومات المصدر دون تغيير سلوك التعرف
+* `إصلاح` تعطل عملية المكون الإضافي عند التعرف على الصور ذات عمق البت العالي مثل ملفات PNG بعمق 16 بت التي يفك Android ترميزها بتنسيق RGBA_F16
+* `إصلاح` كانت الأخطاء الأصلية أثناء تحميل النموذج أو الاستدلال تنهي عملية المكون الإضافي, وأصبحت تُعاد الآن إلى المضيف كأخطاء
 * `تحسين` تستخدم أيقونات مركز الملحقات الأحجام والمواضع والصور الفاتحة والداكنة والخلفيات الدائرية المعدلة في Icon Studio مع الاحتفاظ بالمصادر والمعلمات لإعادة إنتاجها
 * `تحسين` تستخدم أيقونات معلومات التطبيق في Android صور Icon Studio وخلفياته الفاتحة والداكنة مع الحفاظ على الصور الشفافة في مركز الملحقات وخيارات المشغل الحالية
+* `تحسين` تتحقق تهيئة النموذج من قراءة الأصول بالكامل ومن تطابق قاموس التعرف مع عدد فئات مخرجات النموذج
 * `تبعية` ترقية مصدر نماذج RapidOCR من v3.9.1 إلى v3.9.2 وتثبيت إصدار النماذج في `version.properties`
 
 # v1.0.5
@@ -185,7 +188,7 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 .\gradlew.bat :app:assembleRelease
 ```
 
-تأتي معلمات البناء من `version.properties`; الحد الأدنى الحالي لحزمة SDK هو 24 وحزمة SDK المستهدفة هي 36. تقوم `preBuild` بتنزيل أصول النماذج والتحقق منها ثم مزامنة مكتبات ONNX Runtime الأصلية.
+تأتي معلمات البناء من `version.properties`; الحد الأدنى الحالي لحزمة SDK هو 24 وحزمة SDK المستهدفة هي 37. تقوم `preBuild` بتنزيل أصول النماذج والتحقق منها ثم مزامنة مكتبات ONNX Runtime الأصلية.
 
 ******
 
@@ -215,7 +218,7 @@ libs/rapidocr/src/main/assets/models/
 - مشروع RapidOCR: https://github.com/RapidAI/RapidOCR
 - أصول نماذج ModelScope: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
-- OpenCV Mobile: https://github.com/nihui/opencv-mobile
+- OpenCV: https://github.com/opencv/opencv
 
 
 [16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)

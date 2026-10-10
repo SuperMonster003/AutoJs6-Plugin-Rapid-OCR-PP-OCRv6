@@ -229,7 +229,7 @@ public class OcrService extends Service {
                 if (bitmap == null) {
                     throw new IllegalStateException("decode image failed");
                 }
-                return bitmap;
+                return toArgb8888(bitmap);
             } catch (IOException e) {
                 throw new IllegalStateException("decode image failed", e);
             }
@@ -237,6 +237,22 @@ public class OcrService extends Service {
         } finally {
             closeQuietly(descriptor);
         }
+    }
+
+    /**
+     * BitmapFactory keeps high bit depth images as RGBA_F16 or RGBA_1010102 even when
+     * ARGB_8888 is preferred, but the native engine reads RGBA_8888 pixels only.
+     */
+    static Bitmap toArgb8888(Bitmap bitmap) {
+        if (bitmap.getConfig() == Bitmap.Config.ARGB_8888) {
+            return bitmap;
+        }
+        Bitmap converted = bitmap.copy(Bitmap.Config.ARGB_8888, false);
+        bitmap.recycle();
+        if (converted == null) {
+            throw new IllegalStateException("convert image to ARGB_8888 failed");
+        }
+        return converted;
     }
 
     private void recycleDecodedBitmap(Bitmap bitmap) {

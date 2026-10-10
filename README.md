@@ -42,7 +42,7 @@
 
 ******
 
-AutoJs6 Rapid OCR PP-OCRv6 Small 插件为 AutoJs6 提供基于 RapidOCR, ONNX Runtime 和 OpenCV Mobile 的文字检测与识别能力. 插件可返回识别文本, 置信度和文本边界框.
+AutoJs6 Rapid OCR PP-OCRv6 Small 插件为 AutoJs6 提供基于 RapidOCR, ONNX Runtime 和 OpenCV 的文字检测与识别能力. 插件可返回识别文本, 置信度和文本边界框.
 
 ******
 
@@ -56,7 +56,7 @@ AutoJs6 Rapid OCR PP-OCRv6 Small 插件为 AutoJs6 提供基于 RapidOCR, ONNX R
 - 支持编码图片输入和原始 `ARGB_8888` 图片缓冲区输入.
 - 提供 `arm64-v8a`, `armeabi-v7a`, `x86`, `x86_64` 和 `universal` APK.
 - 插件信息, 使用说明, README 和 CHANGELOG 支持西班牙语/法语/俄语/阿拉伯语/日语/韩语/英语/简体中文/香港繁体/台湾繁体.
-- 基于 RapidOCR, ONNX Runtime 和 OpenCV Mobile 构建.
+- 基于 RapidOCR, ONNX Runtime 和 OpenCV 构建.
 - 图像最多包含 16777216 个像素, 原始图像缓冲区上限为 64 MiB
 - 编码图像最大为 64 MiB, 支持文件描述符和管道传输
 
@@ -141,8 +141,11 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 ###### 2026/10/05
 
 * `提示` PP-OCRv6 Small 检测模型, 识别模型, 辅助分类模型和字典在两个版本中的 SHA-256 均一致; 本次更新模型来源记录, 识别行为保持不变
+* `修复` 识别 16 位 PNG 等高位深图像时插件进程崩溃的问题 (Android 会将其解码为 RGBA_F16)
+* `修复` 模型加载或推理出现原生异常时插件进程直接崩溃的问题, 现改为向宿主返回错误
 * `优化` 插件中心图标采用统一工作台调整后的尺寸, 位置, 亮暗图稿与圆形底色, 保留可重建原稿和参数
 * `优化` Android 系统应用信息图标与图标工作台共用图稿和亮暗底色, 保留插件中心透明图稿及现有启动器选项
+* `优化` 模型初始化时校验资产是否完整读取, 以及识别字典与模型输出类别数是否一致
 * `依赖` 升级 RapidOCR 模型来源版本 3.9.1 -> 3.9.2
 
 # v1.0.5
@@ -185,7 +188,7 @@ Release 构建:
 .\gradlew.bat :app:assembleRelease
 ```
 
-构建参数来自 `version.properties`, 当前最低 SDK 为 24, 目标 SDK 为 36. `preBuild` 会下载并校验模型资产, 同时同步 ONNX Runtime 原生库.
+构建参数来自 `version.properties`, 当前最低 SDK 为 24, 目标 SDK 为 37. `preBuild` 会下载并校验模型资产, 同时同步 ONNX Runtime 原生库.
 
 ******
 
@@ -215,7 +218,7 @@ libs/rapidocr/src/main/assets/models/
 - RapidOCR 项目: https://github.com/RapidAI/RapidOCR
 - ModelScope 模型资产: https://www.modelscope.cn/models/RapidAI/RapidOCR
 - ONNX Runtime: https://onnxruntime.ai/
-- OpenCV Mobile: https://github.com/nihui/opencv-mobile
+- OpenCV: https://github.com/opencv/opencv
 
 
 [16 KB page alignment and build verification](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/docs/16kb.md)
