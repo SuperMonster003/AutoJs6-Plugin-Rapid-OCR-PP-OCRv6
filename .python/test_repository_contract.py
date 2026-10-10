@@ -59,7 +59,14 @@ class RepositoryContractTest(unittest.TestCase):
     def test_icon_and_public_build_platform(self):
         self.assertTrue((ROOT/"app/src/main/res/mipmap/ic_launcher.png").read_bytes().startswith(b"\x89PNG\r\n\x1a\n"))
         settings = (ROOT/"settings.gradle.kts").read_text(encoding="utf-8")
-        self.assertIn('version "1.8.3"', settings)
+        # Any published release is accepted; both shared plugins must move together.
+        versions = {
+            plugin: re.search(r'id\("io\.github\.supermonster003\.' + plugin + r'"\) version "(\d+\.\d+\.\d+)"', settings)
+            for plugin in ["autojs6-platform-versions", "autojs6-native-alignment"]
+        }
+        for plugin, match in versions.items():
+            self.assertIsNotNone(match, plugin + " must be resolved from a published release")
+        self.assertEqual(1, len({match.group(1) for match in versions.values()}), "Shared plugin versions differ")
         self.assertNotIn("autojs.buildPlugins.includeBuild", settings)
         name = re.search(r'rootProject.name\s*=\s*"([^"]+)"', settings).group(1)
         self.assertEqual(name.lower(), name)
