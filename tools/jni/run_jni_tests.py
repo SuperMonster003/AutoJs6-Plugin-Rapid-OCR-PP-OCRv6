@@ -1,12 +1,15 @@
 """Compile production JNI sources and run isolated ART tests without installing an APK.
 
-First build the native module (to prepare OpenCV/ONNX headers). Supply --serial,
+First build the native module (to extract the verified OpenCV SDK and ONNX headers).
+The test library links the private static OpenCV recorded in
+libs/opencv-android-sdk-<version>.provenance.json, like the production engine. Supply --serial,
 --sdk and --jdk. Tests use app_process with CheckJNI, without changing VM properties.
 --native-source and --baseline can probe a saved pre-fix Rapid source directory;
 run that baseline only on Android 8+ because it intentionally retains >512 refs.
 """
 
 import argparse
+import json
 import os
 from pathlib import Path
 import shlex
@@ -75,19 +78,22 @@ def main():
         parser.error('Native source directory does not exist: ' + str(native))
     sources = [HERE / 'jni_reference_test.cpp']
     flags = ['-DORT_API_MANUAL_INIT']
+    opencv_version = properties['RAPID_OCR_OPENCV_VERSION' if rapid else 'PADDLE_OCR_OPENCV_VERSION']
+    opencv = json.loads((ROOT / 'libs' / f'opencv-android-sdk-{opencv_version}.provenance.json').read_text(encoding='utf-8'))
+    module = ROOT / ('libs/rapidocr' if rapid else 'libs/paddleocr')
+    cv = module / f'build/opencv-android-sdk-{opencv_version}/sdk/native'
+    cv_libraries = [cv / relative for relative in sorted(opencv['staticLibraries'][abi])]
+    missing = [str(path) for path in cv_libraries if not path.is_file()]
+    if missing:
+        parser.error('Build the native module first; missing OpenCV static libraries: ' + ', '.join(missing))
     if rapid:
-        module = ROOT / 'libs/rapidocr'
-        cv = module / 'build/opencv-native'
-        includes = [native / 'include', cv / 'headers', module / 'build/onnxruntime-native/headers']
-        cv_library = cv / 'jni' / abi / 'libopencv_java4.so'
+        includes = [native / 'include', cv / 'jni/include', module / 'build/onnxruntime-native/headers']
         sources += [native / 'src/OcrResultUtils.cpp', native / 'src/OcrUtils.cpp']
         dto = module / 'src/main/java/com/benjaminwan/ocrlibrary'
         java_files += [HERE / 'JniResultTest.java', *[dto / (name + '.java') for name in ['Point', 'TextBlock', 'OcrResult']]]
         entrypoint = 'com.benjaminwan.ocrlibrary.JniResultTest'
     else:
-        cv = ROOT / 'libs/paddleocr/src/sdk/native'
         includes = [native, cv / 'jni/include']
-        cv_library = cv / 'libs' / abi / 'libopencv_java4.so'
         flags += ['-DTEST_PADDLE']
         entrypoint = 'org.autojs.ocr.jni.JniStringTest'
     runtime = toolchain / 'sysroot/usr/lib' / triple / 'libc++_shared.so'
@@ -98,7 +104,8 @@ def main():
                        '-fvisibility-inlines-hidden', '-Wl,--gc-sections', '-Wl,--no-undefined',
                        '-Wl,-z,max-page-size=16384', '-nostdlib++', *flags]
     compile_command += ['-I' + str(path) for path in includes]
-    compile_command += [*sources, cv_library, runtime, '-llog', '-landroid', '-ljnigraphics', '-o', library]
+    compile_command += [*sources, '-Wl,--start-group', *cv_libraries, '-Wl,--end-group', '-Wl,--exclude-libs,ALL',
+                        runtime, '-llog', '-landroid', '-ljnigraphics', '-lz', '-ldl', '-lm', '-o', library]
     run(compile_command)
 
     android_jar = sdk / 'platforms/android-36/android.jar'
@@ -118,7 +125,7 @@ def main():
     remote = '/data/local/tmp/autojs-jni-' + uuid.uuid4().hex
     try:
         run([adb, '-s', args.serial, 'shell', 'mkdir', '-p', remote])
-        for file in [library, jar, cv_library, runtime]:
+        for file in [library, jar, runtime]:
             run([adb, '-s', args.serial, 'push', file, remote + '/' + file.name])
         command = ['env', 'CLASSPATH=' + remote + '/tests.jar', 'LD_LIBRARY_PATH=' + remote,
                    'app_process', '-Xcheck:jni', '/system/bin', entrypoint, remote + '/' + library.name]
