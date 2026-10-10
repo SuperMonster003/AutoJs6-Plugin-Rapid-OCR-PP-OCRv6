@@ -4,7 +4,7 @@
 
 起草日期: 2026-10-10. 上游目标: [RapidAI/RapidOCR v3.10.0](https://github.com/RapidAI/RapidOCR/releases/tag/v3.10.0) (2026-10-08 发布, 标签指向提交 `bd941dae09da793e76c6ba15c7aaf40f8424232a`).
 
-执行状态 (2026-10-10): P0, P1, P2, P4 已完成, P6 除 16 KB 设备外已完成; P3 为可选评估, 未执行; P5 为需舰队协调的独立轨道, 未启动. 提交依次为 `3766e25`, `ae3d4af`, `884ec94`, `87fc834` 及本次状态更新.
+执行状态 (2026-10-10): P0, P1, P2, P4 已完成, P6 除 16 KB 设备外已完成; P3 为可选评估, 未执行; P5 为需舰队协调的独立轨道, 未启动. 提交依次为 `52edbeb`, `633235e`, `7691310`, `664e461` 及本次状态更新.
 
 证据标签沿用宿主 `docs/dev/page-size-16kb-roadmap.md`: SOURCE (源码 / 上游文件核对), ANDROID_BUILD (Gradle 构建与单元测试), ELF (APK 原生库对齐门禁), DEVICE (4 KB 真机), DEVICE-16K (原生 16 KB 真机或 ps16k 模拟器), DOCS (README / changelog / 来源记录).
 
@@ -87,7 +87,7 @@ C++ 侧上游 [RapidAI/RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx) �
 
 ### P0 基线与前置
 
-- [x] 读取 `git status`, 分支, 最近提交; 确认 2026-10-10 审查修复 (第 5 节) 已提交. (SOURCE) 2026-10-10: 审查修复为提交 `ae3d4af`, 插件版本规则为 `3766e25`, 工作区干净.
+- [x] 读取 `git status`, 分支, 最近提交; 确认 2026-10-10 审查修复 (第 5 节) 已提交. (SOURCE) 2026-10-10: 审查修复为提交 `633235e`, 插件版本规则为 `52edbeb`, 工作区干净.
 - [x] 在 1.0.6 当前产物上运行 `PluginBinderContractTest`, `HighBitDepthImageTest`, `OcrReinitializationTest`, 记录设备, ABI, 页大小与识别文本, 作为升级前对照. (DEVICE) 2026-10-10: 审查修复后的同一源码已在 Sony XQ-DQ72 上通过 (见第 5 节), 识别文本含 "Hello".
 - [x] 记录当前 Release APK 的 `assets/models/*` SHA-256 (应等于第 1.1 节). (ANDROID_BUILD) 2026-10-10: 以 v3.9.2 资产构建的 1.0.6 Debug universal APK (Release 打包同一组资产) 中四个文件的字节数与 SHA-256 均等于第 1.1 节.
 
