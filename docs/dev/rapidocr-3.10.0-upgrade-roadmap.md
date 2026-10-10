@@ -4,6 +4,8 @@
 
 起草日期: 2026-10-10. 上游目标: [RapidAI/RapidOCR v3.10.0](https://github.com/RapidAI/RapidOCR/releases/tag/v3.10.0) (2026-10-08 发布, 标签指向提交 `bd941dae09da793e76c6ba15c7aaf40f8424232a`).
 
+执行状态 (2026-10-10): P0, P1, P2, P4 已完成, P6 除 16 KB 设备外已完成; P3 为可选评估, 未执行; P5 为需舰队协调的独立轨道, 未启动. 提交依次为 `3766e25`, `ae3d4af`, `884ec94`, `87fc834` 及本次状态更新.
+
 证据标签沿用宿主 `docs/dev/page-size-16kb-roadmap.md`: SOURCE (源码 / 上游文件核对), ANDROID_BUILD (Gradle 构建与单元测试), ELF (APK 原生库对齐门禁), DEVICE (4 KB 真机), DEVICE-16K (原生 16 KB 真机或 ps16k 模拟器), DOCS (README / changelog / 来源记录).
 
 ---
@@ -127,10 +129,10 @@ Maven 最新为 1.31.0 (2026-10-09). 不在本次升级范围内执行, 只在�
 
 ### P6 验证与发布
 
-- [ ] 源码检查: `python .python/generate_markdown.py --check`, `python -m unittest discover -s .python -p "test_*.py"`, `python .python/generate_icon_studio.py --check`. (SOURCE)
-- [ ] 构建: `:app:assembleDebug :app:testDebugUnitTest`, `:app:assembleDebugAndroidTest :app:lintDebug`. (ANDROID_BUILD)
-- [ ] 设备: 4 KB arm64 真机运行全部 instrumentation (含管道输入与高位深 PNG); x86_64 ps16k 模拟器 (CI 矩阵); 原生 16 KB arm64 若可用则复验. 缺失项写入发布评估. (DEVICE; DEVICE-16K)
-- [ ] 发布: 提交前 `VERSION_BUILD = git rev-list --count HEAD + 1`; `:app:appendDigestToReleasedFiles` 归档全部 ABI 与 universal APK; 核对 `getInfo()` 的 ABI 清单与实际安装包一致. (ELF; ANDROID_BUILD)
+- [x] 源码检查: `python .python/generate_markdown.py --check`, `python -m unittest discover -s .python -p "test_*.py"`, `python .python/generate_icon_studio.py --check`. (SOURCE) 2026-10-10: 三项均通过, unittest 22 项 (含新增第三方声明同步检查).
+- [x] 构建: `:app:assembleDebug :app:testDebugUnitTest`, `:app:assembleDebugAndroidTest :app:lintDebug`. (ANDROID_BUILD) 2026-10-10: 通过; JVM 单元测试 16 / 16; lint 无错误 (仅既有警告).
+- [ ] 设备: 4 KB arm64 真机运行全部 instrumentation (含管道输入与高位深 PNG); x86_64 ps16k 模拟器 (CI 矩阵); 原生 16 KB arm64 若可用则复验. 缺失项写入发布评估. (DEVICE; DEVICE-16K) 2026-10-10 进度: Sony XQ-DQ72 (API 33, arm64, 4 KB) 上 app 与 libs 共 6 项 instrumentation 全部通过, 含管道输入与 16 位 PNG. x86_64 ps16k 模拟器与原生 16 KB arm64 未在本地执行, 留给 CI 矩阵与后续设备时段.
+- [x] 发布: 提交前 `VERSION_BUILD = git rev-list --count HEAD + 1`; `:app:appendDigestToReleasedFiles` 归档全部 ABI 与 universal APK; 核对 `getInfo()` 的 ABI 清单与实际安装包一致. (ELF; ANDROID_BUILD) 2026-10-10: `releases/v1.0.6/` 归档五个签名 APK (universal 与四个 ABI), versionCode 等于归档时 HEAD 的 `VERSION_BUILD` 加 4, `sourceDirty=false`, Release 原生对齐门禁通过; universal 包内模型哈希与第 1.1 节一致, 含 37 个许可文件. 未在设备上安装 Release 包; `getInfo()` ABI 清单由 Debug 安装包的 `PluginBinderContractTest` 覆盖.
 
 ---
 
