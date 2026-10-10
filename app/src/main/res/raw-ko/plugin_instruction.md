@@ -21,3 +21,11 @@
 
 - `maxSideLen` 은 `OcrOptions.detLongSize` 에 대응하며 감지에 사용할 이미지의 최대 변 길이를 제어합니다. 기본값은 1024 입니다.
 - `scoreThreshold` 는 `OcrOptions.scoreThreshold` 에 대응하며 허용할 최소 감지 점수를 제어합니다. 기본값은 0.5 입니다.
+
+## 언어
+
+- PP-OCRv6 Small은 단일 다국어 모델이며 언어 옵션 없이 중국어 간체, 중국어 번체, 영어, 일본어 및 여러 라틴 문자 언어를 인식합니다.
+
+## 라이선스
+
+- OCR 모델은 RapidOCR이 변환한 PaddleOCR 모델이며 Apache-2.0 라이선스를 따릅니다. 서드파티 라이선스 전문은 APK의 `assets/licenses/`에 포함되어 있습니다.

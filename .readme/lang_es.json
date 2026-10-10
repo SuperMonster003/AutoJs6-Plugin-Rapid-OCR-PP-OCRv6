@@ -38,6 +38,9 @@
     "`{{ model_asset_auxiliary }}`: Recurso de modelo auxiliar necesario durante la inicialización del motor.",
     "`{{ model_asset_dictionary }}`: Diccionario de reconocimiento PP-OCRv6."
   ],
+  "p_model_languages": "PP-OCRv6 Small es un modelo multilingüe que reconoce chino simplificado, chino tradicional, inglés, japonés y muchos idiomas de escritura latina (la tabla de enrutamiento original enumera 52 códigos de idioma). El plugin no tiene opción de idioma y no es necesario indicarlo",
+  "h3_license_attribution": "Licencia y atribución",
+  "p_license_attribution": "El código fuente del plugin se distribuye bajo MPL-2.0. Los modelos y el diccionario PP-OCRv6 incluidos son conversiones de RapidOCR de los modelos oficiales de PaddleOCR; los derechos de autor pertenecen a Baidu y a los titulares de derechos de PaddleOCR correspondientes, y se redistribuyen sin modificaciones bajo Apache-2.0. Los textos completos de las licencias y las atribuciones de ONNX Runtime (MIT), OpenCV (Apache-2.0) y otros componentes se incluyen en el APK en `assets/licenses/`; consulte [`THIRD_PARTY_NOTICES.md`]({{ third_party_notices_url }}). Los nombres se mencionan solo para indicar el origen y no implican respaldo",
   "h3_release_history": "Historial de versiones",
   "h5_for_more_release_history": "Para consultar más historial de versiones",
   "h3_build": "Compilación",

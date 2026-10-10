@@ -109,6 +109,16 @@ supported ABIs: {{ supported_abis }}
 
 {{ placeholder_model_asset_lines }}
 
+{{ p_model_languages }}.
+
+******
+
+### {{ h3_license_attribution }}
+
+******
+
+{{ p_license_attribution }}.
+
 ******
 
 ### {{ h3_release_history }}

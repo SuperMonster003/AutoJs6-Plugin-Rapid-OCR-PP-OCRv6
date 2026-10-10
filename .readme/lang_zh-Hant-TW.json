@@ -38,6 +38,9 @@
     "`{{ model_asset_auxiliary }}`: 引擎初始化所需的輔助模型資產.",
     "`{{ model_asset_dictionary }}`: PP-OCRv6 辨識字典."
   ],
+  "p_model_languages": "PP-OCRv6 Small 為多語言模型, 可辨識簡體中文, 繁體中文, 英文, 日文以及多種拉丁字母語言 (上游路由表共列出 52 個語言代碼). 外掛不提供語言選項, 辨識時無需指定語言",
+  "h3_license_attribution": "授權與署名",
+  "p_license_attribution": "外掛原始碼採用 MPL-2.0 授權. 打包的 PP-OCRv6 模型與字典來自 RapidOCR 對 PaddleOCR 官方模型的轉換, 著作權歸 Baidu 及相關 PaddleOCR 權利人所有, 依 Apache-2.0 授權原樣再散布. ONNX Runtime (MIT), OpenCV (Apache-2.0) 及其他元件的授權全文與署名位於 APK 內的 `assets/licenses/` 目錄, 清單見 [`THIRD_PARTY_NOTICES.md`]({{ third_party_notices_url }}). 文中提及的名稱僅用於說明來源, 不代表相關方認可本外掛",
   "h3_release_history": "發行歷史",
   "h5_for_more_release_history": "更多發行歷史可參閱",
   "h3_build": "建置",

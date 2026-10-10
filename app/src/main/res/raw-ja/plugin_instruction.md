@@ -21,3 +21,11 @@
 
 - `maxSideLen` は `OcrOptions.detLongSize` に対応し, 検出に使用する画像の最大辺長を指定します. 既定値は 1024 です.
 - `scoreThreshold` は `OcrOptions.scoreThreshold` に対応し, 許容する最小検出スコアを指定します. 既定値は 0.5 です.
+
+## 言語
+
+- PP-OCRv6 Small は単一の多言語モデルで, 言語オプションなしで簡体字中国語, 繁体字中国語, 英語, 日本語および多数のラテン文字言語を認識します.
+
+## ライセンス
+
+- OCR モデルは RapidOCR が変換した PaddleOCR モデルで, Apache-2.0 でライセンスされています. サードパーティのライセンス全文は APK 内の `assets/licenses/` に同梱されています.

@@ -8,6 +8,7 @@
   "modelscope_url": "https://www.modelscope.cn/models/RapidAI/RapidOCR",
   "onnx_runtime_url": "https://onnxruntime.ai/",
   "opencv_url": "https://github.com/opencv/opencv",
+  "third_party_notices_url": "https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md",
   "plugin_action": "org.autojs.plugin.PADDLE_OCR",
   "plugin_engine": "rapid-ocr",
   "plugin_variant": "pp-ocrv6",

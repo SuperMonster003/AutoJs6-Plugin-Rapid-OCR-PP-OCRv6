@@ -14,6 +14,8 @@
 * `Amélioration` Les icônes du centre de plugins utilisent les tailles, positions, images claires et sombres et fonds circulaires réglés dans Icon Studio, avec les sources et paramètres permettant de les reproduire
 * `Amélioration` Les icônes des informations d'application Android utilisent les illustrations et les fonds clairs et sombres d'Icon Studio, en conservant les images transparentes du centre de plugins et les choix du lanceur
 * `Amélioration` L'initialisation du modèle vérifie la lecture complète des ressources et la correspondance entre le dictionnaire de reconnaissance et les classes de sortie du modèle
+* `Amélioration` L'APK inclut les textes complets des licences et les attributions des modèles PP-OCRv6, d'ONNX Runtime, d'OpenCV et des autres composants tiers (`assets/licenses/`)
+* `Amélioration` Les instructions du plugin décrivent la couverture multilingue de PP-OCRv6 Small et sa licence
 * `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.10.0 et verrouillage de la version dans `version.properties`
 
 # v1.0.5

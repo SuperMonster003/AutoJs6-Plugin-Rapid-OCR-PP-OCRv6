@@ -21,3 +21,11 @@
 
 - `maxSideLen` corresponde a `OcrOptions.detLongSize` y controla la longitud máxima del lado de la imagen usada para la detección. El valor predeterminado es 1024.
 - `scoreThreshold` corresponde a `OcrOptions.scoreThreshold` y controla la puntuación mínima de detección aceptada. El valor predeterminado es 0.5.
+
+## Idiomas
+
+- PP-OCRv6 Small es un único modelo multilingüe. Reconoce chino simplificado, chino tradicional, inglés, japonés y muchos idiomas de escritura latina sin opción de idioma.
+
+## Licencias
+
+- Los modelos OCR son modelos de PaddleOCR convertidos por RapidOCR y licenciados bajo Apache-2.0. Los textos de licencias de terceros se incluyen en el APK en `assets/licenses/`.

@@ -16,30 +16,56 @@
     "The recognition model outputs 18710 classes, matching ppocrv6_dict.txt (18708 lines) plus the CTC blank and space; the model's embedded character metadata is identical to the dictionary file.",
     "The upstream det fix for limit_type=max (issue #740) does not apply: the C++ engine already honours the requested maxSideLen."
   ],
+  "redistribution": {
+    "notice_in_apk": "assets/licenses/THIRD_PARTY_NOTICES.md",
+    "license_text_in_apk": "assets/licenses/LICENSE-Apache-2.0.txt",
+    "modification_notice": "Converted from an official PaddleOCR model to the indicated inference format and packaged for use with RapidOCR. The upstream model weights are copyright Baidu and/or the applicable PaddleOCR rights holders and are licensed under the Apache License, Version 2.0.",
+    "upstream_notice_file": "none identified"
+  },
   "assets": [
     {
       "file": "PP-OCRv6_det_small.onnx",
       "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv6/det/PP-OCRv6_det_small.onnx",
       "bytes": 9929594,
-      "sha256": "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f"
+      "sha256": "090f04abcd9d9a7498bc4ebf677e4cb9bdce1fe4197ddb7e529f1ef44e1ff94f",
+      "upstream_model": "PP-OCRv6_small_det",
+      "model_card_url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_det_onnx",
+      "origin": "RapidOCR ONNX conversion of the official PaddleOCR model",
+      "copyright": "Baidu and/or the applicable PaddleOCR rights holders",
+      "license": "Apache-2.0"
     },
     {
       "file": "PP-OCRv6_rec_small.onnx",
       "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv6/rec/PP-OCRv6_rec_small.onnx",
       "bytes": 21234383,
-      "sha256": "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884"
+      "sha256": "6f327246b50388f3c176ae304bd95767ea6dc0c9ae92153ef8cbe210b3c14884",
+      "upstream_model": "PP-OCRv6_small_rec",
+      "model_card_url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec_onnx",
+      "origin": "RapidOCR ONNX conversion of the official PaddleOCR model",
+      "copyright": "Baidu and/or the applicable PaddleOCR rights holders",
+      "license": "Apache-2.0"
     },
     {
       "file": "ch_ppocr_mobile_v2.0_cls_mobile.onnx",
       "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/onnx/PP-OCRv4/cls/ch_ppocr_mobile_v2.0_cls_mobile.onnx",
       "bytes": 585532,
-      "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c"
+      "sha256": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+      "upstream_model": "ch_ppocr_mobile_v2.0_cls",
+      "model_card_url": "https://github.com/PaddlePaddle/PaddleOCR/blob/main/docs/version2.x/ppocr/model_list.en.md",
+      "origin": "RapidOCR ONNX conversion of the official PaddleOCR model",
+      "copyright": "Baidu and/or the applicable PaddleOCR rights holders",
+      "license": "Apache-2.0"
     },
     {
       "file": "ppocrv6_dict.txt",
       "url": "https://www.modelscope.cn/models/RapidAI/RapidOCR/resolve/v3.10.0/paddle/PP-OCRv6/rec/PP-OCRv6_rec_small/ppocrv6_dict.txt",
       "bytes": 74947,
-      "sha256": "b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d"
+      "sha256": "b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d",
+      "upstream_model": "PP-OCRv6_small_rec",
+      "model_card_url": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec_onnx",
+      "origin": "PaddleOCR character dictionary; not listed in MODEL_LICENSES.md section 6, identical to the rec model's embedded character metadata",
+      "copyright": "Baidu and/or the applicable PaddleOCR rights holders",
+      "license": "Apache-2.0"
     }
   ]
 }

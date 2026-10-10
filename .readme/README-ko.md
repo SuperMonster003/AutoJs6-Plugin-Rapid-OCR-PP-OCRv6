@@ -130,6 +130,16 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 - `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: 엔진 초기화에 필요한 보조 모델 자산.
 - `ppocrv6_dict.txt`: PP-OCRv6 인식 사전.
 
+PP-OCRv6 Small은 다국어 모델로 중국어 간체, 중국어 번체, 영어, 일본어 및 여러 라틴 문자 언어를 인식합니다(업스트림 라우팅 표에는 52개 언어 코드가 있습니다). 플러그인에는 언어 옵션이 없으며 언어를 지정할 필요가 없습니다.
+
+******
+
+### 라이선스 및 저작자 표시
+
+******
+
+플러그인 소스 코드는 MPL-2.0 라이선스를 따릅니다. 포함된 PP-OCRv6 모델과 사전은 PaddleOCR 공식 모델을 RapidOCR이 변환한 것으로, 저작권은 Baidu 및 관련 PaddleOCR 권리자에게 있으며 Apache-2.0에 따라 수정 없이 재배포됩니다. ONNX Runtime(MIT), OpenCV(Apache-2.0) 및 기타 구성 요소의 라이선스 전문과 저작자 표시는 APK의 `assets/licenses/`에 포함되어 있으며 목록은 [`THIRD_PARTY_NOTICES.md`](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md)를 참고하십시오. 언급된 이름은 출처를 설명하기 위한 것이며 보증이나 제휴를 의미하지 않습니다.
+
 ******
 
 ### 릴리스 기록
@@ -146,6 +156,8 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `개선` 플러그인 센터 아이콘에 Icon Studio에서 조정한 크기, 위치, 밝은 이미지와 어두운 이미지 및 원형 배경을 적용하고 재생성 가능한 원본과 매개변수를 유지
 * `개선` Android 앱 정보 아이콘에 Icon Studio의 그림과 밝은 배경 및 어두운 배경을 사용하고 플러그인 센터의 투명 그림과 기존 런처 옵션을 유지
 * `개선` 모델 초기화 시 자산을 완전히 읽었는지, 인식 사전이 모델 출력 클래스 수와 일치하는지 검증
+* `개선` PP-OCRv6 모델, ONNX Runtime, OpenCV 등 서드파티 구성 요소의 라이선스 전문과 저작자 표시를 APK에 포함(`assets/licenses/`)
+* `개선` 플러그인 안내에 PP-OCRv6 Small의 다국어 인식 범위와 라이선스 정보 추가
 * `의존성` RapidOCR 모델 소스를 v3.9.1에서 v3.10.0으로 업그레이드하고 `version.properties`에서 모델 버전을 고정
 
 # v1.0.5

@@ -72,6 +72,24 @@ class RepositoryContractTest(unittest.TestCase):
         self.assertEqual(name.lower(), name)
 
 
+    def test_third_party_notices_follow_packaged_versions(self):
+        licenses = ROOT / "app/src/main/assets/licenses"
+        notices = (licenses / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8")
+        props = dict(line.split("=", 1) for line in (ROOT / "version.properties").read_text().splitlines()
+                     if "=" in line and not line.startswith("#"))
+        ort, opencv = props["RAPID_OCR_ONNX_RUNTIME_VERSION"], props["RAPID_OCR_OPENCV_VERSION"]
+        for expected in [f"RapidOCR v{props['RAPID_OCR_MODEL_VERSION']}", f"onnxruntime-android:{ort}",
+                         f"OpenCV {opencv}", f"NDK {props['RAPID_OCR_NDK_VERSION']}"]:
+            self.assertIn(expected, notices)
+        provenance = json.loads((ROOT / "libs/rapidocr/models.provenance.json").read_text(encoding="utf-8"))
+        self.assertEqual(props["RAPID_OCR_MODEL_VERSION"], provenance["version"])
+        self.assertIn(provenance["upstream_commit"], notices)
+        for asset in provenance["assets"]:
+            self.assertIn(asset["sha256"], notices, asset["file"])
+        for relative in ["LICENSE-Apache-2.0.txt", f"onnxruntime-{ort}/LICENSE", "clipper-6.4.2/LICENSE_1_0.txt",
+                         f"opencv-{opencv}/opencv-LICENSE.txt", f"opencv-{opencv}/tbb-LICENSE"]:
+            self.assertTrue((licenses / relative).is_file(), relative)
+
     def test_fixed_android_upgrade_offset(self):
         text = (ROOT / "version.properties").read_text(encoding="utf-8")
         build = int(re.search(r"^VERSION_BUILD=(\d+)$", text, re.M).group(1))

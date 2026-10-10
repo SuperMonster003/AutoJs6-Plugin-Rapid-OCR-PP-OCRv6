@@ -130,6 +130,16 @@ La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v
 - `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: Ressource de modèle auxiliaire requise pendant l'initialisation du moteur.
 - `ppocrv6_dict.txt`: Dictionnaire de reconnaissance PP-OCRv6.
 
+PP-OCRv6 Small est un modèle multilingue qui reconnaît le chinois simplifié, le chinois traditionnel, l'anglais, le japonais et de nombreuses langues à écriture latine (la table de routage amont liste 52 codes de langue). Le plugin n'a pas d'option de langue et il n'est pas nécessaire d'en indiquer une.
+
+******
+
+### Licence et attribution
+
+******
+
+Le code source du plugin est sous licence MPL-2.0. Les modèles et le dictionnaire PP-OCRv6 inclus sont des conversions RapidOCR des modèles officiels PaddleOCR; les droits d'auteur appartiennent à Baidu et aux ayants droit de PaddleOCR concernés, et ils sont redistribués sans modification sous Apache-2.0. Les textes complets des licences et les mentions d'attribution d'ONNX Runtime (MIT), d'OpenCV (Apache-2.0) et des autres composants sont inclus dans l'APK sous `assets/licenses/`; voir [`THIRD_PARTY_NOTICES.md`](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md). Les noms cités servent uniquement à indiquer l'origine et n'impliquent aucune approbation.
+
 ******
 
 ### Historique des versions
@@ -146,6 +156,8 @@ La compilation télécharge et vérifie les 4 ressources suivantes de RapidOCR v
 * `Amélioration` Les icônes du centre de plugins utilisent les tailles, positions, images claires et sombres et fonds circulaires réglés dans Icon Studio, avec les sources et paramètres permettant de les reproduire
 * `Amélioration` Les icônes des informations d'application Android utilisent les illustrations et les fonds clairs et sombres d'Icon Studio, en conservant les images transparentes du centre de plugins et les choix du lanceur
 * `Amélioration` L'initialisation du modèle vérifie la lecture complète des ressources et la correspondance entre le dictionnaire de reconnaissance et les classes de sortie du modèle
+* `Amélioration` L'APK inclut les textes complets des licences et les attributions des modèles PP-OCRv6, d'ONNX Runtime, d'OpenCV et des autres composants tiers (`assets/licenses/`)
+* `Amélioration` Les instructions du plugin décrivent la couverture multilingue de PP-OCRv6 Small et sa licence
 * `Dépendance` Mise à jour de la source des modèles RapidOCR de v3.9.1 vers v3.10.0 et verrouillage de la version dans `version.properties`
 
 # v1.0.5

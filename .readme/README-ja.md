@@ -130,6 +130,16 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 - `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: エンジン初期化に必要な補助モデルアセット.
 - `ppocrv6_dict.txt`: PP-OCRv6 認識辞書.
 
+PP-OCRv6 Small は多言語モデルで, 簡体字中国語, 繁体字中国語, 英語, 日本語および多数のラテン文字言語を認識できます (上流のルーティング表には 52 の言語コードが記載されています). プラグインに言語オプションはなく, 言語を指定する必要はありません.
+
+******
+
+### ライセンスと帰属表示
+
+******
+
+プラグインのソースコードは MPL-2.0 でライセンスされています. 同梱の PP-OCRv6 モデルと辞書は PaddleOCR 公式モデルを RapidOCR が変換したもので, 著作権は Baidu および関連する PaddleOCR の権利者に帰属し, Apache-2.0 に基づき無変更で再配布しています. ONNX Runtime (MIT), OpenCV (Apache-2.0) などのライセンス全文と帰属表示は APK 内の `assets/licenses/` に同梱しています. 一覧は [`THIRD_PARTY_NOTICES.md`](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md) を参照してください. 記載した名称は出所の説明のみを目的とし, 推奨や提携を意味しません.
+
 ******
 
 ### リリース履歴
@@ -146,6 +156,8 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `改善` プラグインセンターのアイコンに Icon Studio で調整したサイズ, 位置, 明暗の図稿と円形背景を適用し, 再生成可能な原稿とパラメーターを保持
 * `改善` Android のアプリ情報アイコンに Icon Studio と共通の図案と明暗の背景色を使用し, プラグインセンターの透明な図案と既存のランチャー設定を維持
 * `改善` モデル初期化時に, アセットが完全に読み込まれたことと認識辞書がモデルの出力クラス数と一致することを検証
+* `改善` PP-OCRv6 モデル, ONNX Runtime, OpenCV などのサードパーティコンポーネントのライセンス全文と帰属表示を APK に同梱 (`assets/licenses/`)
+* `改善` プラグインの説明に PP-OCRv6 Small の多言語認識範囲とライセンス情報を追加
 * `依存関係` RapidOCR モデルの取得元を v3.9.1 から v3.10.0 に更新し, `version.properties` でモデルのバージョンを固定
 
 # v1.0.5

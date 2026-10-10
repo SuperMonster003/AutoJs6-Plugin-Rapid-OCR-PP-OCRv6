@@ -38,6 +38,9 @@
     "`{{ model_asset_auxiliary }}`: 引擎初始化所需的辅助模型资产.",
     "`{{ model_asset_dictionary }}`: PP-OCRv6 识别字典."
   ],
+  "p_model_languages": "PP-OCRv6 Small 为多语言模型, 可识别简体中文, 繁体中文, 英文, 日文以及多种拉丁字母语言 (上游路由表共列出 52 个语言代码). 插件不提供语言选项, 识别时无需指定语言",
+  "h3_license_attribution": "许可与署名",
+  "p_license_attribution": "插件源代码采用 MPL-2.0 许可. 打包的 PP-OCRv6 模型与字典来自 RapidOCR 对 PaddleOCR 官方模型的转换, 版权归 Baidu 及相关 PaddleOCR 权利人所有, 按 Apache-2.0 许可原样再分发. ONNX Runtime (MIT), OpenCV (Apache-2.0) 及其他组件的许可全文和署名位于 APK 内的 `assets/licenses/` 目录, 清单见 [`THIRD_PARTY_NOTICES.md`]({{ third_party_notices_url }}). 文中提及的名称仅用于说明来源, 不代表相关方认可本插件",
   "h3_release_history": "发行历史",
   "h5_for_more_release_history": "更多发行历史可参阅",
   "h3_build": "构建",

@@ -130,6 +130,16 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 - `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: 引擎初始化所需的輔助模型資產.
 - `ppocrv6_dict.txt`: PP-OCRv6 識別字典.
 
+PP-OCRv6 Small 為多語言模型, 可識別簡體中文, 繁體中文, 英文, 日文以及多種拉丁字母語言 (上游路由表共列出 52 個語言代碼). 插件不提供語言選項, 識別時無需指定語言.
+
+******
+
+### 許可與署名
+
+******
+
+插件源代碼採用 MPL-2.0 許可. 打包的 PP-OCRv6 模型與字典來自 RapidOCR 對 PaddleOCR 官方模型的轉換, 版權歸 Baidu 及相關 PaddleOCR 權利人所有, 按 Apache-2.0 許可原樣再分發. ONNX Runtime (MIT), OpenCV (Apache-2.0) 及其他組件的許可全文和署名位於 APK 內的 `assets/licenses/` 目錄, 清單見 [`THIRD_PARTY_NOTICES.md`](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md). 文中提及的名稱僅用於說明來源, 不代表相關方認可本插件.
+
 ******
 
 ### 發行歷史
@@ -146,6 +156,8 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `優化` 外掛程式中心圖示採用統一工作台調整後的尺寸, 位置, 明暗圖稿與圓形底色, 保留可重建原稿和參數
 * `優化` Android 系統應用程式資訊圖示與圖示工作台共用圖稿及明暗底色, 保留外掛程式中心透明圖稿與現有啟動器選項
 * `優化` 模型初始化時校驗資產是否完整讀取, 以及識別字典與模型輸出類別數是否一致
+* `優化` APK 內附帶 PP-OCRv6 模型, ONNX Runtime, OpenCV 等第三方組件的許可全文與署名 (`assets/licenses/`)
+* `優化` 插件說明補充 PP-OCRv6 Small 的多語言識別範圍及許可資訊
 * `依賴` RapidOCR 模型來源版本從 v3.9.1 升級至 v3.10.0, 並在 `version.properties` 中統一鎖定模型版本
 
 # v1.0.5

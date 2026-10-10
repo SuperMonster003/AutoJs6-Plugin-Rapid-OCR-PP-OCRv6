@@ -130,6 +130,16 @@ The build downloads and verifies the following 4 assets from RapidOCR v3.10.0 on
 - `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: Auxiliary model asset required during engine initialization.
 - `ppocrv6_dict.txt`: PP-OCRv6 recognition dictionary.
 
+PP-OCRv6 Small is a multilingual model that recognizes Simplified Chinese, Traditional Chinese, English, Japanese and many Latin-script languages (the upstream routing table lists 52 language codes). The plugin has no language option, and no language needs to be specified.
+
+******
+
+### License and Attribution
+
+******
+
+The plugin source code is licensed under MPL-2.0. The bundled PP-OCRv6 models and dictionary are RapidOCR conversions of official PaddleOCR models; copyright belongs to Baidu and the applicable PaddleOCR rights holders, and they are redistributed unmodified under Apache-2.0. Full license texts and attributions for ONNX Runtime (MIT), OpenCV (Apache-2.0) and other components are packaged in the APK under `assets/licenses/`; see [`THIRD_PARTY_NOTICES.md`](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md). Names are mentioned only to describe origin and do not imply endorsement.
+
 ******
 
 ### Release History
@@ -146,6 +156,8 @@ The build downloads and verifies the following 4 assets from RapidOCR v3.10.0 on
 * `Improvement` Plugin Center icons use the sizes, positions, light and dark artwork, and circular backgrounds adjusted in Icon Studio, retaining reproducible sources and parameters
 * `Improvement` Android App info icons share Icon Studio artwork and light/dark backgrounds while preserving transparent Plugin Center artwork and existing launcher choices
 * `Improvement` Model initialization verifies that assets are read completely and that the recognition dictionary matches the model output classes
+* `Improvement` The APK bundles full license texts and attributions for the PP-OCRv6 models, ONNX Runtime, OpenCV and other third-party components (`assets/licenses/`)
+* `Improvement` Plugin instructions describe the multilingual coverage of PP-OCRv6 Small and its licensing
 * `Dependency` Upgrade the RapidOCR model source from v3.9.1 to v3.10.0 and pin the model version in `version.properties`
 
 # v1.0.5

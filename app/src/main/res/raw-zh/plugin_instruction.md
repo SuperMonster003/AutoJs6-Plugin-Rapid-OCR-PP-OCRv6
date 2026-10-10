@@ -21,3 +21,11 @@
 
 - `maxSideLen` 对应 `OcrOptions.detLongSize`, 控制检测使用的图像最大边长. 默认值为 1024.
 - `scoreThreshold` 对应 `OcrOptions.scoreThreshold`, 控制可接受的最低检测分数. 默认值为 0.5.
+
+## 语言
+
+- PP-OCRv6 Small 是单一的多语言模型, 无需语言选项即可识别简体中文, 繁体中文, 英文, 日文以及多种拉丁字母语言.
+
+## 许可
+
+- OCR 模型为 RapidOCR 转换的 PaddleOCR 模型, 采用 Apache-2.0 许可. 第三方许可全文打包在 APK 的 `assets/licenses/` 目录中.

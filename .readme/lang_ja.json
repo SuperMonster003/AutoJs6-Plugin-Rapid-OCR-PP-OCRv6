@@ -38,6 +38,9 @@
     "`{{ model_asset_auxiliary }}`: エンジン初期化に必要な補助モデルアセット.",
     "`{{ model_asset_dictionary }}`: PP-OCRv6 認識辞書."
   ],
+  "p_model_languages": "PP-OCRv6 Small は多言語モデルで, 簡体字中国語, 繁体字中国語, 英語, 日本語および多数のラテン文字言語を認識できます (上流のルーティング表には 52 の言語コードが記載されています). プラグインに言語オプションはなく, 言語を指定する必要はありません",
+  "h3_license_attribution": "ライセンスと帰属表示",
+  "p_license_attribution": "プラグインのソースコードは MPL-2.0 でライセンスされています. 同梱の PP-OCRv6 モデルと辞書は PaddleOCR 公式モデルを RapidOCR が変換したもので, 著作権は Baidu および関連する PaddleOCR の権利者に帰属し, Apache-2.0 に基づき無変更で再配布しています. ONNX Runtime (MIT), OpenCV (Apache-2.0) などのライセンス全文と帰属表示は APK 内の `assets/licenses/` に同梱しています. 一覧は [`THIRD_PARTY_NOTICES.md`]({{ third_party_notices_url }}) を参照してください. 記載した名称は出所の説明のみを目的とし, 推奨や提携を意味しません",
   "h3_release_history": "リリース履歴",
   "h5_for_more_release_history": "その他のリリース履歴",
   "h3_build": "ビルド",

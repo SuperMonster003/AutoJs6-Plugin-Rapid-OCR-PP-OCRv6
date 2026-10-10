@@ -98,10 +98,10 @@ C++ 侧上游 [RapidAI/RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx) �
 
 ### P2 模型许可与署名
 
-- [ ] 在 APK 内附带第三方声明 (建议 `app/src/main/assets/doc/THIRD_PARTY_NOTICES.md`): RapidOCR (Apache-2.0), PaddleOCR 模型权重 (Apache-2.0, 版权归 Baidu / PaddleOCR 权利人), 上游给出的转换修改说明原文, ONNX Runtime (MIT), OpenCV 4.8.0 (Apache-2.0), 静态链接进 OpenCV 的 Intel TBB 2020.2 (Apache-2.0, 见 `libopencv_java4.so` 的构建信息 `Parallel framework: TBB (ver 2020.2 interface 11102)`), NDK 的 `libc++_shared.so` (Apache-2.0 WITH LLVM-exception), Clipper (Boost). 附 Apache-2.0 全文或其固定链接, 以满足 MODEL_LICENSES 第 7 节第 1 项. (SOURCE; DOCS)
-- [ ] `models.provenance.json` 每个资产补 `upstream_model` (`PP-OCRv6_small_det`, `PP-OCRv6_small_rec`, `ch_ppocr_mobile_v2.0_cls`), 官方模型卡链接与 `copyright` 字段; 字典标注来源为 PaddleOCR `ppocrv6_dict.txt` (MODEL_LICENSES 第 6 节未列出字典, 需单独记录). (SOURCE)
-- [ ] README 十语新增 "许可与署名" 段落, 说明插件代码 (MPL-2.0) 与模型 (Apache-2.0) 分属不同许可, 并链接上述声明; 不使用 Baidu / PaddlePaddle / RapidOCR 商标暗示背书 (MODEL_LICENSES 第 8 节). (DOCS)
-- [ ] 若设置或说明界面链接了发行历史, 同时链接第三方声明. (SOURCE)
+- [x] 在 APK 内附带第三方声明: RapidOCR (Apache-2.0), PaddleOCR 模型权重 (Apache-2.0, 版权归 Baidu / PaddleOCR 权利人), 上游给出的转换修改说明原文, ONNX Runtime (MIT), OpenCV 4.8.0 (Apache-2.0), 静态链接进 OpenCV 的 Intel TBB 2020.2 (Apache-2.0, 见 `libopencv_java4.so` 的构建信息 `Parallel framework: TBB (ver 2020.2 interface 11102)`), NDK 的 `libc++_shared.so` (Apache-2.0 WITH LLVM-exception), Clipper (Boost). 附 Apache-2.0 全文或其固定链接, 以满足 MODEL_LICENSES 第 7 节第 1 项. (SOURCE; DOCS) 2026-10-10: 落在 `app/src/main/assets/licenses/` (与 changelog 目录分开): `THIRD_PARTY_NOTICES.md`, 官方 Apache-2.0 全文, ONNX Runtime 1.21.1 MIT 许可, Clipper 6.4.2 Boost 许可, 以及从 AutoJs6-Plugin-OpenCV 原样导出的 33 个 OpenCV 4.8.0 许可文件 (本插件的 `libopencv_java4.so` 四个 ABI 与其来源记录逐字节一致). 契约测试 `test_third_party_notices_follow_packaged_versions` 校验声明中的版本, 上游提交与模型哈希.
+- [x] `models.provenance.json` 每个资产补 `upstream_model` (`PP-OCRv6_small_det`, `PP-OCRv6_small_rec`, `ch_ppocr_mobile_v2.0_cls`), 官方模型卡链接与 `copyright` 字段; 字典标注来源为 PaddleOCR `ppocrv6_dict.txt` (MODEL_LICENSES 第 6 节未列出字典, 需单独记录). (SOURCE) 2026-10-10: 另增 `redistribution` 段 (APK 内声明位置, 许可全文位置, 上游转换说明原文).
+- [x] README 十语新增 "许可与署名" 段落, 说明插件代码 (MPL-2.0) 与模型 (Apache-2.0) 分属不同许可, 并链接上述声明; 不使用 Baidu / PaddlePaddle / RapidOCR 商标暗示背书 (MODEL_LICENSES 第 8 节). (DOCS)
+- [x] 若设置或说明界面链接了发行历史, 同时链接第三方声明. (SOURCE) 2026-10-10: 插件无设置界面; 宿主展示的 `plugin_instruction.md` 十一个语言版本新增 "许可" 段, 指向 `assets/licenses/`.
 
 ### P3 行为一致性评估 (可选, 不阻塞发布)
 
@@ -113,13 +113,14 @@ C++ 侧上游 [RapidAI/RapidOcrOnnx](https://github.com/RapidAI/RapidOcrOnnx) �
 
 ### P4 语言范围说明 (可选)
 
-- [ ] README 与 `plugin_instruction.md` 十语补充: PP-OCRv6 Small 为多语言模型, 覆盖简体中文, 繁体中文, 英文, 日文及多种拉丁字母语言 (以 `default_models.yaml` 的 `ppocrv6_langs` 为准, 共 52 个代码, 其中 `french` / `german` 是 `fr` / `de` 的别名). 不新增选项. (DOCS)
+- [x] README 与 `plugin_instruction.md` 十语补充: PP-OCRv6 Small 为多语言模型, 覆盖简体中文, 繁体中文, 英文, 日文及多种拉丁字母语言 (以 `default_models.yaml` 的 `ppocrv6_langs` 为准, 共 52 个代码, 其中 `french` / `german` 是 `fr` / `de` 的别名). 不新增选项. (DOCS) 2026-10-10: README 模型资产段与插件说明 "语言" 段均已补充.
 
 ### P5 ONNX Runtime 升级 (独立轨道, 舰队协调)
 
 Maven 最新为 1.31.0 (2026-10-09). 不在本次升级范围内执行, 只在满足以下前提时启动:
 
 - [ ] 宿主与 Paddle v4 / v5 / v6, Rapid v3 维护者确认同一目标版本, 同批发布. (SOURCE)
+- [ ] 同步 `assets/licenses/onnxruntime-<版本>/LICENSE` 与 `THIRD_PARTY_NOTICES.md` 中的 ORT 版本 (契约测试会在不同步时失败). (SOURCE)
 - [ ] 核对 ORT C++ API 变化 (头文件, `Ort::Session` 构造, `GetInputNameAllocated`) 与 Android AAR 的最低 SDK (须仍兼容 minSdk 24). (ANDROID_BUILD)
 - [ ] 新 `libonnxruntime.so` 四个 ABI 的 64 位 ELF 对齐通过共享门禁; armeabi-v7a / x86 按现有策略记录. (ELF)
 - [ ] 识别结果与 P0 对照逐字一致; 用户 APK 内 Paddle + Rapid 同进程识别通过. (DEVICE; DEVICE-16K)

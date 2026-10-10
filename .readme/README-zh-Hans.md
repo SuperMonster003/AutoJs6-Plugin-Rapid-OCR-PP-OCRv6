@@ -130,6 +130,16 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 - `ch_ppocr_mobile_v2.0_cls_mobile.onnx`: 引擎初始化所需的辅助模型资产.
 - `ppocrv6_dict.txt`: PP-OCRv6 识别字典.
 
+PP-OCRv6 Small 为多语言模型, 可识别简体中文, 繁体中文, 英文, 日文以及多种拉丁字母语言 (上游路由表共列出 52 个语言代码). 插件不提供语言选项, 识别时无需指定语言.
+
+******
+
+### 许可与署名
+
+******
+
+插件源代码采用 MPL-2.0 许可. 打包的 PP-OCRv6 模型与字典来自 RapidOCR 对 PaddleOCR 官方模型的转换, 版权归 Baidu 及相关 PaddleOCR 权利人所有, 按 Apache-2.0 许可原样再分发. ONNX Runtime (MIT), OpenCV (Apache-2.0) 及其他组件的许可全文和署名位于 APK 内的 `assets/licenses/` 目录, 清单见 [`THIRD_PARTY_NOTICES.md`](https://github.com/SuperMonster003/AutoJs6-Plugin-Rapid-OCR-PP-OCRv6/blob/master/app/src/main/assets/licenses/THIRD_PARTY_NOTICES.md). 文中提及的名称仅用于说明来源, 不代表相关方认可本插件.
+
 ******
 
 ### 发行历史
@@ -146,6 +156,8 @@ supported ABIs: arm64-v8a, armeabi-v7a, x86, x86_64, universal
 * `优化` 插件中心图标采用统一工作台调整后的尺寸, 位置, 亮暗图稿与圆形底色, 保留可重建原稿和参数
 * `优化` Android 系统应用信息图标与图标工作台共用图稿和亮暗底色, 保留插件中心透明图稿及现有启动器选项
 * `优化` 模型初始化时校验资产是否完整读取, 以及识别字典与模型输出类别数是否一致
+* `优化` APK 内附带 PP-OCRv6 模型, ONNX Runtime, OpenCV 等第三方组件的许可全文与署名 (`assets/licenses/`)
+* `优化` 插件说明补充 PP-OCRv6 Small 的多语言识别范围及许可信息
 * `依赖` 升级 RapidOCR 模型来源版本 3.9.1 -> 3.10.0
 
 # v1.0.5
